@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Bouncer;
+use Illuminate\Support\Facades\Hash;
 
 class BouncerSeeder extends Seeder
 {
@@ -22,11 +23,12 @@ class BouncerSeeder extends Seeder
             'title' => 'Super Admin',
         ]);
 
-        // $user = User::create([
-        //     'name' => "Admin",
-        //     'email' => "admin@dmu.com",
-        //     'password' => Hash::make('password'),
-        // ]);
+        $user = User::create([
+            'name' => "Admin",
+            'email' => "admin@fis.com",
+            'status' => true,
+            'password' => Hash::make('password'),
+        ]);
 
         // $admin = Bouncer::role()->firstOrCreate([
         //     'name' => 'editor',
@@ -42,6 +44,6 @@ class BouncerSeeder extends Seeder
 
         $user = User::find(1);
         $user->assign('superadmin');
-        Bouncer::allow('superadmin')->everything();
+        // Bouncer::allow('superadmin')->everything();
     }
 }

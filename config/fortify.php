@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => env('ADMIN_PREFIX', 'admin'),
 
     'domain' => null,
 
