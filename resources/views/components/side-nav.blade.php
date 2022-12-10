@@ -18,7 +18,7 @@
                 @if (auth()->user()->can('manage-settings'))
                     <li class="{{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
                         <a href="{{ route('admin.settings.index') }}">
-                            <i class="simple-icon-cog"></i> Settings
+                            <i class="simple-icon-settings"></i> Settings
                         </a>
                     </li>
                 @endif
