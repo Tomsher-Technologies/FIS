@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
@@ -48,6 +49,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             Route::get('/', Settings::class)->name('index');
         });
+        // Banner
+        Route::resource('banner', BannerController::class);
+
 
         // All Users 
         Route::resource('users', UserController::class);

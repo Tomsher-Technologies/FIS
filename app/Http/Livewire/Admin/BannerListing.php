@@ -21,6 +21,18 @@ final class BannerListing extends PowerGridComponent
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
 
+    public int $perPage = 2;
+
+    protected function getListeners(): array
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'deleted'   => 'deleteBanner',
+            ]
+        );
+    }
+
     /*
     |--------------------------------------------------------------------------
     |  Features Setup
@@ -30,10 +42,8 @@ final class BannerListing extends PowerGridComponent
     */
     public function setUp(): void
     {
-        $this->showCheckBox()
-            ->showPerPage()
-            ->showSearchInput()
-            ->showExportOption('download', ['excel', 'csv']);
+        $this->showPerPage(2)
+            ->showSearchInput();
     }
 
     /*
@@ -43,12 +53,12 @@ final class BannerListing extends PowerGridComponent
     | Provides data to your Table using a Model or Collection
     |
     */
-    
+
     /**
-    * PowerGrid datasource.
-    *
-    * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Banner>|null
-    */
+     * PowerGrid datasource.
+     *
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Banner>|null
+     */
     public function datasource(): ?Builder
     {
         return Banner::query();
@@ -84,10 +94,10 @@ final class BannerListing extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('name')
+            ->addColumn('heading')
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', function(Banner $model) {
-                return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
+            ->addColumn('created_at_formatted', function (Banner $model) {
+                return Carbon::parse($model->created_at)->format('d/m/Y');
             });
     }
 
@@ -100,7 +110,7 @@ final class BannerListing extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -111,14 +121,18 @@ final class BannerListing extends PowerGridComponent
             Column::add()
                 ->title('ID')
                 ->field('id')
+                ->sortable(),
+
+            Column::add()
+                ->title('Heading')
+                ->field('heading')
                 ->searchable()
                 ->sortable(),
 
             Column::add()
-                ->title('Name')
-                ->field('name')
-                ->searchable()
-                ->makeInputText('name')
+                ->title('Status')
+                ->field('status')
+                ->toggleable(true, 1, 0)
                 ->sortable(),
 
             Column::add()
@@ -128,9 +142,8 @@ final class BannerListing extends PowerGridComponent
 
             Column::add()
                 ->title('Created at')
-                ->field('created_at_formatted')
-                ->makeInputDatePicker('created_at')
-                ->searchable()
+                ->field('created_at_formatted', 'created_at')
+                ->sortable()
         ];
     }
 
@@ -142,29 +155,35 @@ final class BannerListing extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Banner Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
 
-    /*
+
     public function actions(): array
     {
-       return [
-           Button::add('edit')
-               ->caption('Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('banner.edit', ['banner' => 'id']),
+        return [
+            Button::add('edit')
+                ->caption('Edit')
+                ->class('btn btn-primary')
+                ->route('admin.banner.edit', ['banner' => 'id'])
+                ->target('_self'),
 
-           Button::add('destroy')
-               ->caption('Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('banner.destroy', ['banner' => 'id'])
-               ->method('delete')
+
+            Button::add('destroy')
+                ->caption('Delete')
+                ->class('btn btn-danger')
+                ->emit('deleted', ['key' => 'id']),
+
+            // Button::add('destroy')
+            //     ->caption('Delete')
+            //     ->route('admin.banner.destroy', ['banner' => 'id'])
+            //     ->method('delete')
+            //     ->target('_self')
         ];
     }
-    */
 
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +193,7 @@ final class BannerListing extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Banner Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
@@ -202,24 +221,25 @@ final class BannerListing extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Banner Update.
      *
      * @param array<string,string> $data
      */
 
-    /*
-    public function update(array $data ): bool
+
+    public function update(array $data): bool
     {
-       try {
-           $updated = Banner::query()
+        try {
+            $updated = Banner::query()
+                ->find($data['id'])
                 ->update([
                     $data['field'] => $data['value'],
                 ]);
-       } catch (QueryException $exception) {
-           $updated = false;
-       }
-       return $updated;
+        } catch (QueryException $exception) {
+            $updated = false;
+        }
+        return $updated;
     }
 
     public function updateMessages(string $status = 'error', string $field = '_default_message'): string
@@ -239,5 +259,24 @@ final class BannerListing extends PowerGridComponent
 
         return (is_string($message)) ? $message : 'Error!';
     }
-    */
+
+
+    // public function onUpdatedToggleable($id, $field, $value): void
+    // {
+    //     Banner::query()->find($id)->update([
+    //         $field => $value,
+    //     ]);
+    // }
+
+    public function deleteBanner($id)
+    {
+        Banner::destroy($id['key']);
+
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Banner deleted',
+            'timer' => 3000,
+            'icon' => 'success',
+            'timerProgressBar' => true,
+        ]);
+    }
 }
