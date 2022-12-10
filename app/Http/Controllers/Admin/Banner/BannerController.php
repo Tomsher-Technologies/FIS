@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -26,7 +27,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.banner.create');
     }
 
     /**
@@ -37,7 +38,20 @@ class BannerController extends Controller
      */
     public function store(StoreBannerRequest $request)
     {
-        //
+        $banner = Banner::create($request->all());
+        if ($request->hasFile('image_file')) {
+            // $name = pathinfo($request->file('image_file')->getClientOriginalName(), PATHINFO_FILENAME) . time() . '.' . $request->file('image_file')->getClientOriginalExtension();
+            // $path = $request->file('image_file')->storeAs(
+            //     'public/banner',
+            //     $name
+            // );
+
+            $name = uploadImage($request, 'image_file', 'banner');
+
+            $banner->image = $name;
+            $banner->save();
+        }
+        return redirect()->route('admin.banner.index')->with('status', 'Banner created successfully');
     }
 
     /**
@@ -59,7 +73,9 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        //
+        return view('admin.banner.edit')->with([
+            'banner' => $banner
+        ]);
     }
 
     /**
@@ -71,7 +87,21 @@ class BannerController extends Controller
      */
     public function update(UpdateBannerRequest $request, Banner $banner)
     {
-        //
+
+        $banner->update($request->all());
+
+        if ($request->hasFile('image_file')) {
+
+            // Delete image
+            deleteImage($banner->image);
+
+            $name = uploadImage($request, 'image_file', 'banner');
+
+            $banner->image = $name;
+            $banner->save();
+        }
+
+        return redirect()->route('admin.banner.index')->with('status', 'Banner created successfully');
     }
 
     /**
@@ -82,6 +112,10 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        //
+        if ($banner->image) {
+            deleteImage($banner->image);
+        }
+        $banner->delete();
+        return redirect()->route('admin.banner.index')->with('status', 'Banner deleted successfully');
     }
 }

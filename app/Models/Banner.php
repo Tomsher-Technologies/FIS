@@ -22,6 +22,6 @@ class Banner extends Model
 
     public function getImage()
     {
-        return Storage::url(Str::replace('public', 'storage', $this->image));
+        return Storage::url(Str::replace('/storage/', '', $this->image));
     }
 }

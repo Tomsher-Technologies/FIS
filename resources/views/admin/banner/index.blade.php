@@ -13,6 +13,12 @@
             </div>
         </div>
 
+        <div class="rpw">
+            <div class="col-12">
+                <x-status />
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">

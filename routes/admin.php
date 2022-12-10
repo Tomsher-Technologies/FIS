@@ -50,7 +50,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::get('/', Settings::class)->name('index');
         });
         // Banner
-        Route::resource('banner', BannerController::class);
+        Route::resource('banner', BannerController::class)->except('show');
 
 
         // All Users 

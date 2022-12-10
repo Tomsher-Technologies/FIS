@@ -15,6 +15,13 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-banner'))
+                    <li class="{{ request()->routeIs('admin.banner*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.banner.index') }}">
+                            <i class="simple-icon-picture"></i> Banners
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-settings'))
                     <li class="{{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
                         <a href="{{ route('admin.settings.index') }}">
@@ -22,6 +29,7 @@
                         </a>
                     </li>
                 @endif
+
             </ul>
         </div>
     </div>

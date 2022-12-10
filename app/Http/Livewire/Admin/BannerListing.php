@@ -40,9 +40,12 @@ final class BannerListing extends PowerGridComponent
     | Setup Table's general features
     |
     */
+
+    public array $perPageValues = [0, 15, 1000, 5000];
+
     public function setUp(): void
     {
-        $this->showPerPage(2)
+        $this->showPerPage(15)
             ->showSearchInput();
     }
 
@@ -270,7 +273,11 @@ final class BannerListing extends PowerGridComponent
 
     public function deleteBanner($id)
     {
-        Banner::destroy($id['key']);
+        $banner = Banner::find($id['key']);
+        if ($banner->image) {
+            deleteImage($banner->image);
+        }
+        $banner->delete();
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Banner deleted',
