@@ -8,13 +8,6 @@
                         <span>Dashboards</span>
                     </a>
                 </li>
-                @if (auth()->user()->can('manage-users'))
-                    <li class="{{ request()->routeIs('admin.users*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.users.index') }}">
-                            <i class="simple-icon-user"></i> Users
-                        </a>
-                    </li>
-                @endif
                 @if (auth()->user()->can('manage-careers'))
                     <li class="{{ request()->routeIs('admin.career*') ? 'active' : '' }}">
                         <a href="{{ route('admin.career.index') }}">
@@ -29,10 +22,24 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-clients'))
+                    <li class="{{ request()->routeIs('admin.clients*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.clients.index') }}">
+                            <i class="simple-icon-people"></i> Clients
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-banner'))
                     <li class="{{ request()->routeIs('admin.banner*') ? 'active' : '' }}">
                         <a href="{{ route('admin.banner.index') }}">
                             <i class="simple-icon-picture"></i> Banners
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->can('manage-users'))
+                    <li class="{{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="simple-icon-user"></i> Users
                         </a>
                     </li>
                 @endif

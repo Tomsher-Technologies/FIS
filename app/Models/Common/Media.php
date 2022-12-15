@@ -4,6 +4,8 @@ namespace App\Models\Common;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Media extends Model
 {
@@ -21,6 +23,11 @@ class Media extends Model
     public function media()
     {
         return $this->morphTo();
+    }
+
+    public function getImage()
+    {
+        return Storage::url(Str::replace('/storage/', '', $this->url));
     }
 
     // public function featuredImage()

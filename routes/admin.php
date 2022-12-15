@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Livewire\Admin\Blog\BlogCreate;
 use App\Http\Livewire\Admin\Blog\BlogEdit;
+use App\Http\Livewire\Admin\Brands\BrandCreate;
+use App\Http\Livewire\Admin\Brands\BrandEdit;
 use App\Http\Livewire\Admin\Clients\ClientCreate;
 use App\Http\Livewire\Admin\Clients\ClientEdit;
 use App\Http\Livewire\Admin\Settings;
@@ -75,6 +77,15 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             })->name('index');
             Route::get('/create', ClientCreate::class)->name('create');
             Route::get('/{client}/edit', ClientEdit::class)->name('edit');
+        });
+
+        // Clients
+        Route::group(['prefix' => 'brands', 'as' => 'brands.'], function () {
+            Route::get('/', function () {
+                return view('admin.brands.index');
+            })->name('index');
+            Route::get('/create', BrandCreate::class)->name('create');
+            Route::get('/{brand}/edit', BrandEdit::class)->name('edit');
         });
 
         // All Users 
