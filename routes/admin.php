@@ -12,6 +12,8 @@ use App\Http\Livewire\Admin\Brands\BrandCreate;
 use App\Http\Livewire\Admin\Brands\BrandEdit;
 use App\Http\Livewire\Admin\Clients\ClientCreate;
 use App\Http\Livewire\Admin\Clients\ClientEdit;
+use App\Http\Livewire\Admin\Products\ProductCreate;
+use App\Http\Livewire\Admin\Products\ProductEdit;
 use App\Http\Livewire\Admin\Settings;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +88,15 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             })->name('index');
             Route::get('/create', BrandCreate::class)->name('create');
             Route::get('/{brand}/edit', BrandEdit::class)->name('edit');
+        });
+
+        // Product
+        Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+            Route::get('/', function () {
+                return view('admin.products.index');
+            })->name('index');
+            Route::get('/create', ProductCreate::class)->name('create');
+            Route::get('/{product}/edit', ProductEdit::class)->name('edit');
         });
 
         // All Users 

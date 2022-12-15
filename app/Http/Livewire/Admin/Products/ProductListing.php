@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Career;
+namespace App\Http\Livewire\Admin\Products;
 
-use App\Models\Career;
+use App\Models\Product;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +14,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\Rule;
 
-final class CareerListing extends PowerGridComponent
+final class ProductListing extends PowerGridComponent
 {
     use ActionButton;
 
@@ -23,12 +23,15 @@ final class CareerListing extends PowerGridComponent
 
     public int $perPage = 2;
 
+    public array $perPageValues = [15, 30, 100, 0];
+
+
     protected function getListeners(): array
     {
         return array_merge(
             parent::getListeners(),
             [
-                'deleted'   => 'deleteBanner',
+                'deleted'   => 'deleteModel',
             ]
         );
     }
@@ -40,11 +43,9 @@ final class CareerListing extends PowerGridComponent
     | Setup Table's general features
     |
     */
-    public array $perPageValues = [15, 30, 100, 0];
-
     public function setUp(): void
     {
-        $this->showPerPage(15)
+        $this->showPerPage()
             ->showSearchInput();
     }
 
@@ -59,11 +60,11 @@ final class CareerListing extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Career>|null
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Product>|null
      */
     public function datasource(): ?Builder
     {
-        return Career::query();
+        return Product::query();
     }
 
     /*
@@ -98,7 +99,7 @@ final class CareerListing extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('title')
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', function (Career $model) {
+            ->addColumn('created_at_formatted', function (Product $model) {
                 return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
             });
     }
@@ -130,6 +131,7 @@ final class CareerListing extends PowerGridComponent
                 ->title('Title')
                 ->field('title')
                 ->searchable()
+                ->makeInputText('title')
                 ->sortable(),
 
             Column::add()
@@ -145,10 +147,9 @@ final class CareerListing extends PowerGridComponent
 
             Column::add()
                 ->title('Created at')
-                ->field('created_at_formatted')
-                ->searchable()
-                ->sortable()
+                ->field('created_at_formatted', 'created_at')
                 ->makeInputDatePicker('created_at')
+                ->searchable()
         ];
     }
 
@@ -161,7 +162,7 @@ final class CareerListing extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Career Action Buttons.
+     * PowerGrid Product Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
@@ -173,9 +174,8 @@ final class CareerListing extends PowerGridComponent
             Button::add('edit')
                 ->caption('Edit')
                 ->class('btn btn-primary')
-                ->route('admin.career.edit', ['career' => 'id'])
+                ->route('admin.products.edit', ['product' => 'id'])
                 ->target('_self'),
-
 
             Button::add('destroy')
                 ->caption('Delete')
@@ -183,7 +183,6 @@ final class CareerListing extends PowerGridComponent
                 ->emit('deleted', ['key' => 'id']),
         ];
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -194,7 +193,7 @@ final class CareerListing extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Career Action Rules.
+     * PowerGrid Product Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
      */
@@ -206,7 +205,7 @@ final class CareerListing extends PowerGridComponent
            
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($career) => $career->id === 1)
+                ->when(fn($product) => $product->id === 1)
                 ->hide(),
         ];
     }
@@ -222,7 +221,7 @@ final class CareerListing extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Career Update.
+     * PowerGrid Product Update.
      *
      * @param array<string,string> $data
      */
@@ -231,7 +230,7 @@ final class CareerListing extends PowerGridComponent
     public function update(array $data): bool
     {
         try {
-            $updated = Career::query()
+            $updated = Product::query()
                 ->find($data['id'])
                 ->update([
                     $data['field'] => $data['value'],
@@ -260,13 +259,16 @@ final class CareerListing extends PowerGridComponent
         return (is_string($message)) ? $message : 'Error!';
     }
 
-    public function deleteBanner($id)
+    public function deleteModel($id)
     {
-        $career = Career::find($id['key']);
-        $career->delete();
+        $model = Product::find($id['key']);
+        if ($model->image) {
+            deleteImage($model->image);
+        }
+        $model->delete();
 
         $this->dispatchBrowserEvent('swal', [
-            'title' => 'Career deleted',
+            'title' => 'Product deleted',
             'timer' => 3000,
             'icon' => 'success',
             'timerProgressBar' => true,

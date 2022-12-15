@@ -33,7 +33,7 @@ final class BrandListing extends PowerGridComponent
         );
     }
 
-    public array $perPageValues = [0, 15, 1000, 5000];
+    public array $perPageValues = [15, 30, 100, 0];
 
     /*
     |--------------------------------------------------------------------------
@@ -268,7 +268,7 @@ final class BrandListing extends PowerGridComponent
         $model->delete();
 
         $this->dispatchBrowserEvent('swal', [
-            'title' => 'Career deleted',
+            'title' => 'Brand deleted',
             'timer' => 3000,
             'icon' => 'success',
             'timerProgressBar' => true,

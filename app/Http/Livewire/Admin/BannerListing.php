@@ -41,7 +41,7 @@ final class BannerListing extends PowerGridComponent
     |
     */
 
-    public array $perPageValues = [0, 15, 1000, 5000];
+    public array $perPageValues = [15, 30, 100, 0];
 
     public function setUp(): void
     {
