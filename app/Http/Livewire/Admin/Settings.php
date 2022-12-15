@@ -69,7 +69,10 @@ class Settings extends Component
 
     public function render()
     {
-        return view('livewire.admin.settings')->extends('layouts.admin.app');
+        return view('livewire.admin.settings')->extends('layouts.admin.app', [
+            'body_class' => '',
+            'title' => 'Settings'
+        ]);
     }
 
     public function updated($propertyName)

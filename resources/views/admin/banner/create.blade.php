@@ -1,4 +1,4 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Users'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Create Banner'])
 @section('content')
     <div class="container-fluid">
 

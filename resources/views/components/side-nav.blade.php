@@ -15,6 +15,20 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-careers'))
+                    <li class="{{ request()->routeIs('admin.career*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.career.index') }}">
+                            <i class="simple-icon-briefcase"></i> Career
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->can('manage-blog'))
+                    <li class="{{ request()->routeIs('admin.blog*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.blog.index') }}">
+                            <i class="simple-icon-paper-plane"></i> Blogs
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-banner'))
                     <li class="{{ request()->routeIs('admin.banner*') ? 'active' : '' }}">
                         <a href="{{ route('admin.banner.index') }}">

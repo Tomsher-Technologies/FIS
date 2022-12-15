@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Blog\BlogController;
+use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
+use App\Http\Livewire\Admin\Blog\BlogCreate;
+use App\Http\Livewire\Admin\Blog\BlogEdit;
 use App\Http\Livewire\Admin\Settings;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +55,16 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         });
         // Banner
         Route::resource('banner', BannerController::class)->except('show');
+
+        // Carrer
+        Route::resource('career', CareerController::class)->except('show');
+
+        // Blog
+        Route::group(['prefix' => 'blog', 'as' => 'blog.'], function () {
+            Route::get('/', [BlogController::class, 'index'])->name('index');
+            Route::get('/create', BlogCreate::class)->name('create');
+            Route::get('/{blog}/edit', BlogEdit::class)->name('edit');
+        });
 
 
         // All Users 
