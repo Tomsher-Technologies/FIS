@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Livewire\Admin\Blog\BlogCreate;
 use App\Http\Livewire\Admin\Blog\BlogEdit;
+use App\Http\Livewire\Admin\Clients\ClientCreate;
+use App\Http\Livewire\Admin\Clients\ClientEdit;
 use App\Http\Livewire\Admin\Settings;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -66,6 +68,14 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::get('/{blog}/edit', BlogEdit::class)->name('edit');
         });
 
+        // Clients
+        Route::group(['prefix' => 'clients', 'as' => 'clients.'], function () {
+            Route::get('/', function () {
+                return view('admin.clients.index');
+            })->name('index');
+            Route::get('/create', ClientCreate::class)->name('create');
+            Route::get('/{client}/edit', ClientEdit::class)->name('edit');
+        });
 
         // All Users 
         Route::resource('users', UserController::class);

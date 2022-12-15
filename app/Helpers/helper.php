@@ -55,7 +55,7 @@ function deleteImage($path)
 }
 
 /**
- * Clean file names
+ * Clean file names. Removes special characters from file name
  *
  * @param  string $file_name_str
  * @return string

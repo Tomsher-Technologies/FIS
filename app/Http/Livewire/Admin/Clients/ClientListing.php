@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Blog;
+namespace App\Http\Livewire\Admin\Clients;
 
-use App\Models\Blog;
+use App\Models\Common\Media;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +14,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\Rule;
 
-final class BlogListing extends PowerGridComponent
+final class ClientListing extends PowerGridComponent
 {
     use ActionButton;
 
@@ -55,11 +55,12 @@ final class BlogListing extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Blog>|null
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Common\Media>|null
      */
     public function datasource(): ?Builder
     {
-        return Blog::query();
+        return Media::query()
+            ->where('type', 'clients');
     }
 
     /*
@@ -92,9 +93,9 @@ final class BlogListing extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('title')
+            ->addColumn('name')
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', function (Blog $model) {
+            ->addColumn('created_at_formatted', function (Media $model) {
                 return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
             });
     }
@@ -123,9 +124,10 @@ final class BlogListing extends PowerGridComponent
                 ->sortable(),
 
             Column::add()
-                ->title('Title')
-                ->field('title')
+                ->title('Name')
+                ->field('alt')
                 ->searchable()
+                ->makeInputText('alt')
                 ->sortable(),
 
             Column::add()
@@ -141,10 +143,9 @@ final class BlogListing extends PowerGridComponent
 
             Column::add()
                 ->title('Created at')
-                ->field('created_at_formatted', 'created_at')
+                ->field('created_at_formatted')
                 ->makeInputDatePicker('created_at')
                 ->searchable()
-                ->sortable()
         ];
     }
 
@@ -157,11 +158,10 @@ final class BlogListing extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Blog Action Buttons.
+     * PowerGrid Media Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
-
 
     public function actions(): array
     {
@@ -169,7 +169,7 @@ final class BlogListing extends PowerGridComponent
             Button::add('edit')
                 ->caption('Edit')
                 ->class('btn btn-primary')
-                ->route('admin.blog.edit', ['blog' => 'id'])
+                ->route('admin.clients.edit', ['client' => 'id'])
                 ->target('_self'),
 
             Button::add('destroy')
@@ -188,7 +188,7 @@ final class BlogListing extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Blog Action Rules.
+     * PowerGrid Media Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
      */
@@ -200,7 +200,7 @@ final class BlogListing extends PowerGridComponent
            
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($blog) => $blog->id === 1)
+                ->when(fn($media) => $media->id === 1)
                 ->hide(),
         ];
     }
@@ -216,15 +216,16 @@ final class BlogListing extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Blog Update.
+     * PowerGrid Media Update.
      *
      * @param array<string,string> $data
      */
 
+
     public function update(array $data): bool
     {
         try {
-            $updated = Blog::query()
+            $updated = Media::query()
                 ->find($data['id'])
                 ->update([
                     $data['field'] => $data['value'],
@@ -252,16 +253,17 @@ final class BlogListing extends PowerGridComponent
 
         return (is_string($message)) ? $message : 'Error!';
     }
+
     public function deleteBanner($id)
     {
-        $blog = Blog::find($id['key']);
-        if ($blog->image) {
-            deleteImage($blog->image);
+        $client = Media::find($id['key']);
+        if ($client->url) {
+            deleteImage($client->url);
         }
-        $blog->delete();
+        $client->delete();
 
         $this->dispatchBrowserEvent('swal', [
-            'title' => 'Blog deleted',
+            'title' => 'Client deleted',
             'timer' => 3000,
             'icon' => 'success',
             'timerProgressBar' => true,
