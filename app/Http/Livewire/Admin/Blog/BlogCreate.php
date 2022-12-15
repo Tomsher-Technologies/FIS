@@ -36,7 +36,7 @@ class BlogCreate extends Component
     {
         $validatedData = $this->validate();
 
-        $iname = time() . $this->photo->getClientOriginalName();
+        $iname = time() . cleanFileName($this->photo->getClientOriginalName());
 
         $blog = Blog::create([
             'title' => $this->title,

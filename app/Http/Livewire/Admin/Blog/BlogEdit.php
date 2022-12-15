@@ -39,7 +39,7 @@ class BlogEdit extends Component
         $validatedData = $this->validate();
         if ($this->photo) {
             deleteImage($this->blog->image);
-            $iname = time() . $this->photo->getClientOriginalName();
+            $iname = time() . cleanFileName($this->photo->getClientOriginalName());
             $this->photo->storeAs('public/blogs', $iname);
             $this->blog->image  = '/storage/blogs/' . $iname;
         }
