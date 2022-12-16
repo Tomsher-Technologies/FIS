@@ -23,8 +23,16 @@
                         <form wire:submit.prevent="save()" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title<span class="text-danger">*</span></label>
-                                <input name="" class="form-control" wire:model="title" />
+                                <input name="" class="form-control" wire:model="title" wire:change="changeSeoUrl($event.target.value)" />
                                 @error('title')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">SEO URL<span class="text-danger">*</span></label>
+                                <input name="" class="form-control" wire:model="slug" />
+                                @error('slug')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -76,6 +84,8 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            @include('admin.common.seo')
 
                             <button type="submit" class="btn btn-primary mb-0">Create</button>
                         </form>

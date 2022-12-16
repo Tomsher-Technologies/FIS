@@ -14,12 +14,27 @@ class BlogEdit extends Component
 
     public $photo;
 
+    // SEO
+    public $seotitle;
+    public $ogtitle;
+    public $twtitle;
+    public $seodescription;
+    public $og_description;
+    public $twitter_description;
+
     protected $rules = [
         'blog.title' => 'required',
         'blog.description' => 'required',
         'blog.status' => 'required',
         'blog.image_alt' => 'nullable',
         'photo' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:1024',
+
+        'seotitle' => 'nullable|min:5|max:60',
+        'ogtitle' => 'nullable|min:5|max:60',
+        'twtitle' => 'nullable|min:5|max:60',
+        'seodescription' => 'nullable|min:5|max:120',
+        'og_description' => 'nullable|min:5|max:120',
+        'twitter_description' => 'nullable|min:5|max:120',
     ];
 
     protected $messages = [
@@ -32,6 +47,14 @@ class BlogEdit extends Component
     public function mount($blog)
     {
         $this->blog = Blog::find($blog);
+        $seo = $this->blog->seo;
+
+        $this->seotitle = $seo->title;
+        $this->ogtitle = $seo->og_title;
+        $this->twtitle = $seo->twitter_title;
+        $this->seodescription = $seo->description;
+        $this->og_description = $seo->og_description;
+        $this->twitter_description = $seo->twitter_description;
     }
 
     public function save()
@@ -45,6 +68,18 @@ class BlogEdit extends Component
         }
 
         $this->blog->save();
+
+        $this->blog->seo()->updateorCreate([
+            'seo_id' => $this->blog->id,
+            'seo_type' => get_class(new Blog)
+        ], [
+            'title' => $this->seotitle,
+            'og_title' => $this->ogtitle,
+            'twitter_title' => $this->twtitle,
+            'description' => $this->seodescription,
+            'og_description' => $this->og_description,
+            'twitter_description' => $this->twitter_description,
+        ]);
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Blog updated',

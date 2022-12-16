@@ -69,3 +69,14 @@ function cleanFileName($file_name_str)
     $file_name_str = preg_replace('/-+/', '-', $file_name_str);
     return $file_name_str;
 }
+
+/**
+ * Create SEO Url from string
+ *
+ * @param  string $file_name_str
+ * @return string
+ */
+function createSlug($string)
+{
+    return Str::of($string)->slug('-');
+}

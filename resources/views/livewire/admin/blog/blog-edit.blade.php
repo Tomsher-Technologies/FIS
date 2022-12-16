@@ -85,6 +85,8 @@
                                 @enderror
                             </div>
 
+                            @include('admin.common.seo')
+
                             <button type="submit" class="btn btn-primary mb-0">Create</button>
                         </form>
                     </div>

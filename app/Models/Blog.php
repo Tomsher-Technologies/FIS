@@ -17,10 +17,16 @@ class Blog extends Model
         'image_alt',
         'image',
         'status',
+        'slug',
     ];
 
     public function getImage()
     {
         return Storage::url(Str::replace('/storage/', '', $this->image));
+    }
+
+    public function seo()
+    {
+        return $this->morphOne(Seo::class, 'seo');
     }
 }
