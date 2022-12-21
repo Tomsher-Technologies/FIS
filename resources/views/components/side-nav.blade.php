@@ -8,6 +8,13 @@
                         <span>Dashboards</span>
                     </a>
                 </li>
+                @if (auth()->user()->can('manage-product'))
+                    <li class="{{ request()->routeIs('admin.products*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.products.index') }}">
+                            <i class="simple-icon-star"></i> Products
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-careers'))
                     <li class="{{ request()->routeIs('admin.career*') ? 'active' : '' }}">
                         <a href="{{ route('admin.career.index') }}">

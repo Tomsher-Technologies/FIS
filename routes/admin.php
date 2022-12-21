@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\Blog\BlogController;
 use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Galler\GalleryController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Livewire\Admin\Blog\BlogCreate;
@@ -12,6 +13,7 @@ use App\Http\Livewire\Admin\Brands\BrandCreate;
 use App\Http\Livewire\Admin\Brands\BrandEdit;
 use App\Http\Livewire\Admin\Clients\ClientCreate;
 use App\Http\Livewire\Admin\Clients\ClientEdit;
+use App\Http\Livewire\Admin\Gallery\GalleryListing;
 use App\Http\Livewire\Admin\Products\ProductCreate;
 use App\Http\Livewire\Admin\Products\ProductEdit;
 use App\Http\Livewire\Admin\Settings;
@@ -98,6 +100,13 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::get('/create', ProductCreate::class)->name('create');
             Route::get('/{product}/edit', ProductEdit::class)->name('edit');
         });
+
+        // Product
+        Route::get('/gallery', function () {
+            return view('admin.gallery.index');
+        })->name('gallery');
+
+        Route::post('/gallery', [GalleryController::class, 'index'])->name('gallery.upload');
 
         // All Users 
         Route::resource('users', UserController::class);
