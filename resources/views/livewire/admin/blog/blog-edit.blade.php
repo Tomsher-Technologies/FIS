@@ -87,7 +87,7 @@
 
                             @include('admin.common.seo')
 
-                            <button type="submit" class="btn btn-primary mb-0">Create</button>
+                            <button type="submit" class="btn btn-primary mb-0">Update</button>
                         </form>
                     </div>
                 </div>

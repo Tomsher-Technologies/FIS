@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Sub Title<span class="text-danger">*</span></label>
+                                <label for="exampleInputEmail1">Sub Title</label>
                                 <input name="" class="form-control" wire:model="sub_title" />
                                 @error('sub_title')
                                     <div class="alert alert-danger">{{ $message }}</div>
