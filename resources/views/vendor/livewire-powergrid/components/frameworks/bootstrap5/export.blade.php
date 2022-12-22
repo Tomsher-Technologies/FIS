@@ -3,7 +3,9 @@
         <div class="btn-group">
             <button class="btn btn-secondary btn-sm dropdown-toggle"
                     type="button"
-                    data-bs-toggle="dropdown"
+                    id="exportBtn"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
                     aria-expanded="false">
                     <span>
                         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +16,7 @@
                         </svg>
                     </span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" aria-labelledby="exportBtn">
                 @if(in_array('excel',$exportType))
                     <li class="d-flex">
                         <div class="dropdown-item">

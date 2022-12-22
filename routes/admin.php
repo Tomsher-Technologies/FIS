@@ -16,9 +16,13 @@ use App\Http\Livewire\Admin\Clients\ClientEdit;
 use App\Http\Livewire\Admin\Gallery\GalleryListing;
 use App\Http\Livewire\Admin\Products\ProductCreate;
 use App\Http\Livewire\Admin\Products\ProductEdit;
+use App\Http\Livewire\Admin\Services\ServiceCreate;
+use App\Http\Livewire\Admin\Services\ServiceEdit;
 use App\Http\Livewire\Admin\Settings;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,12 +105,26 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::get('/{product}/edit', ProductEdit::class)->name('edit');
         });
 
-        // Product
+        // Services
+        Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
+            Route::get('/', function () {
+                return view('admin.services.index');
+            })->name('index');
+            Route::get('/create', ServiceCreate::class)->name('create');
+            Route::get('/{service}/edit', ServiceEdit::class)->name('edit');
+        });
+
+        // Gallery
         Route::get('/gallery', function () {
             return view('admin.gallery.index');
         })->name('gallery');
 
         Route::post('/gallery', [GalleryController::class, 'index'])->name('gallery.upload');
+
+        // Product
+        Route::get('/enquriy', function () {
+            return view('admin.enquriy.index');
+        })->name('enquriy');
 
         // All Users 
         Route::resource('users', UserController::class);

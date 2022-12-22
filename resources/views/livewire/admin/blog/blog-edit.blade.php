@@ -97,21 +97,8 @@
 
 
     @push('header')
-        <script src="{{ getAdminAsset('tinymce/tinymce.min.js') }}"></script>
+        <x-admin.tiny-mce node='#description' dataObj='blog.description' />
         <script>
-            tinymceztinymce = tinymce.init({
-                selector: '#description',
-                forced_root_block: false,
-                setup: function(editor) {
-                    editor.on('init change', function() {
-                        editor.save();
-                    });
-                    editor.on('change', function(e) {
-                        @this.set('blog.description', editor.getContent());
-                    });
-                }
-            });
-
             window.addEventListener('clear', function(e) {
                 $('.custom-file-label').html('Choose file');
             });

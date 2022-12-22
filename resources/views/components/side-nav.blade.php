@@ -43,6 +43,13 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-gallery'))
+                    <li class="{{ request()->routeIs('admin.gallery*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.gallery') }}">
+                            <i class="simple-icon-picture"></i> Gallery
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-users'))
                     <li class="{{ request()->routeIs('admin.users*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}">

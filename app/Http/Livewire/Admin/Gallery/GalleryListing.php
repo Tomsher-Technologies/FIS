@@ -47,7 +47,12 @@ class GalleryListing extends Component
         foreach($this->images as $image){
             $image->save();
         }
-        $this->dispatchBrowserEvent('clear');
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Gallery Updated create',
+            'timer' => 3000,
+            'icon' => 'success',
+            'timerProgressBar' => true,
+        ]);
     }
 
     public function render()

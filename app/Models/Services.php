@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use DOMDocument;
-use DOMXPath;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Blog extends Model
+class Services extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'image_alt',
+        'name',
+        'sub_title',
         'image',
+        'content',
         'status',
         'slug',
     ];
