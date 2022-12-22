@@ -19,6 +19,8 @@ use App\Http\Livewire\Admin\Products\ProductEdit;
 use App\Http\Livewire\Admin\Services\ServiceCreate;
 use App\Http\Livewire\Admin\Services\ServiceEdit;
 use App\Http\Livewire\Admin\Settings;
+use App\Http\Livewire\Admin\StoreLocation\LocationCreate;
+use App\Http\Livewire\Admin\StoreLocation\LocationEdit;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -112,6 +114,15 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             })->name('index');
             Route::get('/create', ServiceCreate::class)->name('create');
             Route::get('/{service}/edit', ServiceEdit::class)->name('edit');
+        });
+
+        // Store Location
+        Route::group(['prefix' => 'store_location', 'as' => 'store_location.'], function () {
+            Route::get('/', function () {
+                return view('admin.store_location.index');
+            })->name('index');
+            Route::get('/create', LocationCreate::class)->name('create');
+            Route::get('/{location}/edit', LocationEdit::class)->name('edit');
         });
 
         // Gallery

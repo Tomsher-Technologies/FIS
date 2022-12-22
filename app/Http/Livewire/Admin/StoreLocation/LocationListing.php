@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Services;
+namespace App\Http\Livewire\Admin\StoreLocation;
 
-use App\Models\Services;
+use App\Models\StoreLoction;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +14,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\Rule;
 
-final class ServiceList extends PowerGridComponent
+final class LocationListing extends PowerGridComponent
 {
     use ActionButton;
 
@@ -59,11 +59,11 @@ final class ServiceList extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Services>|null
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\StoreLoction>|null
      */
     public function datasource(): ?Builder
     {
-        return Services::query();
+        return StoreLoction::query();
     }
 
     /*
@@ -98,7 +98,7 @@ final class ServiceList extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('name')
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', function (Services $model) {
+            ->addColumn('created_at_formatted', function (StoreLoction $model) {
                 return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
             });
     }
@@ -161,7 +161,7 @@ final class ServiceList extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Services Action Buttons.
+     * PowerGrid StoreLoction Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
@@ -173,7 +173,7 @@ final class ServiceList extends PowerGridComponent
             Button::add('edit')
                 ->caption('Edit')
                 ->class('btn btn-primary')
-                ->route('admin.services.edit', ['service' => 'id'])
+                ->route('admin.store_location.edit', ['location' => 'id'])
                 ->target('_self'),
 
             Button::add('destroy')
@@ -182,6 +182,7 @@ final class ServiceList extends PowerGridComponent
                 ->emit('deleted', ['key' => 'id']),
         ];
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -192,7 +193,7 @@ final class ServiceList extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Services Action Rules.
+     * PowerGrid StoreLoction Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
      */
@@ -204,7 +205,7 @@ final class ServiceList extends PowerGridComponent
            
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($services) => $services->id === 1)
+                ->when(fn($store-loction) => $store-loction->id === 1)
                 ->hide(),
         ];
     }
@@ -220,7 +221,7 @@ final class ServiceList extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Services Update.
+     * PowerGrid StoreLoction Update.
      *
      * @param array<string,string> $data
      */
@@ -229,7 +230,7 @@ final class ServiceList extends PowerGridComponent
     public function update(array $data): bool
     {
         try {
-            $updated = Services::query()
+            $updated = StoreLoction::query()
                 ->find($data['id'])
                 ->update([
                     $data['field'] => $data['value'],
@@ -260,14 +261,11 @@ final class ServiceList extends PowerGridComponent
 
     public function deleteModel($id)
     {
-        $model = Services::find($id['key']);
-        if ($model->image) {
-            deleteImage($model->image);
-        }
+        $model = StoreLoction::find($id['key']);
         $model->delete();
 
         $this->dispatchBrowserEvent('swal', [
-            'title' => 'Service deleted',
+            'title' => 'Lcoation deleted',
             'timer' => 3000,
             'icon' => 'success',
             'timerProgressBar' => true,

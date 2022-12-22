@@ -30,9 +30,10 @@ class ProductEdit extends Component
         'photo.required' => "Please select an image",
     ];
 
-    public function mount($product)
+    public function mount(Product $product)
     {
-        $this->product = Product::findOrFail($product);
+        $this->product = $product;
+        // $this->product = Product::findOrFail($product);
     }
 
     public function save()
