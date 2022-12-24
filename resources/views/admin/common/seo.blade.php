@@ -39,9 +39,19 @@
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">Twitter Description</label>
-        <textarea wire:model="twitter_description" name="" id="" cols="30" rows="3" class="form-control"></textarea>
+        <textarea wire:model="twitter_description" name="" id="" cols="30" rows="3"
+            class="form-control"></textarea>
         @error('twitter_description')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Keywords</label>
+        <input name="" class="form-control" wire:model="seokeywords" />
+        @error('seokeywords')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+    </div>
+
 </div>

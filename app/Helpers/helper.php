@@ -80,3 +80,26 @@ function createSlug($string)
 {
     return Str::of($string)->slug('-');
 }
+
+/**
+ * Save SEO Data
+ *
+ * @param  Modal $modal
+ * @param  string $file_name_str
+ * @return string
+ */
+function saveSEO($model, $that, $class)
+{
+    $model->seo()->updateorCreate([
+        'seo_id' => $model->id,
+        'seo_type' => $class
+    ], [
+        'title' => $that->seotitle,
+        'og_title' => $that->ogtitle,
+        'twitter_title' => $that->twtitle,
+        'description' => $that->seodescription,
+        'og_description' => $that->og_description,
+        'twitter_description' => $that->twitter_description,
+        'seokeywords' => $that->seokeywords,
+    ]);
+}

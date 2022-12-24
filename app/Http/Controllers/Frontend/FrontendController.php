@@ -45,10 +45,9 @@ class FrontendController extends Controller
 
     public function home()
     {
-        $blog = Blog::find(1);
-        $blog->load(['seo']);
-        $this->loadSEO($blog);
-        return view('welcome'); 
+        $page = Pages::where('page_id_name', 'home')->firstOrFail();
+        $page->load(['seo']);
+        $this->loadSEO($page);
     }
 
     public function loadSEO($model)

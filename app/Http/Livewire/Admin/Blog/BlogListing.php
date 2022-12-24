@@ -258,6 +258,7 @@ final class BlogListing extends PowerGridComponent
         if ($blog->image) {
             deleteImage($blog->image);
         }
+        $blog->seo()->delete();
         $blog->delete();
 
         $this->dispatchBrowserEvent('swal', [

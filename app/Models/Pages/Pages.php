@@ -2,6 +2,7 @@
 
 namespace App\Models\Pages;
 
+use App\Models\Seo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -29,5 +30,10 @@ class Pages extends Model
     public function getFunctionName()
     {
         return Str::camel($this->page_id_name);
+    }
+
+    public function seo()
+    {
+        return $this->morphOne(Seo::class, 'seo');
     }
 }

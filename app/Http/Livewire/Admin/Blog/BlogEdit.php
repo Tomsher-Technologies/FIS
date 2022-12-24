@@ -69,17 +69,19 @@ class BlogEdit extends Component
 
         $this->blog->save();
 
-        $this->blog->seo()->updateorCreate([
-            'seo_id' => $this->blog->id,
-            'seo_type' => get_class(new Blog)
-        ], [
-            'title' => $this->seotitle,
-            'og_title' => $this->ogtitle,
-            'twitter_title' => $this->twtitle,
-            'description' => $this->seodescription,
-            'og_description' => $this->og_description,
-            'twitter_description' => $this->twitter_description,
-        ]);
+        saveSEO($this->blog, $this, get_class(new Blog));
+
+        // $this->blog->seo()->updateorCreate([
+        //     'seo_id' => $this->blog->id,
+        //     'seo_type' => get_class(new Blog)
+        // ], [
+        //     'title' => $this->seotitle,
+        //     'og_title' => $this->ogtitle,
+        //     'twitter_title' => $this->twtitle,
+        //     'description' => $this->seodescription,
+        //     'og_description' => $this->og_description,
+        //     'twitter_description' => $this->twitter_description,
+        // ]);
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Blog updated',

@@ -27,6 +27,7 @@ class BlogCreate extends Component
     public $seodescription;
     public $og_description;
     public $twitter_description;
+    public $seokeywords;
 
     protected $rules = [
         'title' => 'required',
@@ -42,6 +43,8 @@ class BlogCreate extends Component
         'seodescription' => 'nullable|min:5|max:120',
         'og_description' => 'nullable|min:5|max:120',
         'twitter_description' => 'nullable|min:5|max:120',
+        'twitter_description' => 'nullable|min:5|max:120',
+        'seokeywords' => 'nullable|min:5|max:120',
     ];
 
     protected $messages = [
@@ -71,20 +74,13 @@ class BlogCreate extends Component
 
         $this->photo->storeAs('public/blogs', $iname);
 
+        saveSEO($blog, $this, get_class(new Blog));
+
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Blog create',
             'timer' => 3000,
             'icon' => 'success',
             'timerProgressBar' => true,
-        ]);
-
-        $blog->seo()->create([
-            'title' => $this->seotitle,
-            'og_title' => $this->ogtitle,
-            'twitter_title' => $this->twtitle,
-            'description' => $this->seodescription,
-            'og_description' => $this->og_description,
-            'twitter_description' => $this->twitter_description,
         ]);
 
         $this->dispatchBrowserEvent('clear');
