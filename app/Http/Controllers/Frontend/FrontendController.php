@@ -48,6 +48,11 @@ class FrontendController extends Controller
         $page = Pages::where('page_id_name', 'home')->firstOrFail();
         $page->load(['seo']);
         $this->loadSEO($page);
+
+        return view('welcome')
+            ->with(
+                ['page' => $page]
+            );
     }
 
     public function loadSEO($model)

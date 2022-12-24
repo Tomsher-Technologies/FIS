@@ -36,4 +36,9 @@ class Pages extends Model
     {
         return $this->morphOne(Seo::class, 'seo');
     }
+
+    public function getContent()
+    {
+        return do_shortcode($this->banner_content);
+    }
 }
