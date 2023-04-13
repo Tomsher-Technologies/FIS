@@ -29,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Bouncer::cache();
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
+
+        add_shortcode('hello','hai');
     }
 }

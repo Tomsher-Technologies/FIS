@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ getAdminAsset('css/main.css') }}" />
 
     @livewireStyles
+    @powerGridStyles
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 
@@ -45,7 +48,6 @@
     {{-- Footer Start --}}
     @include('admin.parts.footer')
     {{-- Footer End --}}
-
     {{-- Logout Form Start --}}
     <form action="{{ route('logout') }}" method="post" id="logoutForm">
         @csrf
@@ -53,6 +55,14 @@
     {{-- Logout Form End --}}
 
     @livewireScripts
+    @powerGridScripts
+
+
+    <script>
+        window.addEventListener('swal', function(e) {
+            Swal.fire(e.detail);
+        });
+    </script>
 
     <script src="{{ getAdminAsset('js/vendor/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/bootstrap.bundle.min.js') }}"></script>

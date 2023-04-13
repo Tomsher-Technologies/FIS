@@ -1,11 +1,30 @@
 <?php
 
+use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Blog\BlogController;
+use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Galler\GalleryController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
+use App\Http\Livewire\Admin\Blog\BlogCreate;
+use App\Http\Livewire\Admin\Blog\BlogEdit;
+use App\Http\Livewire\Admin\Brands\BrandCreate;
+use App\Http\Livewire\Admin\Brands\BrandEdit;
+use App\Http\Livewire\Admin\Clients\ClientCreate;
+use App\Http\Livewire\Admin\Clients\ClientEdit;
+use App\Http\Livewire\Admin\Gallery\GalleryListing;
+use App\Http\Livewire\Admin\Products\ProductCreate;
+use App\Http\Livewire\Admin\Products\ProductEdit;
+use App\Http\Livewire\Admin\Services\ServiceCreate;
+use App\Http\Livewire\Admin\Services\ServiceEdit;
 use App\Http\Livewire\Admin\Settings;
+use App\Http\Livewire\Admin\StoreLocation\LocationCreate;
+use App\Http\Livewire\Admin\StoreLocation\LocationEdit;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +67,75 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             Route::get('/', Settings::class)->name('index');
         });
+        // Banner
+        Route::resource('banner', BannerController::class)->except('show');
+
+        // Carrer
+        Route::resource('career', CareerController::class)->except('show');
+
+        // Blog
+        Route::group(['prefix' => 'blog', 'as' => 'blog.'], function () {
+            Route::get('/', [BlogController::class, 'index'])->name('index');
+            Route::get('/create', BlogCreate::class)->name('create');
+            Route::get('/{blog}/edit', BlogEdit::class)->name('edit');
+        });
+
+        // Clients
+        Route::group(['prefix' => 'clients', 'as' => 'clients.'], function () {
+            Route::get('/', function () {
+                return view('admin.clients.index');
+            })->name('index');
+            Route::get('/create', ClientCreate::class)->name('create');
+            Route::get('/{client}/edit', ClientEdit::class)->name('edit');
+        });
+
+        // Clients
+        Route::group(['prefix' => 'brands', 'as' => 'brands.'], function () {
+            Route::get('/', function () {
+                return view('admin.brands.index');
+            })->name('index');
+            Route::get('/create', BrandCreate::class)->name('create');
+            Route::get('/{brand}/edit', BrandEdit::class)->name('edit');
+        });
+
+        // Product
+        Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+            Route::get('/', function () {
+                return view('admin.products.index');
+            })->name('index');
+            Route::get('/create', ProductCreate::class)->name('create');
+            Route::get('/{product}/edit', ProductEdit::class)->name('edit');
+        });
+
+        // Services
+        Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
+            Route::get('/', function () {
+                return view('admin.services.index');
+            })->name('index');
+            Route::get('/create', ServiceCreate::class)->name('create');
+            Route::get('/{service}/edit', ServiceEdit::class)->name('edit');
+        });
+
+        // Store Location
+        Route::group(['prefix' => 'store_location', 'as' => 'store_location.'], function () {
+            Route::get('/', function () {
+                return view('admin.store_location.index');
+            })->name('index');
+            Route::get('/create', LocationCreate::class)->name('create');
+            Route::get('/{location}/edit', LocationEdit::class)->name('edit');
+        });
+
+        // Gallery
+        Route::get('/gallery', function () {
+            return view('admin.gallery.index');
+        })->name('gallery');
+
+        Route::post('/gallery', [GalleryController::class, 'index'])->name('gallery.upload');
+
+        // Product
+        Route::get('/enquriy', function () {
+            return view('admin.enquriy.index');
+        })->name('enquriy');
 
         // All Users 
         Route::resource('users', UserController::class);
