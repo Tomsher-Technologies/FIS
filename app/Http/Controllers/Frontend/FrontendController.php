@@ -49,7 +49,7 @@ class FrontendController extends Controller
         $page->load(['seo']);
         $this->loadSEO($page);
 
-        return view('welcome')
+        return view('frontend.home')
             ->with(
                 ['page' => $page]
             );
