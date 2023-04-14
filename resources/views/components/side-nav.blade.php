@@ -15,6 +15,13 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-businesses'))
+                    <li class="{{ request()->routeIs('admin.businesses*') ? 'active' : '' }}">
+                        <a href="#businesses">
+                            <i class="simple-icon-wallet"></i> Businesses
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-careers'))
                     <li class="{{ request()->routeIs('admin.career*') ? 'active' : '' }}">
                         <a href="{{ route('admin.career.index') }}">
@@ -68,9 +75,22 @@
             </ul>
         </div>
     </div>
-
-    <div class="sub-menu">
-        <div class="scroll">
+    <div class="sub-menu default-transition">
+        <div class="scroll ps">
+            <ul class="list-unstyled" data-link="businesses">
+                <li class="{{ request()->routeIs('admin.businesses.index') ? 'active' : '' }}">
+                    <a href="{{ route('admin.businesses.index') }}">
+                        <i class="simple-icon-rocket"></i> <span class="d-inline-block">Agencies/Catalogue/Materials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.businesses.index') }}">
+                        <i class="simple-icon-pie-chart"></i> <span class="d-inline-block">Production</span>
+                    </a>
+                </li>
+            </ul>
+            
         </div>
     </div>
+
 </div>

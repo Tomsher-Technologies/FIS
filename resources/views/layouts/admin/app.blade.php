@@ -55,6 +55,7 @@
     {{-- Logout Form End --}}
 
     @livewireScripts
+    
     @powerGridScripts
 
 

@@ -89,3 +89,7 @@ small,
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
+.menu .sub-menu {
+    width: 245px !important;
+}
