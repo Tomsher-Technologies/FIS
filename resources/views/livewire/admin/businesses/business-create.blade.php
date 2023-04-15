@@ -3,6 +3,9 @@
         <div class="row">
             <div class="col-12">
                 <h1>Create Agency/Catelogue/Material</h1>
+                <div class="text-zero top-right-button-container">
+                    <a href="{{ route('admin.businesses.index') }}" class="btn btn-primary btn-lg top-right-button mr-1">Back To List</a>
+                </div>
                 <div class="separator mb-5"></div>
             </div>
         </div>
@@ -18,15 +21,18 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form wire:submit.prevent="save()" enctype="multipart/form-data">
+                        <form wire:submit.prevent="save()"  enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Type<span class="text-danger">*</span></label>
                                 <select wire:model="btype" name="" class="form-control  mb-3">
                                     <option {{ old('type') == "agency" ? 'selected' : '' }} value="agency">
                                         Agency
                                     </option>
-                                    <option {{ old('type') == "catelogue" ? 'selected' : '' }} value="catelogue">
-                                        Catelogue
+                                    <option {{ old('type') == "product_catelogue" ? 'selected' : '' }} value="product_catelogue">
+                                        Product Catelogue
+                                    </option>
+                                    <option {{ old('type') == "stationery_catelogue" ? 'selected' : '' }} value="stationery_catelogue">
+                                        Stationery Catelogue
                                     </option>
                                     <option {{ old('type') == "material" ? 'selected' : '' }} value="material">
                                         Material
@@ -37,7 +43,7 @@
                                 @enderror
                             </div>
 
-
+                            @if($btype != "agency")
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title<span class="text-danger">*</span></label>
                                 <input name="" class="form-control" wire:model="title" />
@@ -53,6 +59,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            @endif
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Image <span class="text-danger">*</span></label>

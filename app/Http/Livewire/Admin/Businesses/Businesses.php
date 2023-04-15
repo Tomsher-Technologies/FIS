@@ -52,8 +52,8 @@ class Businesses extends PowerGridComponent
     */
     public function setUp(): void
     {
-        $this->persist(['columns', 'filters']);
-        $this->showPerPage()->showSearchInput();
+        // $this->persist(['columns', 'filters']);
+        $this->showPerPage($this->perPage)->showSearchInput();
     }
 
     /*
@@ -91,7 +91,10 @@ class Businesses extends PowerGridComponent
             })
             ->addColumn('title')
             ->addColumn('type', function (BusinessSettings $model) {
-                return ucfirst($model->type);
+                return ucwords(str_replace('_',' ',$model->type));
+              })
+            ->addColumn('image', function (BusinessSettings $model) {
+                return '<img class="img_width" src="'. $model->getImage().'" alt="'.$model->image_alt.'"/>';
               })
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', function (BusinessSettings $model) {
@@ -134,8 +137,15 @@ class Businesses extends PowerGridComponent
                 ->title('Type')
                 ->field( 'type')
                 ->searchable()
-                ->makeInputSelect(BusinessSettings::select('type')->distinct()->get(), 'type', 'type', ['live-search' => true])
+                ->makeInputSelect(BusinessSettings::select('type')->distinct()->orderBy('type','asc')->get() ->map(function ($setting) {
+                                        $setting->converted_type = ucwords(str_replace('_', ' ', $setting->type));
+                                        return $setting;
+                                    }), 'converted_type', 'type', ['live-search' => true])
                 ->sortable(),
+
+            Column::add()
+                ->title('Image')
+                ->field('image'),
 
             Column::add()
                 ->title('Status')

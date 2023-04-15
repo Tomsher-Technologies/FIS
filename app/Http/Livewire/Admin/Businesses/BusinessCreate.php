@@ -14,21 +14,23 @@ class BusinessCreate extends Component
     public $link;
     public $image_alt;
     public $status = 1;
-    public $btype;
+    public $btype = 'agency';
     public $photo;
 
     protected $rules = [
-        'title' => 'required',
+        'btype' => 'required',
+        'title' => 'required_unless:btype,agency',
         'status' => 'required',
-        'link' => 'required|url',
+        'link' => 'required_unless:btype,agency|nullable|url',
         'image_alt' => 'nullable',
         'photo' => 'required|mimes:jpeg,png,jpg,gif,webp|max:1024',
     ];
 
     protected $messages = [
-        'title.required' => "Please enter a title",
-        'status.required' => "Please enter a title",
-        'link.required' => "Please enter a url",
+        'btype.required' => "Please select a type",
+        'title.required_unless' => "Please enter a title",
+        'status.required' => "Please select a status",
+        'link.required_unless' => "Please enter a url",
         'photo.required' => "Please select an image",
     ];
 
@@ -63,6 +65,7 @@ class BusinessCreate extends Component
         $this->reset('link');
         $this->reset('image_alt');
         $this->reset('photo');
+        $this->reset('status');
     }
 
     public function render()

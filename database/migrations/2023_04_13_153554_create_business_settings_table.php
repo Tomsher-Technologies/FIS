@@ -15,7 +15,7 @@ class CreateBusinessSettingsTable extends Migration
     {
         Schema::create('business_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('type');
             $table->string('link')->nullable();
             $table->string('image');

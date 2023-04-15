@@ -78,7 +78,7 @@
     <div class="sub-menu default-transition">
         <div class="scroll ps">
             <ul class="list-unstyled" data-link="businesses">
-                <li class="{{ request()->routeIs('admin.businesses.index') ? 'active' : '' }}">
+                <li class="{{ (request()->routeIs('admin.businesses.index') ||  request()->routeIs('admin.businesses.create')) ? 'active' : '' }}">
                     <a href="{{ route('admin.businesses.index') }}">
                         <i class="simple-icon-rocket"></i> <span class="d-inline-block">Agencies/Catalogue/Materials</span>
                     </a>

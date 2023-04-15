@@ -93,3 +93,7 @@ small,
 .menu .sub-menu {
     width: 245px !important;
 }
+
+.img_width{
+    width: 100px;
+}
