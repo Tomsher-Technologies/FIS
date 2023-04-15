@@ -164,6 +164,7 @@ class Businesses extends PowerGridComponent
                 ->field('created_at_formatted', 'created_at')
                 ->makeInputDatePicker('created_at')
                 ->searchable()
+                ->sortable(),
         ];
     }
 
@@ -198,7 +199,7 @@ class Businesses extends PowerGridComponent
              Button::add('edit')
                  ->caption('Edit')
                  ->class('btn btn-primary')
-                 ->route('admin.businesses.edit', ['id' => 'id'])
+                 ->route('admin.businesses.edit', ['business_settings' => 'id'])
                  ->target('_self'),
  
              Button::add('destroy')

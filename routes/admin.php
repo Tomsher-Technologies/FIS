@@ -148,7 +148,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                 return view('admin.businesses.index');
             })->name('index');
             Route::get('/create', BusinessCreate::class)->name('create');
-            Route::get('/{id}/edit', BusinessEdit::class)->name('edit');
+            Route::get('/{business_settings}/edit', BusinessEdit::class)->name('edit');
         });
     });
 });

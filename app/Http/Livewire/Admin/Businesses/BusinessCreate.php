@@ -40,7 +40,7 @@ class BusinessCreate extends Component
 
         $iname = time() . cleanFileName($this->photo->getClientOriginalName());
 
-        $business = BusinessSettings::create([
+        $business_settings = BusinessSettings::create([
             'title' => $this->title,
             'type' => $this->btype,
             'link' => $this->link,
@@ -72,7 +72,7 @@ class BusinessCreate extends Component
     {
         return view('livewire.admin.businesses.business-create')->extends('layouts.admin.app', [
             'body_class' => '',
-            'title' => 'Create business'
+            'title' => 'Create Agency/Catelogue/Material'
         ]);
     }
 
