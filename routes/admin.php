@@ -19,6 +19,8 @@ use App\Http\Livewire\Admin\Products\ProductEdit;
 use App\Http\Livewire\Admin\Services\ServiceCreate;
 use App\Http\Livewire\Admin\Services\ServiceEdit;
 use App\Http\Livewire\Admin\Settings;
+use App\Http\Livewire\Admin\Businesses\BusinessCreate;
+use App\Http\Livewire\Admin\Businesses\BusinessEdit;
 use App\Http\Livewire\Admin\StoreLocation\LocationCreate;
 use App\Http\Livewire\Admin\StoreLocation\LocationEdit;
 use App\Models\User;
@@ -139,5 +141,14 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         // All Users 
         Route::resource('users', UserController::class);
+
+        // Businesses
+        Route::group(['prefix' => 'businesses', 'as' => 'businesses.'], function () {
+            Route::get('/', function () {
+                return view('admin.businesses.index');
+            })->name('index');
+            Route::get('/create', BusinessCreate::class)->name('create');
+            Route::get('/{id}/edit', BusinessEdit::class)->name('edit');
+        });
     });
 });

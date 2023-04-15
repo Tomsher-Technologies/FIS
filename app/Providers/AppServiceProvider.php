@@ -30,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
 
-        add_shortcode('hello','hai');
+        // add_shortcode('hello','hai');
     }
 }
