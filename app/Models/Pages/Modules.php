@@ -20,6 +20,13 @@ class Modules extends Model
         'btn_text',
         'btn_link',
         'pages_id',
+        'seo_title',
+        'og_title',
+        'twitter_title',
+        'seo_description',
+        'og_description',
+        'twitter_description',
+        'keywords'
     ];
 
     public function page()

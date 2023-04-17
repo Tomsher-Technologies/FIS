@@ -63,6 +63,9 @@
         window.addEventListener('swal', function(e) {
             Swal.fire(e.detail);
         });
+        function slugify(text) {
+            return text.toString().toLowerCase().replace(/\s+/g, '-').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/ğ/g, 'g').replace(/ş/g, 's').replace(/ı/g, 'i').replace(/ç/g, 'c').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '').replace(/[\s_-]+/g, '-');
+        }
     </script>
 
     <script src="{{ getAdminAsset('js/vendor/jquery-3.3.1.min.js') }}"></script>
@@ -70,6 +73,7 @@
     <script src="{{ getAdminAsset('js/vendor/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/select2.full.js') }}"></script>
     <script src="{{ getAdminAsset('js/dore.script.js') }}"></script>
+    <script src="{{ getAdminAsset('js/vendor/jquery.validate/jquery.validate.min.js') }}"></script>
     @stack('footer')
     <script src="{{ getAdminAsset('js/scripts.single.theme.js') }}"></script>
 </body>

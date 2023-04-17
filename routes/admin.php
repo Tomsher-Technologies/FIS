@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\Blog\BlogController;
 use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\Galler\GalleryController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
@@ -149,6 +150,20 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             })->name('index');
             Route::get('/create', BusinessCreate::class)->name('create');
             Route::get('/{business_settings}/edit', BusinessEdit::class)->name('edit');
+        });
+
+         // Pages
+         Route::group(['prefix' => 'pages', 'as' => 'page.'], function () {
+            Route::get('/privacy', [PageController::class, 'index'])->name('privacy');
+            Route::post('/store-data', [PageController::class, 'store'])->name('store-privacy');
+            Route::post('/getData', [PageController::class, 'getData'])->name('get-data');
+
+            Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+            Route::get('/create-faq', [PageController::class, 'createFaq'])->name('faq-create');
+            Route::post('/store-faq', [PageController::class, 'storeFaq'])->name('store-faq');
+
+            Route::get('/edit-faq/{id}', [PageController::class, 'editFaq'])->name('faq-edit');
+            Route::post('/delete-faq', [PageController::class, 'deleteFaq'])->name('delete-faq');
         });
     });
 });
