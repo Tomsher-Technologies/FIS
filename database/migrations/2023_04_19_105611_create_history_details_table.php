@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGeneralSettingsTable extends Migration
+class CreateHistoryDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateGeneralSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('general_settings', function (Blueprint $table) {
+        Schema::create('history_details', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('value')->nullable();
+            $table->integer('year');
+            $table->text('heading')->nullable();
+            $table->text('sub_heading')->nullable();
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateGeneralSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('general_settings');
+        Schema::dropIfExists('history_details');
     }
 }

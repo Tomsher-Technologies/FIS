@@ -113,19 +113,19 @@
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">About Us</span>
                     </a>
                 </li>
-                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.privacy') }}">
+                <li class="{{ (request()->routeIs('admin.page.history')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.history') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">History And Evolution</span>
                     </a>
                 </li>
 
-                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.privacy') }}">
+                <li class="{{ (request()->routeIs('admin.page.mission-vision') ) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.mission-vision') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Mission & Vision</span>
                     </a>
                 </li>
-                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.privacy') }}">
+                <li class="{{ (request()->routeIs('admin.page.awards')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.awards') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Awards & Accolades</span>
                     </a>
                 </li>

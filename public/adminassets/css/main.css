@@ -138,3 +138,6 @@ display: none;
 .error{
     color: red !important;
 }
+.dynamic-sub-heading{
+    margin-top: 72px !important;
+}

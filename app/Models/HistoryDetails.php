@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GeneralSettings extends Model
+class HistoryDetails extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'value',
-        'type',
+        'year',
+        'heading',
+        'sub_heading',
         'content',
-        'image'
+        'created_at'
     ];
 }
