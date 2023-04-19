@@ -53,35 +53,36 @@ class PageController extends Controller
         $result = Pages::leftJoin('modules', 'modules.pages_id', '=', 'pages.id')
         ->where('pages.page_id_name','=',"$type")
         ->get();
-       
-        if($result[0]['banner_image'] != NULL){
-            $result[0]['banner_image'] = Storage::url('pages/'. $result[0]['banner_image']);
-        }
-        if($result[0]['image1'] != NULL){
-            $result[0]['image1'] = Storage::url('pages/'. $result[0]['image1']);
-        }
-        if($result[0]['image2'] != NULL){
-            $result[0]['image2'] = Storage::url('pages/'. $result[0]['image2']);
-        }
-        if($result[0]['image3'] != NULL){
-            $result[0]['image3'] = Storage::url('pages/'. $result[0]['image3']);
-        }
-        if($result[0]['image'] != NULL){
-            $result[0]['image'] = Storage::url('pages/'. $result[0]['image']);
-        }
+        if(isset($result[0])){
+            if($result[0]['banner_image'] != NULL){
+                $result[0]['banner_image'] = Storage::url('pages/'. $result[0]['banner_image']);
+            }
+            if($result[0]['image1'] != NULL){
+                $result[0]['image1'] = Storage::url('pages/'. $result[0]['image1']);
+            }
+            if($result[0]['image2'] != NULL){
+                $result[0]['image2'] = Storage::url('pages/'. $result[0]['image2']);
+            }
+            if($result[0]['image3'] != NULL){
+                $result[0]['image3'] = Storage::url('pages/'. $result[0]['image3']);
+            }
+            if($result[0]['image'] != NULL){
+                $result[0]['image'] = Storage::url('pages/'. $result[0]['image']);
+            }
 
-        $settings = GeneralSettings::get();
-        if($settings){
-            foreach($settings as$value){
-                if(in_array($value['type'], array('mission_vision','challenges','our_team','mission','vision'))){
-                    $result[0][$value['type']] = array('value' => $value['value'], 'content' => $value['content'],'image' =>  Storage::url('pages/'. $value['image']));
-                }else{
-                    $result[0][$value['type']] = $value['value'];
+            $settings = GeneralSettings::get();
+            if($settings){
+                foreach($settings as$value){
+                    if(in_array($value['type'], array('mission_vision','challenges','our_team','mission','vision'))){
+                        $result[0][$value['type']] = array('value' => $value['value'], 'content' => $value['content'],'image' =>  Storage::url('pages/'. $value['image']));
+                    }else{
+                        $result[0][$value['type']] = $value['value'];
+                    }
                 }
             }
+            $result[0]['history'] = HistoryDetails::get();
+            $result[0]['awards'] = AwardDetails::get();
         }
-        $result[0]['history'] = HistoryDetails::get();
-        $result[0]['awards'] = AwardDetails::get();
         return json_encode( $result);
     }
     function checkSEOUrlExist($url, $type){
@@ -410,5 +411,36 @@ class PageController extends Controller
                 'image' => $value['image'],
             ]);
         }
+    }
+    public function services()
+    {
+        return view('admin.pages.services');
+    }
+
+    public function storeServices(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),$request->get("type"));
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/pages', $fileName);
+            $data['banner_image'] = $fileName;
+        }
+
+        if ($request->has('image1')) {
+            $file1 = $request->file('image1');
+            $fileName1 = strtolower(Str::random(2)).time().'.'. $file1->extension();  
+            $file1->move(base_path() . '/storage/app/public/pages', $fileName1);
+            $data['image1'] = $fileName1;
+        }
+        if ($request->has('image3')) {
+            $file2 = $request->file('image3');
+            $fileName2 = strtolower(Str::random(2)).time().'.'. $file2->extension();  
+            $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
+            $data['image3'] = $fileName2;
+        }
+        $this->savePageSettings($data);
     }
 }

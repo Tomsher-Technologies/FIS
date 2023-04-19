@@ -98,6 +98,11 @@
             </ul>
 
             <ul class="list-unstyled" data-link="pages">
+                <li class="{{ (request()->routeIs('admin.page.services')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.services') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Services</span>
+                    </a>
+                </li>
                 <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.privacy') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Privacy Policy & Terms</span>

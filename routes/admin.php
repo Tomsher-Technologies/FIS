@@ -180,6 +180,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/mission-vision', [PageController::class, 'missionAndVision'])->name('mission-vision');
             Route::post('/store-mission-vision', [PageController::class, 'storeMissionAndVision'])->name('store-mission-vision');
+
+            Route::get('/services', [PageController::class, 'services'])->name('services');
+            Route::post('/store-services', [PageController::class, 'storeServices'])->name('store-services');
         });
     });
 });
