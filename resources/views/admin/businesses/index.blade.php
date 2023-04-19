@@ -6,7 +6,7 @@
             <div class="col-12">
                 <h1> Agencies/Catelogues/Materials</h1>
                 <div class="text-zero top-right-button-container">
-                    <a href="{{ route('admin.businesses.create') }}" class="btn btn-primary btn-lg top-right-button mr-1">ADD NEW
+                    <a href="{{ route('admin.businesses.create') }}" class="btn btn-primary btn-lg top-right-button mr-1">CREATE NEW
                         AGENCY/CATELOGUE/MATERIAL</a>
                 </div>
                 <div class="separator mb-5"></div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusinessSettingsTable extends Migration
+class CreateGeneralSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateBusinessSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_settings', function (Blueprint $table) {
+        Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
             $table->string('type');
-            $table->string('link')->nullable();
-            $table->string('image');
-            $table->string('image_alt')->nullable();
-            $table->boolean('status')->default(1);
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateBusinessSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_settings');
+        Schema::dropIfExists('general_settings');
     }
 }

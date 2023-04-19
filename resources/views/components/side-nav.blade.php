@@ -64,10 +64,17 @@
                         </a>
                     </li>
                 @endif
-                @if (auth()->user()->can('manage-settings'))
+                @if (auth()->user()->can('manage-pages'))
                     <li class="{{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
                         <a href="{{ route('admin.settings.index') }}">
                             <i class="simple-icon-settings"></i> Settings
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->can('manage-settings'))
+                    <li class="{{ request()->routeIs('admin.page*') ? 'active' : '' }}">
+                        <a href="#pages">
+                            <i class="simple-icon-notebook"></i> Page Settings
                         </a>
                     </li>
                 @endif
@@ -78,7 +85,7 @@
     <div class="sub-menu default-transition">
         <div class="scroll ps">
             <ul class="list-unstyled" data-link="businesses">
-                <li class="{{ request()->routeIs('admin.businesses.index') ? 'active' : '' }}">
+                <li class="{{ (request()->routeIs('admin.businesses.index') ||  request()->routeIs('admin.businesses.create')) ? 'active' : '' }}">
                     <a href="{{ route('admin.businesses.index') }}">
                         <i class="simple-icon-rocket"></i> <span class="d-inline-block">Agencies/Catalogue/Materials</span>
                     </a>
@@ -86,6 +93,40 @@
                 <li>
                     <a href="{{ route('admin.businesses.index') }}">
                         <i class="simple-icon-pie-chart"></i> <span class="d-inline-block">Production</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled" data-link="pages">
+                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.privacy') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Privacy Policy & Terms</span>
+                    </a>
+                </li>
+                <li class="{{ (request()->routeIs('admin.page.faq') ||  request()->routeIs('admin.page.faq-create') ||  request()->routeIs('admin.page.faq-settings')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.faq') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Help & FAQ</span>
+                    </a>
+                </li>
+                <li class="{{ (request()->routeIs('admin.page.about-us') ) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.about-us') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">About Us</span>
+                    </a>
+                </li>
+                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.privacy') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">History And Evolution</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.privacy') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Mission & Vision</span>
+                    </a>
+                </li>
+                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.privacy') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Awards & Accolades</span>
                     </a>
                 </li>
             </ul>
