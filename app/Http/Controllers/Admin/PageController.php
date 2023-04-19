@@ -73,7 +73,7 @@ class PageController extends Controller
             $settings = GeneralSettings::get();
             if($settings){
                 foreach($settings as$value){
-                    if(in_array($value['type'], array('mission_vision','challenges','our_team','mission','vision'))){
+                    if(in_array($value['type'], array('mission_vision','challenges','our_team','mission','vision','career_content','latest_news','contact_content'))){
                         $result[0][$value['type']] = array('value' => $value['value'], 'content' => $value['content'],'image' =>  Storage::url('pages/'. $value['image']));
                     }else{
                         $result[0][$value['type']] = $value['value'];
@@ -442,5 +442,40 @@ class PageController extends Controller
             $data['image3'] = $fileName2;
         }
         $this->savePageSettings($data);
+        return json_encode(array('type' => $request->get("type")));
+    }
+    public function directors()
+    {
+        return view('admin.pages.directors');
+    }
+
+    public function storeDirectors(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),$request->get("type"));
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/pages', $fileName);
+            $data['banner_image'] = $fileName;
+        }
+        $this->savePageSettings($data);
+
+        $general['career_content'] = array('value' => NULL,'content' => $data['careers'],'image' => NULL );
+        $general['latest_news'] = array('value' => NULL,'content' => $data['latest_news'],'image' => NULL );
+        $general['contact_content'] = array('value' => NULL,'content' => $data['contact_content'],'image' => NULL );
+
+        foreach($general as $key=>$value){
+            $page = GeneralSettings::updateOrCreate([
+                'type'   => $key,
+            ],[
+                'value' => $value['value'],
+                'content' => $value['content'],
+                'image' => $value['image'],
+            ]);
+        }
+
+        return json_encode(array('type' => $request->get("type")));
     }
 }

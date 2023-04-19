@@ -183,6 +183,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/services', [PageController::class, 'services'])->name('services');
             Route::post('/store-services', [PageController::class, 'storeServices'])->name('store-services');
+
+            Route::get('/directors', [PageController::class, 'directors'])->name('directors');
+            Route::post('/store-directors', [PageController::class, 'storeDirectors'])->name('store-directors');
         });
     });
 });

@@ -1,10 +1,10 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Services'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Board Of Directors & Management'])
 @section('content')
     <div class="container-fluid">
 
         <div class="row">
             <div class="col-12">
-                <h1>Services</h1>
+                <h1>Board Of Directors & Management</h1>
                 <div class="separator mb-5"></div>
             </div>
         </div>
@@ -20,17 +20,14 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form id="services_settings"  method="POST" enctype="multipart/form-data">
+                        <form id="directors"  method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Service Type<span class="text-danger">*</span></label>
+                                <label for="exampleInputEmail1">Type<span class="text-danger">*</span></label>
                                 <select name="type" class="form-control  mb-3" onChange="getDataForEdit(this.value)">
-                                    <option value="wholesaler">Wholesaler And Retailer</option>
-                                    <option value="manufacturer">Manufacturer </option>
-                                    <option value="office_stationery">Office Stationery </option>
-                                    <option value="import_exports">Import & Exports </option>
-                                    <option value="csr_activities">CSR Activities </option>
+                                    <option value="directors">Board Of Directors</option>
+                                    <option value="management">Management </option>
                                 </select>
                             </div>
 
@@ -66,53 +63,25 @@
                                 <label for="exampleInputEmail1">Title<span class="text-danger">*</span></label>
                                 <input type="text" name="title" id="title" class="form-control" value="" />
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Description<span class="text-danger">*</span></label>
-                                <textarea name="description" id="description" cols="30" rows="10" class="form-control" > </textarea>
+                                <label for="exampleInputEmail1">Sub Title<span class="text-danger">*</span></label>
+                                <input type="text" name="sub_title" id="sub_title" class="form-control" value="" />
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Image</label>
-                                <div class="input-group mb-3">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input"
-                                            name="image1" id="image1">
-                                        <label class="custom-file-label" for="image1">Choose file</label>
-                                       
-                                    </div>
-                                </div>
-                                <div id="current_image1"></div>
+                                <label for="exampleInputEmail1">Careers Content<span class="text-danger">*</span></label>
+                                <textarea name="careers" id="careers"  cols="30" rows="3" class="form-control" > </textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Sub Content <span class="text-danger">*</span></label>
-                                <div wire:ignore>
-                                    <textarea name="block_content" id="block_content" cols="30" rows="10" class="form-control" > </textarea>
-                                </div> 
+                                <label for="exampleInputEmail1">Latest News Content<span class="text-danger">*</span></label>
+                                <textarea name="latest_news" id="latest_news" cols="30" rows="3" class="form-control" > </textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Benefit Title<span class="text-danger">*</span></label>
-                                <input type="text" name="heading2" id="heading2" class="form-control" value="" />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Benefit Content<span class="text-danger">*</span></label>
-                                <textarea name="content2" id="content2" cols="30" rows="10" class="form-control" > </textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Benefit Image</label>
-                                <div class="input-group mb-3">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input"
-                                            name="image3" id="image3">
-                                        <label class="custom-file-label" for="image3">Choose file</label>
-                                       
-                                    </div>
-                                </div>
-                                <div id="current_image3"></div>
+                                <label for="exampleInputEmail1">Contact Content<span class="text-danger">*</span></label>
+                                <textarea name="contact_content" id="contact_content" cols="30" rows="3" class="form-control" > </textarea>
                             </div>
 
                             @include('admin.common.seo_form')
@@ -129,21 +98,8 @@
 @push('footer')
 <script src="{{ getAdminAsset('tinymce/tinymce.min.js') }}"></script>
 <script>
-    tinymce.init({
-        selector: 'textarea#description',
-        height: 300,
-    });
-    tinymce.init({
-        selector: 'textarea#block_content',
-        height: 300,
-    });
-    tinymce.init({
-        selector: 'textarea#content2',
-        height: 300,
-    });
-
-    if ($("#services_settings").length > 0) {    
-        $("#services_settings").validate({
+    if ($("#directors").length > 0) {    
+        $("#directors").validate({
             rules: {
                 banner_title: {
                     required: true
@@ -157,7 +113,16 @@
                 title: {
                     required: true
                 },
-                description: {
+                sub_title: {
+                    required: true
+                }, 
+                careers: {
+                    required: true
+                }, 
+                latest_news: {
+                    required: true
+                }, 
+                contact_content: {
                     required: true
                 }, 
             },
@@ -189,17 +154,16 @@
                 $('#submit').html('Please Wait...');
                 $("#submit"). attr("disabled", true);
 
-                var data = new FormData($('#services_settings')[0]);
-
+                var data = new FormData($('#directors')[0]);
+              
                 $.ajax({
-                    url: "{{ route('admin.page.store-services')}}",
+                    url: "{{ route('admin.page.store-directors')}}",
                     type: "POST",
                     data: data,
                     processData: false,
                     contentType: false,
                     success: function( response ) {
                         var returnedData = JSON.parse(response);
-                      
                         $('#submit').html('Submit');
                         $("#submit"). attr("disabled", false);
                         
@@ -222,7 +186,7 @@
     });
 
     setTimeout(function(){
-        getDataForEdit('wholesaler');
+        getDataForEdit('directors');
     }, 500);
 
     
@@ -243,10 +207,12 @@
                     $('#seo_url').val(returnedData[0].seo_url);
                     $('#banner_sub_title').val(returnedData[0].banner_content);
                     $('#title').val(returnedData[0].heading);
-                    $('#description').html(returnedData[0].content);
-                    $('#block_content').html(returnedData[0].block_content);
-                    $('#heading2').val(returnedData[0].heading2);
-                    $('#content2').html(returnedData[0].content2);
+                   
+                    $('#sub_title').val(returnedData[0].sub_heading);
+                    $('#contact_content').html(returnedData[0].contact_content.content);
+                    $('#careers').html(returnedData[0].career_content.content);
+                    $('#latest_news').html(returnedData[0].latest_news.content);
+                    
             
                     $('#seotitle').val(returnedData[0].seo_title);
                     $('#ogtitle').val(returnedData[0].og_title);
@@ -255,29 +221,16 @@
                     $('#og_description').val(returnedData[0].og_description);
                     $('#twitter_description').val(returnedData[0].twitter_description);
                     $('#seokeywords').val(returnedData[0].keywords);
-                    tinymce.get("description").setContent(returnedData[0].content);
-                    tinymce.get("block_content").setContent(returnedData[0].block_content);
-                    tinymce.get("content2").setContent(returnedData[0].content2);
+            
                     if(returnedData[0].banner_image != ''){
                        var html = ' <label for="exampleInputEmail1">Current Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].banner_image +' " alt="">';
                        $('#current_image').html(html);
                     }
-                    if(returnedData[0].image1 != ''){
-                       var html = ' <label for="exampleInputEmail1">Current Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].image1 +' " alt="">';
-                       $('#current_image1').html(html);
-                    }
-                    
-                    if(returnedData[0].image3 != ''){
-                       var html = ' <label for="exampleInputEmail1">Current Benefit Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].image3 +' " alt="">';
-                       $('#current_image3').html(html);
-                    }
 
                 }else{
-                    $('#banner_title,#seo_url,#banner_sub_title,#title,#heading2,#seotitle,#ogtitle,#twtitle,#seodescription,#og_description,#twitter_description,#seokeywords').val('');
-                    $('#description,#block_content,#content2,#current_image,#current_image1,#current_image3').html('');
-                    tinymce.get("content2").setContent('');
-                    tinymce.get("description").setContent('');
-                    tinymce.get("block_content").setContent('');
+                    $('#sub_title,#banner_title,#seo_url,#banner_sub_title,#title,#heading2,#seotitle,#ogtitle,#twtitle,#seodescription,#og_description,#twitter_description,#seokeywords').val('');
+                    $('#contact_content,#careers,#latest_news').html('');
+                    $('#current_image').html('');
                 }
             }
         });

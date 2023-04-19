@@ -134,6 +134,12 @@
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Awards & Accolades</span>
                     </a>
                 </li>
+                <li class="{{ (request()->routeIs('admin.page.directors')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.directors') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Board Of Directors & Management</span>
+                    </a>
+                </li>
+               
             </ul>
             
         </div>
