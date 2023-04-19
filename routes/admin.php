@@ -171,6 +171,21 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/aboutus', [PageController::class, 'aboutUs'])->name('about-us');
             Route::post('/store-about-settings', [PageController::class, 'storeAboutSettings'])->name('store-about-settings');
+
+            Route::get('/history', [PageController::class, 'history'])->name('history');
+            Route::post('/store-history-settings', [PageController::class, 'storeHistorySettings'])->name('store-history-settings');
+
+            Route::get('/awards', [PageController::class, 'awards'])->name('awards');
+            Route::post('/store-awards-settings', [PageController::class, 'storeAwardsSettings'])->name('store-awards-settings');
+
+            Route::get('/mission-vision', [PageController::class, 'missionAndVision'])->name('mission-vision');
+            Route::post('/store-mission-vision', [PageController::class, 'storeMissionAndVision'])->name('store-mission-vision');
+
+            Route::get('/services', [PageController::class, 'services'])->name('services');
+            Route::post('/store-services', [PageController::class, 'storeServices'])->name('store-services');
+
+            Route::get('/directors', [PageController::class, 'directors'])->name('directors');
+            Route::post('/store-directors', [PageController::class, 'storeDirectors'])->name('store-directors');
         });
     });
 });
