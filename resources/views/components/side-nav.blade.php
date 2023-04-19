@@ -103,13 +103,13 @@
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Privacy Policy & Terms</span>
                     </a>
                 </li>
-                <li class="{{ (request()->routeIs('admin.page.faq') ||  request()->routeIs('admin.page.faq-create')) ? 'active' : '' }}">
+                <li class="{{ (request()->routeIs('admin.page.faq') ||  request()->routeIs('admin.page.faq-create') ||  request()->routeIs('admin.page.faq-settings')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.faq') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Help & FAQ</span>
                     </a>
                 </li>
-                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.privacy') }}">
+                <li class="{{ (request()->routeIs('admin.page.about-us') ) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.about-us') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">About Us</span>
                     </a>
                 </li>

@@ -26,7 +26,13 @@ class Modules extends Model
         'seo_description',
         'og_description',
         'twitter_description',
-        'keywords'
+        'keywords',
+        'block_content',
+        'image1',
+        'image2',
+        'image3',
+        'heading2',
+        'content2'
     ];
 
     public function page()

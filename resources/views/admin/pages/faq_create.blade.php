@@ -5,6 +5,9 @@
         <div class="row">
             <div class="col-12">
                 <h1> @if(isset($faq['id'])) Edit FAQ  @else  Create FAQ  @endif</h1>
+                <div class="text-zero top-right-button-container">
+                    <a href="{{ route('admin.page.faq') }}" class="btn btn-primary btn-lg top-right-button mr-1">Go Back To List</a>
+                </div>
                 <div class="separator mb-5"></div>
             </div>
         </div>

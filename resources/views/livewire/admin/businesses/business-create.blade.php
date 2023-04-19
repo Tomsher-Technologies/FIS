@@ -4,7 +4,7 @@
             <div class="col-12">
                 <h1>Create Agency/Catelogue/Material</h1>
                 <div class="text-zero top-right-button-container">
-                    <a href="{{ route('admin.businesses.index') }}" class="btn btn-primary btn-lg top-right-button mr-1">Back To List</a>
+                    <a href="{{ route('admin.businesses.index') }}" class="btn btn-primary btn-lg top-right-button mr-1">Go Back To List</a>
                 </div>
                 <div class="separator mb-5"></div>
             </div>

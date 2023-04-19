@@ -164,6 +164,13 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/edit-faq/{id}', [PageController::class, 'editFaq'])->name('faq-edit');
             Route::post('/delete-faq', [PageController::class, 'deleteFaq'])->name('delete-faq');
+            Route::post('/status-faq', [PageController::class, 'changeFaqStatus'])->name('change-faq-status');
+
+            Route::get('/faq-settings', [PageController::class, 'settingsFaq'])->name('faq-settings');
+            Route::post('/store-faq-settings', [PageController::class, 'storeFaqSettings'])->name('store-faq-settings');
+
+            Route::get('/aboutus', [PageController::class, 'aboutUs'])->name('about-us');
+            Route::post('/store-about-settings', [PageController::class, 'storeAboutSettings'])->name('store-about-settings');
         });
     });
 });
