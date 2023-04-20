@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\Blog\BlogController;
 use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\Galler\GalleryController;
 use App\Http\Controllers\Admin\Users\ProfileController;
 use App\Http\Controllers\Admin\Users\UserController;
@@ -19,6 +20,8 @@ use App\Http\Livewire\Admin\Products\ProductEdit;
 use App\Http\Livewire\Admin\Services\ServiceCreate;
 use App\Http\Livewire\Admin\Services\ServiceEdit;
 use App\Http\Livewire\Admin\Settings;
+use App\Http\Livewire\Admin\Businesses\BusinessCreate;
+use App\Http\Livewire\Admin\Businesses\BusinessEdit;
 use App\Http\Livewire\Admin\StoreLocation\LocationCreate;
 use App\Http\Livewire\Admin\StoreLocation\LocationEdit;
 use App\Models\User;
@@ -139,5 +142,50 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         // All Users 
         Route::resource('users', UserController::class);
+
+        // Businesses
+        Route::group(['prefix' => 'businesses', 'as' => 'businesses.'], function () {
+            Route::get('/', function () {
+                return view('admin.businesses.index');
+            })->name('index');
+            Route::get('/create', BusinessCreate::class)->name('create');
+            Route::get('/{business_settings}/edit', BusinessEdit::class)->name('edit');
+        });
+
+         // Pages
+         Route::group(['prefix' => 'pages', 'as' => 'page.'], function () {
+            Route::get('/privacy', [PageController::class, 'index'])->name('privacy');
+            Route::post('/store-data', [PageController::class, 'store'])->name('store-privacy');
+            Route::post('/getData', [PageController::class, 'getData'])->name('get-data');
+
+            Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+            Route::get('/create-faq', [PageController::class, 'createFaq'])->name('faq-create');
+            Route::post('/store-faq', [PageController::class, 'storeFaq'])->name('store-faq');
+
+            Route::get('/edit-faq/{id}', [PageController::class, 'editFaq'])->name('faq-edit');
+            Route::post('/delete-faq', [PageController::class, 'deleteFaq'])->name('delete-faq');
+            Route::post('/status-faq', [PageController::class, 'changeFaqStatus'])->name('change-faq-status');
+
+            Route::get('/faq-settings', [PageController::class, 'settingsFaq'])->name('faq-settings');
+            Route::post('/store-faq-settings', [PageController::class, 'storeFaqSettings'])->name('store-faq-settings');
+
+            Route::get('/aboutus', [PageController::class, 'aboutUs'])->name('about-us');
+            Route::post('/store-about-settings', [PageController::class, 'storeAboutSettings'])->name('store-about-settings');
+
+            Route::get('/history', [PageController::class, 'history'])->name('history');
+            Route::post('/store-history-settings', [PageController::class, 'storeHistorySettings'])->name('store-history-settings');
+
+            Route::get('/awards', [PageController::class, 'awards'])->name('awards');
+            Route::post('/store-awards-settings', [PageController::class, 'storeAwardsSettings'])->name('store-awards-settings');
+
+            Route::get('/mission-vision', [PageController::class, 'missionAndVision'])->name('mission-vision');
+            Route::post('/store-mission-vision', [PageController::class, 'storeMissionAndVision'])->name('store-mission-vision');
+
+            Route::get('/services', [PageController::class, 'services'])->name('services');
+            Route::post('/store-services', [PageController::class, 'storeServices'])->name('store-services');
+
+            Route::get('/directors', [PageController::class, 'directors'])->name('directors');
+            Route::post('/store-directors', [PageController::class, 'storeDirectors'])->name('store-directors');
+        });
     });
 });
