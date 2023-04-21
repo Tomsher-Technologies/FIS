@@ -20,9 +20,8 @@
                 <x-status />
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.banner.store') }}" enctype="multipart/form-data">
+                        <form method="POST" id="create" action="{{ route('admin.banner.store') }}" enctype="multipart/form-data">
                             @csrf
-
                             <x-input name="heading" text="Heading" />
                             <x-input name="content" text="Content" required="0" />
                             <x-input name="btn_text" text="Button text" required="0" />
@@ -64,5 +63,10 @@
     </div>
 @endsection
 
-@push('header')
+@push('footer')
+    <script>
+        jQuery('#create').validate({
+            onsubmit: false
+        });
+    </script>
 @endpush

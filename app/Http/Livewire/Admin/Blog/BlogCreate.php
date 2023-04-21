@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Blog;
 
 use App\Models\Blog;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -84,6 +85,8 @@ class BlogCreate extends Component
         ]);
 
         $this->dispatchBrowserEvent('clear');
+
+        Cache::forget('blogs');
 
         $this->reset('title');
         $this->reset('description');

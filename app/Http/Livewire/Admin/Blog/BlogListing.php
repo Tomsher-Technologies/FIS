@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
@@ -229,6 +230,8 @@ final class BlogListing extends PowerGridComponent
                 ->update([
                     $data['field'] => $data['value'],
                 ]);
+
+            Cache::forget('blogs');
         } catch (QueryException $exception) {
             $updated = false;
         }
@@ -260,6 +263,8 @@ final class BlogListing extends PowerGridComponent
         }
         $blog->seo()->delete();
         $blog->delete();
+
+        Cache::forget('blogs');
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Blog deleted',
