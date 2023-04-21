@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
@@ -51,6 +52,9 @@ class BannerController extends Controller
             $banner->image = $name;
             $banner->save();
         }
+
+        Cache::forget('banners');
+
         return redirect()->route('admin.banner.index')->with('status', 'Banner created successfully');
     }
 
@@ -101,6 +105,8 @@ class BannerController extends Controller
             $banner->save();
         }
 
+        Cache::forget('banners');
+
         return redirect()->route('admin.banner.index')->with('status', 'Banner created successfully');
     }
 
@@ -116,6 +122,9 @@ class BannerController extends Controller
             deleteImage($banner->image);
         }
         $banner->delete();
+
+        Cache::forget('banners');
+
         return redirect()->route('admin.banner.index')->with('status', 'Banner deleted successfully');
     }
 }

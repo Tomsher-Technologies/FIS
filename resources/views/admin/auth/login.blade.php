@@ -24,7 +24,7 @@
                         <form action="{{ route('login') }}" method="POST" id="login-form">
                             @csrf
                             <label class="form-group has-float-label mb-4">
-                                <input type="email" name="email" class="form-control" value="admin@fis.com" required="" />
+                                <input type="email" name="email" class="form-control" value="admin@fis.com" required="" autofocus />
                                 <span>E-mail</span>
                             </label>
 

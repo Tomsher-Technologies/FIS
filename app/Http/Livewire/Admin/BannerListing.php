@@ -6,6 +6,7 @@ use App\Models\Banner;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
@@ -278,6 +279,8 @@ final class BannerListing extends PowerGridComponent
             deleteImage($banner->image);
         }
         $banner->delete();
+
+        Cache::forget('banners');
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Banner deleted',

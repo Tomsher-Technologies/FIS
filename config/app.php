@@ -178,6 +178,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
 
         Silber\Bouncer\BouncerServiceProvider::class,
+
+        App\Providers\ViewServiceProvider::class,
     ],
 
     /*
