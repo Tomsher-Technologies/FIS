@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Pages\Pages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 function getAdminAsset($path)
@@ -9,6 +12,29 @@ function getAdminAsset($path)
     return asset('adminassets/' . $path);
 }
 
+
+function getSEOUrl($path)
+{
+    $uriSegments = explode(".", $path);
+
+    Cache::forget('url_pages');
+
+    $pages = Cache::rememberForever('url_pages',  function () {
+        return Pages::all();
+    });
+
+    $url_sub = "";
+    $url = $pages->where('page_id_name', $uriSegments[0])->pluck('seo_url')->first();
+
+    if (count($uriSegments) > 1) {
+        switch ($uriSegments[0]) {
+            default:
+                $url_sub = "";
+        }
+    }
+
+    return $url !== null ? URL::to($url . "/" . $url_sub) : "";
+}
 
 /**
  * Image Upload Helper
@@ -94,12 +120,18 @@ function saveSEO($model, $that, $class)
         'seo_id' => $model->id,
         'seo_type' => $class
     ], [
-        'title' => $that->seotitle,
-        'og_title' => $that->ogtitle,
-        'twitter_title' => $that->twtitle,
-        'description' => $that->seodescription,
-        'og_description' => $that->og_description,
-        'twitter_description' => $that->twitter_description,
-        'seokeywords' => $that->seokeywords,
+        'title' => $that->seotitle ?? '',
+        'og_title' => $that->ogtitle ?? '',
+        'twitter_title' => $that->twtitle ?? '',
+        'description' => $that->seodescription ?? '',
+        'og_description' => $that->og_description ?? '',
+        'twitter_description' => $that->twitter_description ?? '',
+        'seokeywords' => $that->seokeywords ?? '',
     ]);
+}
+
+
+function getValueFromSetting($settings, $name)
+{
+    return $settings->where('name', $name)->first()->value;
 }

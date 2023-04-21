@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Pages\Pages;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -22,24 +24,28 @@ class FrontendController extends Controller
         $view = "";
         $uriSegments = explode("/", parse_url($request->path(), PHP_URL_PATH));
 
-        $pages = Cache::rememberForever('url_pages', function () {
-            return Pages::all();
-        });
+        // $pages = Cache::rememberForever('url_pages', function () {
+        //     return Pages::all();
+        // });
 
-        try {
-            $page = $pages->where('slug', $uriSegments[0])->firstOrFail();
+        $pages = Pages::all();
 
-            $functionName = $page->getFunctionName();
 
-            if (!method_exists(FrontendController::class, $functionName)) {
-                abort(404);
-            }
+        // try {
+        $page = $pages->where('seo_url', $uriSegments[0])->firstOrFail();
 
-            $view = $this->$functionName($page, $uriSegments[1] ?? null);
-            return $view;
-        } catch (\Exception $exception) {
+        $functionName = $page->getFunctionName();
+        // dd($functionName);
+
+        if (!method_exists(FrontendController::class, $functionName)) {
             abort(404);
         }
+
+        $view = $this->$functionName($page, $uriSegments[1] ?? null);
+        return $view;
+        // } catch (\Exception $exception) {
+        //     abort(404);
+        // }
         abort(404);
     }
 
@@ -49,10 +55,106 @@ class FrontendController extends Controller
         $page->load(['seo']);
         $this->loadSEO($page);
 
+        $banners = Cache::rememberForever('banners', function () {
+            return Banner::whereStatus(1)->latest()->get();
+        });
+
+        $blogs = Cache::rememberForever('blogs', function () {
+            return Blog::whereStatus(1)->latest()->limit(3)->get();
+        });
+
+        $blog_first = $blogs->slice(0, 1)->first();
+        $blog_second = $blogs->slice(1, 2)->all();
+
+        $products = Cache::rememberForever('products', function () {
+            return Product::whereStatus(1)->latest()->limit(10)->get();
+        });
+
         return view('frontend.home')
-            ->with(
-                ['page' => $page]
-            );
+            ->with([
+                'page' => $page,
+                'banners' => $banners,
+                'blog_first' => $blog_first,
+                'blog_second' => $blog_second,
+                'products' => $products,
+            ]);
+    }
+
+    public function contact($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.contact-us')
+            ->with([
+                'page' => $page,
+            ]);
+    }
+
+    public function mediaCenter($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.media-center')
+            ->with([
+                'page' => $page,
+            ]);
+    }
+
+    public function history($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.history')
+            ->with([
+                'page' => $page,
+            ]);
+    }
+
+    public function missionVision($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.mission')
+            ->with([
+                'page' => $page,
+            ]);
+    }
+
+    public function awards($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.awards')
+            ->with([
+                'page' => $page,
+            ]);
+    }
+
+    public function directors($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.directors')
+            ->with([
+                'page' => $page,
+            ]);
+    }
+
+    public function management($page)
+    {
+        $page->load(['seo']);
+        $this->loadSEO($page);
+
+        return view('frontend.management')
+            ->with([
+                'page' => $page,
+            ]);
     }
 
     public function loadSEO($model)

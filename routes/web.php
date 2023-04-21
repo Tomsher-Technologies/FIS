@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontendController::class, 'home']);
+Route::get('/', [FrontendController::class, 'home'])->name('home');
 
 Route::fallback([FrontendController::class, 'catchAll']);
 

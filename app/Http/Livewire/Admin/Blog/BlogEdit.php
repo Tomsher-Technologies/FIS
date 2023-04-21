@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Blog;
 
 use App\Models\Blog;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -49,12 +50,14 @@ class BlogEdit extends Component
         $this->blog = Blog::find($blog);
         $seo = $this->blog->seo;
 
-        $this->seotitle = $seo->title;
-        $this->ogtitle = $seo->og_title;
-        $this->twtitle = $seo->twitter_title;
-        $this->seodescription = $seo->description;
-        $this->og_description = $seo->og_description;
-        $this->twitter_description = $seo->twitter_description;
+        if ($seo) {
+            $this->seotitle = $seo->title;
+            $this->ogtitle = $seo->og_title;
+            $this->twtitle = $seo->twitter_title;
+            $this->seodescription = $seo->description;
+            $this->og_description = $seo->og_description;
+            $this->twitter_description = $seo->twitter_description;
+        }
     }
 
     public function save()
@@ -82,6 +85,8 @@ class BlogEdit extends Component
         //     'og_description' => $this->og_description,
         //     'twitter_description' => $this->twitter_description,
         // ]);
+
+        Cache::forget('blogs');
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Blog updated',
