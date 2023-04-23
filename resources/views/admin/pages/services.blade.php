@@ -115,6 +115,24 @@
                                 <div id="current_image3"></div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Home Icon</label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"
+                                            name="image4" id="image4">
+                                        <label class="custom-file-label" for="image4">Choose file</label>
+                                       
+                                    </div>
+                                </div>
+                                <div id="current_image4"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Home Content<span class="text-danger">*</span></label>
+                                <textarea name="home_content" id="home_content" cols="30" rows="10" class="form-control" > </textarea>
+                            </div>
+
                             @include('admin.common.seo_form')
 
                             <button type="submit"  onclick="tinyMCE.triggerSave(true,true);"  class="btn btn-primary mb-0" id='submit'>Save</button>
@@ -141,6 +159,10 @@
         selector: 'textarea#content2',
         height: 300,
     });
+    tinymce.init({
+        selector: 'textarea#home_content',
+        height: 300,
+    });
 
     if ($("#services_settings").length > 0) {    
         $("#services_settings").validate({
@@ -158,6 +180,9 @@
                     required: true
                 },
                 description: {
+                    required: true
+                },
+                home_content: {
                     required: true
                 }, 
             },
@@ -247,6 +272,7 @@
                     $('#block_content').html(returnedData[0].block_content);
                     $('#heading2').val(returnedData[0].heading2);
                     $('#content2').html(returnedData[0].content2);
+                    $('#home_content').html(returnedData[0].home_content);
             
                     $('#seotitle').val(returnedData[0].seo_title);
                     $('#ogtitle').val(returnedData[0].og_title);
@@ -258,6 +284,8 @@
                     tinymce.get("description").setContent(returnedData[0].content);
                     tinymce.get("block_content").setContent(returnedData[0].block_content);
                     tinymce.get("content2").setContent(returnedData[0].content2);
+                    tinymce.get("home_content").setContent(returnedData[0].home_content);
+                    
                     if(returnedData[0].banner_image != ''){
                        var html = ' <label for="exampleInputEmail1">Current Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].banner_image +' " alt="">';
                        $('#current_image').html(html);
@@ -271,11 +299,16 @@
                        var html = ' <label for="exampleInputEmail1">Current Benefit Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].image3 +' " alt="">';
                        $('#current_image3').html(html);
                     }
+                    if(returnedData[0].home_icon != ''){
+                       var html = ' <label for="exampleInputEmail1">Current Home Icon</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].home_icon +' " alt="">';
+                       $('#current_image4').html(html);
+                    }
 
                 }else{
                     $('#banner_title,#seo_url,#banner_sub_title,#title,#heading2,#seotitle,#ogtitle,#twtitle,#seodescription,#og_description,#twitter_description,#seokeywords').val('');
-                    $('#description,#block_content,#content2,#current_image,#current_image1,#current_image3').html('');
+                    $('#description,#block_content,#home_content,#content2,#current_image,#current_image1,#current_image3,#current_image4').html('');
                     tinymce.get("content2").setContent('');
+                    tinymce.get("home_content").setContent('');
                     tinymce.get("description").setContent('');
                     tinymce.get("block_content").setContent('');
                 }

@@ -186,6 +186,18 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/directors', [PageController::class, 'directors'])->name('directors');
             Route::post('/store-directors', [PageController::class, 'storeDirectors'])->name('store-directors');
+            
+            Route::get('/other-pages', [PageController::class, 'otherPages'])->name('other-pages');
+            Route::post('/store-others', [PageController::class, 'storeOtherPages'])->name('store-other-settings');
+
+            Route::get('/home', [PageController::class, 'homePage'])->name('home');
+            Route::post('/store-home', [PageController::class, 'storeHomePage'])->name('store-home');
+            
+            Route::get('/teams', [PageController::class, 'teams'])->name('teams');
+            Route::get('/create-team-member', [PageController::class, 'createTeamMember'])->name('team-member-create');
+            Route::post('/store-member', [PageController::class, 'storeMember'])->name('store-member');
+            Route::get('/edit-member/{id}', [PageController::class, 'editMember'])->name('member-edit');
+            Route::post('/delete-member', [PageController::class, 'deleteMember'])->name('delete-member');
         });
     });
 });

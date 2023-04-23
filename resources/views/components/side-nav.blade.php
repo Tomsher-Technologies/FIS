@@ -139,6 +139,24 @@
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Board Of Directors & Management</span>
                     </a>
                 </li>
+
+                <li class="{{ (request()->routeIs('admin.page.home')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.home') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Home</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.other-pages')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.other-pages') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Other Pages</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.teams') ||  request()->routeIs('admin.page.team-create') ) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.teams') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Teams</span>
+                    </a>
+                </li>
                
             </ul>
             

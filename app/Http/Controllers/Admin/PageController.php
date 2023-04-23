@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pages\Pages;
 use App\Models\Pages\Modules;
 use App\Models\Pages\Faq;
+use App\Models\Teams;
 use App\Models\GeneralSettings;
 use App\Models\HistoryDetails;
 use App\Models\AwardDetails;
@@ -68,6 +69,9 @@ class PageController extends Controller
             }
             if($result[0]['image'] != NULL){
                 $result[0]['image'] = Storage::url('pages/'. $result[0]['image']);
+            }
+            if($result[0]['home_icon'] != NULL){
+                $result[0]['home_icon'] = Storage::url('pages/'. $result[0]['home_icon']);
             }
 
             $settings = GeneralSettings::get();
@@ -193,13 +197,13 @@ class PageController extends Controller
                             'twitter_description'    => isset($data["twitter_description"]) ? $data["twitter_description"] : NULL,
                             'keywords'    => isset($data["seokeywords"]) ? $data["seokeywords"] : NULL,
                             'has_image' => isset($data['has_image']) ? $data['has_image'] : 0,
-                            'image' => isset($data['mid_image']) ? $data['mid_image'] : NULL,
                             'has_btn' => isset($data['has_btn']) ? $data['has_btn'] : 0,
                             'btn_text' => isset($data['btn_text']) ? $data['btn_text'] : NULL,
                             'btn_link' => isset($data['btn_link']) ? $data['btn_link'] : NULL,
                             'block_content' => isset($data['block_content']) ? $data['block_content'] : NULL,
                             'heading2' => isset($data['heading2']) ? $data['heading2'] : NULL,
-                            'content2' => isset($data['content2']) ? $data['content2'] : NULL);
+                            'content2' => isset($data['content2']) ? $data['content2'] : NULL,
+                            'home_content' => isset($data['home_content']) ? $data['home_content'] : NULL);
         if(isset($data['image1']) ){
             $image_array['image1'] = $data['image1'];
         }
@@ -208,6 +212,12 @@ class PageController extends Controller
         }
         if(isset($data['image3']) ){
             $image_array['image3'] = $data['image3'];
+        }
+        if(isset($data['mid_image']) ){
+            $image_array['image'] = $data['mid_image'];
+        }
+        if(isset($data['home_icon']) ){
+            $image_array['home_icon'] = $data['home_icon'];
         }
         $result_array = array_merge( $normal_array,$image_array);
 
@@ -441,6 +451,13 @@ class PageController extends Controller
             $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
             $data['image3'] = $fileName2;
         }
+
+        if ($request->has('image4')) {
+            $file4 = $request->file('image4');
+            $fileName4 = strtolower(Str::random(2)).time().'.'. $file4->extension();  
+            $file4->move(base_path() . '/storage/app/public/pages', $fileName4);
+            $data['home_icon'] = $fileName4;
+        }
         $this->savePageSettings($data);
         return json_encode(array('type' => $request->get("type")));
     }
@@ -477,5 +494,81 @@ class PageController extends Controller
         }
 
         return json_encode(array('type' => $request->get("type")));
+    }
+
+    public function otherPages()
+    {
+        return view('admin.pages.others');
+    }
+
+    public function storeOtherPages(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),$request->get("type"));
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/pages', $fileName);
+            $data['banner_image'] = $fileName;
+        }
+        $this->savePageSettings($data);
+        return json_encode(array('type' => $request->get("type")));
+    }
+
+    public function homePage()
+    {
+        return view('admin.pages.home');
+    }
+
+    public function storeHomePage(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),'home');
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        $data['type'] = 'home';
+        $this->savePageSettings($data);
+    }
+
+    public function teams()
+    {
+        $teams = Teams::orderBy('id','desc')->get();
+        return view('admin.pages.teams_list')->with('teams', $teams);
+    }
+
+    public function createTeamMember()
+    {
+         return view('admin.pages.member_create')->with('member', array());
+    }
+
+    public function storeMember(Request $request)
+    {
+        $fileName = '';
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/teams', $fileName);
+        }
+        $page = Teams::updateOrCreate([
+            'id'   => $request->get('member_id'),
+        ],[
+            'type' => $request->get('type'),
+            'name' => $request->get('name'),
+            'designation'    => $request->designation,
+            'image' => $fileName,
+            'status'    => $request->status,
+        ]);
+
+        $result['image'] = Storage::url('teams/'. $fileName);
+        return json_encode($result);
+    }
+    public function editMember($id)
+    {
+        $member = Teams::find($id);
+         return view('admin.pages.member_create')->with('member', $member);
+    }
+    public function deleteMember(Request $request){
+        $member = Teams::find($request->id);
+        $member->delete();
     }
 }
