@@ -198,6 +198,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::post('/store-member', [PageController::class, 'storeMember'])->name('store-member');
             Route::get('/edit-member/{id}', [PageController::class, 'editMember'])->name('member-edit');
             Route::post('/delete-member', [PageController::class, 'deleteMember'])->name('delete-member');
+
+            Route::get('/packaging', [PageController::class, 'packaging'])->name('packaging');
+            Route::post('/store-package-settings', [PageController::class, 'storePackagingSettings'])->name('store-package-settings');
         });
     });
 });

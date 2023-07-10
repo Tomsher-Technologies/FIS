@@ -50,6 +50,13 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-brand'))
+                    <li class="{{ request()->routeIs('admin.brands*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.brands.index') }}">
+                            <i class="simple-icon-badge"></i> Brands
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-gallery'))
                     <li class="{{ request()->routeIs('admin.gallery*') ? 'active' : '' }}">
                         <a href="{{ route('admin.gallery') }}">
@@ -149,6 +156,12 @@
                 <li class="{{ (request()->routeIs('admin.page.other-pages')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.other-pages') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Other Pages</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.packaging')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.packaging') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Packaging</span>
                     </a>
                 </li>
 

@@ -10,6 +10,7 @@ use App\Models\Teams;
 use App\Models\GeneralSettings;
 use App\Models\HistoryDetails;
 use App\Models\AwardDetails;
+use App\Models\PackageSteps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -379,23 +380,37 @@ class PageController extends Controller
             $data['banner_image'] = $fileName;
         }
 
+        $settings = GeneralSettings::get();
+        $gSettings = array();
+        if($settings){
+            foreach($settings as$value){
+                $gSettings[$value['type']] = $value['image'];
+            }
+        }
+
         if ($request->has('image1')) {
             $file1 = $request->file('image1');
             $fileName1 = strtolower(Str::random(2)).time().'.'. $file1->extension();  
             $file1->move(base_path() . '/storage/app/public/pages', $fileName1);
             $data['image1'] = $fileName1;
+        }else{
+            $data['image1'] = $gSettings['mission_vision'];
         }
         if ($request->has('image2')) {
             $file2 = $request->file('image2');
             $fileName2 = strtolower(Str::random(2)).time().'.'. $file2->extension();  
             $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
             $data['image2'] = $fileName2;
+        }else{
+            $data['image2'] = $gSettings['challenges'];
         }
         if ($request->has('image3')) {
             $file3 = $request->file('image3');
             $fileName3 = strtolower(Str::random(2)).time().'.'. $file3->extension();  
             $file3->move(base_path() . '/storage/app/public/pages', $fileName3);
             $data['image3'] = $fileName3;
+        }else{
+            $data['image3'] = $gSettings['our_team'];
         }
         if ($request->has('mid_image')) {
             $mid_file = $request->file('mid_image');
@@ -406,6 +421,7 @@ class PageController extends Controller
         $data['type'] = 'mission_vision';
         $this->savePageSettings($data);
 
+        
         $general['mission_vision'] = array('value' => $data['title1'],'content' => $data['content1'],'image' => $data['image1']  );
         $general['challenges'] = array('value' => $data['title2'],'content' => $data['content2'],'image' => $data['image2']  );
         $general['our_team'] = array('value' => $data['title3'],'content' => $data['content3'],'image' => $data['image3']  );
@@ -570,5 +586,43 @@ class PageController extends Controller
     public function deleteMember(Request $request){
         $member = Teams::find($request->id);
         $member->delete();
+    }
+
+    public function packaging()
+    {
+         return view('admin.pages.packaging')->with('package', array());
+    }
+
+    public function storePackagingSettings(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),'packaging');
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/pages', $fileName);
+            $data['banner_image'] = $fileName;
+        }
+        $data['type'] = 'packaging';
+       
+        $this->savePageSettings($data);
+
+        $package_title = $request->package_title;
+        $package_content = $request->package_content;
+        for($count = 0; $count < count($package_title); $count++)
+        {
+            if($award_title[$count] != ''){
+                $dataHis = array(
+                    'title' => $package_title[$count],
+                    'content'  => $package_content[$count],
+                    'created_at' => now()
+                );
+                $insert_data[] = $dataHis; 
+            }
+        }
+      
+        PackageSteps::truncate();
+        PackageSteps::insert($insert_data);
     }
 }

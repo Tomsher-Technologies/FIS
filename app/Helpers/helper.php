@@ -2,6 +2,7 @@
 
 use App\Models\Pages\Pages;
 use Illuminate\Http\Request;
+use App\Models\GeneralSettings;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -134,4 +135,30 @@ function saveSEO($model, $that, $class)
 function getValueFromSetting($settings, $name)
 {
     return $settings->where('name', $name)->first()->value;
+}
+
+function getGeneralSettings(){
+    $result = array();
+    $settings = GeneralSettings::get();
+    if($settings){
+        foreach($settings as$value){
+            if(in_array($value['type'], array('mission_vision','challenges','our_team','mission','vision','career_content','latest_news','contact_content'))){
+                $result[0][$value['type']] = array('value' => $value['value'], 'content' => $value['content'],'image' =>  Storage::url('pages/'. $value['image']));
+            }else{
+                $result[0][$value['type']] = $value['value'];
+            }
+        }
+    }
+    return $result;
+}
+function getPageSettings(){
+    $settings = [];
+    $pageSettings = Pages::leftJoin('modules', 'modules.pages_id', '=', 'pages.id')
+                            ->get();
+    if($pageSettings){
+        foreach($pageSettings as $page){
+            $settings[$page['page_id_name']] = $page->getAttributes();
+        }
+    }
+    return $settings;
 }

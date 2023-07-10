@@ -1,11 +1,10 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Other Pages'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Packaging'])
 @section('content')
     <div class="container-fluid">
 
         <div class="row">
             <div class="col-12">
-                <h1>Other Page Settings</h1>
-                
+                <h1>Packaging</h1>
                 <div class="separator mb-5"></div>
             </div>
         </div>
@@ -21,22 +20,8 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form id="other_settings"  method="POST" enctype="multipart/form-data">
+                        <form id="package_settings"  method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Page Type<span class="text-danger">*</span></label>
-                                <select name="type" class="form-control  mb-3" onChange="getDataForEdit(this.value)">
-                                    <option value="agencies">Agencies</option>
-                                    <option value="blogs">Blogs </option>
-                                    <option value="brands">Brands </option>
-                                    <option value="careers">Careers </option>
-                                    <option value="materials">Materials </option>
-                                    <option value="media_center">Media Center </option>
-                                    <option value="product_catalogue">Product Catalogues </option>
-                                    <option value="stationary_catalogue">Stationary Catalogues </option>
-                                    <option value="store_location">Store Location </option>
-                                </select>
-                            </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Banner Title<span class="text-danger">*</span></label>
@@ -67,17 +52,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Title</label>
-                                <input type="text" name="title" id="title" class="form-control" value="" />
+                                <label for="exampleInputEmail1">Steps</label>
+                                
+                                <table class="table table-bordered table-striped" >
+                                    <thead>
+                                       
+                                    </thead>
+                                    <tbody id="steps_table">
+                                       
+                                    </tbody>
+                                </table>
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Sub Title</label>
-                                <input type="text" name="sub_title" id="sub_title" class="form-control" value="" />
-                            </div>
                             @include('admin.common.seo_form')
 
-                            <button type="submit" class="btn btn-primary mb-0" id='submit'>Save</button>
+                            <button type="submit"  onclick="tinyMCE.triggerSave(true,true);"  class="btn btn-primary mb-0" id='submit'>Save</button>
                         </form>
                     </div>
                 </div>
@@ -90,8 +79,8 @@
 
 <script>
 
-    if ($("#other_settings").length > 0) {
-        $("#other_settings").validate({
+    if ($("#awards_settings").length > 0) {    
+        $("#awards_settings").validate({
             rules: {
                 banner_title: {
                     required: true
@@ -112,7 +101,7 @@
                 },
                 banner_sub_title: {
                     required: "Please enter a Banner Sub Title"
-                },   
+                }
             },
            
             submitHandler: function(e) {
@@ -125,10 +114,9 @@
                 $('#submit').html('Please Wait...');
                 $("#submit"). attr("disabled", true);
 
-                var data = new FormData($('#other_settings')[0]);
-
+                var data = new FormData($('#awards_settings')[0]);
                 $.ajax({
-                    url: "{{ route('admin.page.store-other-settings')}}",
+                    url: "{{ route('admin.page.store-package-settings')}}",
                     type: "POST",
                     data: data,
                     processData: false,
@@ -144,7 +132,7 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        getDataForEdit(returnedData.type);
+                        getDataForEdit('package');
                     }
                 });
             }
@@ -156,7 +144,7 @@
     });
 
     setTimeout(function(){
-        getDataForEdit('agencies');
+        getDataForEdit('package');
     }, 500);
 
     
@@ -176,7 +164,7 @@
                     $('#banner_title').val(returnedData[0].banner_text);
                     $('#seo_url').val(returnedData[0].seo_url);
                     $('#banner_sub_title').val(returnedData[0].banner_content);
-            
+                    
                     $('#seotitle').val(returnedData[0].seo_title);
                     $('#ogtitle').val(returnedData[0].og_title);
                     $('#twtitle').val(returnedData[0].twitter_title);
@@ -184,16 +172,62 @@
                     $('#og_description').val(returnedData[0].og_description);
                     $('#twitter_description').val(returnedData[0].twitter_description);
                     $('#seokeywords').val(returnedData[0].keywords);
+                   
                     if(returnedData[0].banner_image != ''){
                        var html = ' <label for="exampleInputEmail1">Current Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].banner_image +' " alt="">';
                        $('#current_image').html(html);
                     }
+
+                    var editCount = 1;
+                    $.each(returnedData[0].packages, function(key,value) {
+                        dynamic_field(editCount);
+                        editCount++;
+                        $('#package_title_'+(key+1)).val(value.title);
+                        $('#package_content_'+(key+1)).html(value.content);
+                    });
+
                 }else{
-                    $('#banner_title,#seo_url,#banner_sub_title,#seotitle,#ogtitle,#twtitle,#seodescription,#og_description,#twitter_description,#seokeywords').val('');
-                   
+                    $('#banner_title,#seo_url,#banner_sub_title,#seotitle,#ogtitle,#twtitle,#seodescription,#og_description,#twitter_description,#seokeywords').val('');   
                 }
             }
         });
     }
+
+
+    var count = 1;
+
+    dynamic_field(count);
+
+    function dynamic_field(number)
+    {
+
+            html = '<tr>';
+            html += '<td><div class="form-group"><label for="exampleInputEmail1">Title</label><input type="text" name="package_title[]" id="package_title_'+number+'" class="form-control year" value="" /></div>';
+            html += '   <div class="form-group"> <label for="exampleInputEmail1">Content</label><textarea name="package_content[]" id="package_content_'+number+'" cols="40" rows="4" class="form-control" ></textarea> </div>';
+            html += '</td>';
+            
+            if(number > 1)
+            {
+                html += '<td><button type="button" name="remove" id="" class="btn btn-danger remove">Remove</button></td></tr>';
+                $('#steps_table').append(html);
+            }
+            else
+            {   
+                html += '<td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td></tr>';
+                $('#steps_table').html(html);
+            }
+        
+    }
+
+    $(document).on('click', '#add', function(){
+        count++;
+        dynamic_field(count);
+    });
+
+    $(document).on('click', '.remove', function(){
+        count--;
+        $(this).closest("tr").remove();
+    });
+
 </script>
 @endpush

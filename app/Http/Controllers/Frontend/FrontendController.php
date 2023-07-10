@@ -16,6 +16,7 @@ use Artesaos\SEOTools\Facades\TwitterCard;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\URL;
+use DB;
 
 class FrontendController extends Controller
 {
@@ -66,10 +67,18 @@ class FrontendController extends Controller
         $blog_first = $blogs->slice(0, 1)->first();
         $blog_second = $blogs->slice(1, 2)->all();
 
-        $products = Cache::rememberForever('products', function () {
-            return Product::whereStatus(1)->latest()->limit(10)->get();
-        });
+        // $products = Cache::rememberForever('products', function () {
+        //     return Product::whereStatus(1)->latest()->limit(10)->get();
+        // });
+        $products = Product::whereStatus(1)->latest()->limit(10)->get();
+        
+        $about =  Pages::leftJoin('modules', 'modules.pages_id', '=', 'pages.id')
+            ->where('pages.page_id_name','=','about_us')
+            ->get();
 
+        $pageSettings = getPageSettings();
+
+        $general = getGeneralSettings();
         return view('frontend.home')
             ->with([
                 'page' => $page,
@@ -77,6 +86,9 @@ class FrontendController extends Controller
                 'blog_first' => $blog_first,
                 'blog_second' => $blog_second,
                 'products' => $products,
+                'about' => $about,
+                'general' => $general,
+                'pageSettings' => $pageSettings
             ]);
     }
 

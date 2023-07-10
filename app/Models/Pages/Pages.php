@@ -41,4 +41,8 @@ class Pages extends Model
     {
         return do_shortcode($this->banner_content);
     }
+    public function getBannerImage()
+    {
+        return Storage::url(Str::replace('/storage/pages/', '', $this->banner_image));
+    }
 }

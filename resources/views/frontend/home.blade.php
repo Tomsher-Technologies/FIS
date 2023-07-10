@@ -47,25 +47,19 @@
     @endif
     <!--=================================
                                                                             banner -->
-
+    @if ($about[0])
 
     <section class="space-ptb">
         <div class="container">
             <div class="row justify-content-center mb-4 mb-md-5">
                 <div class="col-lg-6 pb-4 pb-lg-0">
                     <div class="section-title mb-3">
-                        <h2>Who we are ?</h2>
+                        <h2>{!! $about[0]->heading !!}</h2>
                     </div>
-                    <h6>Farook international stationery was established <br>
-                        in dubai in 1980.</h6>
-                    <p>Farook International Stationery Was Established In Dubai In 1980. Today FIS Is The Leading Stationers
-                        Brand In U.A.E. With Strong 3 Manufacturing Factories, Plus 11 Showrooms In U.A.E. And One In Oman
-                        Catering For Wholesale And Retail Sales.
-                    </p>
+                    <h6>{!! $about[0]->sub_heading !!}</h6>
+                    <p> {!! $about[0]->content !!} </p>
                     <blockquote class="blockquote">
-                        For those of you who are serious about having more, doing more, giving more and being more, success
-                        is achievable with some understanding of what to do.
-                        <cite class="d-block mt-3"> -CEO </cite>
+                        {!! $about[0]->block_content !!}
                     </blockquote>
                     <a class="btn btn-dark btn-round text-white mt-4" href="case-study.html">
                         View Case Study<i class="fas fa-arrow-right ps-3"></i>
@@ -74,18 +68,18 @@
                 <div class="col-lg-6">
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <img class="img-fluid border-radius mb-3" src="{{ asset('images/who_img1.webp') }}"
+                            <img class="img-fluid border-radius mb-3" src="{{ asset(Storage::url('pages/'. $about[0]->image1)) }}"
                                 alt="">
-                            <img class="img-fluid border-radius mb-3 mb-sm-0" src="{{ asset('images/who_img3.webp') }}"
+                            <img class="img-fluid border-radius mb-3 mb-sm-0" src="{{ asset(Storage::url('pages/'. $about[0]->image3)) }}"
                                 alt="">
                         </div>
                         <div class="col-sm-6">
-                            <img class="img-fluid border-radius mb-3" src="{{ asset('images/who_img2.webp') }}"
+                            <img class="img-fluid border-radius mb-3" src="{{ asset(Storage::url('pages/'. $about[0]->image2)) }}"
                                 alt="">
                             <div class="counter counter-03 py-5">
                                 <div class="counter-content h-100">
                                     <label>Established In UAE</label>
-                                    <span class="timer text-stroke-white mb-0" data-to="235" data-speed="10000">235</span>
+                                    <span class="timer text-stroke-white mb-0" data-to="235" data-speed="10000">{{ $general[0]['established'] }}</span>
 
                                 </div>
                             </div>
@@ -97,34 +91,31 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <div class="feature-info feature-info-style-03 bg_blue shadow-lg">
                         <div class="feature-info-content">
-                            <h4 class="mb-3 fw-normal feature-info-title text-white">Mission and Vision</h4>
-                            <p class="mb-0 text-white">Our Vision &amp; Mission are both helping our team to achieve the
-                                goal. We identify the clients' requirements and provide the best solutions.</p>
+                            <h4 class="mb-3 fw-normal feature-info-title text-white">{{ $general[0]['mission_vision']['value'] }}</h4>
+                            <p class="mb-0 text-white">{{ $general[0]['mission_vision']['content'] }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4 mb-md-0">
                     <div class="feature-info feature-info-style-03 bg_red shadow-lg">
                         <div class="feature-info-content">
-                            <h4 class="mb-3 fw-normal feature-info-title text-white">Our Challenges</h4>
-                            <p class="mb-0 text-white">We take pride in helping our clients deliver marvelous results when
-                                it comes to their projects. From data to performance, we’ve got you covered.</p>
+                            <h4 class="mb-3 fw-normal feature-info-title text-white">{{ $general[0]['challenges']['value'] }}</h4>
+                            <p class="mb-0 text-white">{{ $general[0]['challenges']['content'] }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-info feature-info-style-03 bg_blue shadow-lg">
                         <div class="feature-info-content">
-                            <h4 class="mb-3 fw-normal feature-info-title text-white">Our Team</h4>
-                            <p class="mb-0 text-white">Meet our institute leaders and the hard-working personalities who
-                                deliver innovative concepts to corporations like yours.</p>
+                            <h4 class="mb-3 fw-normal feature-info-title text-white">{{ $general[0]['our_team']['value'] }}</h4>
+                            <p class="mb-0 text-white">{{ $general[0]['our_team']['content'] }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    @endif
     <!--=================================
                                                             Category -->
     <section class="space-pb">
@@ -151,9 +142,7 @@
                         </div>
                         <div class="feature-info-content">
                             <p class="mb-0">
-                                Farook International Stationery Was
-                                Established In Dubai In 1980. Today FIS Is
-                                The Leading Stationers Brand In U.A.E.
+                               {!! $pageSettings['wholesaler']['home_content'] !!}
                             </p>
                             <a href="service-detail.html" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
@@ -174,9 +163,7 @@
                         </div>
                         <div class="feature-info-content">
                             <p class="mb-0">
-                                Farook International Stationery Was
-                                Established In Dubai In 1980. Today FIS Is
-                                The Leading Stationers Brand In U.A.E.
+                            {!! $pageSettings['manufacturer']['home_content'] !!}
                             </p>
                             <a href="service-detail.html" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
@@ -197,9 +184,7 @@
                         </div>
                         <div class="feature-info-content">
                             <p class="mb-0">
-                                Farook International Stationery Was
-                                Established In Dubai In 1980. Today FIS Is
-                                The Leading Stationers Brand In U.A.E.
+                            {!! $pageSettings['office_stationery']['home_content'] !!}
                             </p>
                             <a href="service-detail.html" class="icon-btn"><i
                                     class="fas fa-long-arrow-alt-right"></i></a>
@@ -211,7 +196,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <!-- <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                     <div class="feature-info feature-info-style-02 h-100">
                         <div class="feature-info-icon">
                             <img src="{{ asset('images/what_icon1.svg') }}" class="w-25" alt="" />
@@ -234,7 +219,7 @@
                                 ">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                     <div class="feature-info feature-info-style-02 h-100">
                         <div class="feature-info-icon">
@@ -245,9 +230,7 @@
                         </div>
                         <div class="feature-info-content">
                             <p class="mb-0">
-                                Farook International Stationery Was
-                                Established In Dubai In 1980. Today FIS Is
-                                The Leading Stationers Brand In U.A.E.
+                            {!! $pageSettings['import_exports']['home_content'] !!}
                             </p>
                             <a href="service-detail.html" class="icon-btn"><i
                                     class="fas fa-long-arrow-alt-right"></i></a>
@@ -269,9 +252,7 @@
                         </div>
                         <div class="feature-info-content">
                             <p class="mb-0">
-                                Farook International Stationery Was
-                                Established In Dubai In 1980. Today FIS Is
-                                The Leading Stationers Brand In U.A.E.
+                                {!! $pageSettings['csr_activities']['home_content'] !!}
                             </p>
                             <a href="service-detail.html" class="icon-btn"><i
                                     class="fas fa-long-arrow-alt-right"></i></a>
