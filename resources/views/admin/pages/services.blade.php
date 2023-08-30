@@ -25,12 +25,10 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Service Type<span class="text-danger">*</span></label>
-                                <select name="type" class="form-control  mb-3" onChange="getDataForEdit(this.value)">
-                                    <option value="wholesaler">Wholesaler And Retailer</option>
-                                    <option value="manufacturer">Manufacturer </option>
-                                    <option value="office_stationery">Office Stationery </option>
-                                    <option value="import_exports">Import & Exports </option>
-                                    <option value="csr_activities">CSR Activities </option>
+                                <select name="type" id="type" class="form-control  mb-3" onChange="getDataForEdit(this.value)">
+                                    @foreach($services as $ser)
+                                        <option value="{{$ser->type}}">{{$ser->title}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -247,7 +245,8 @@
     });
 
     setTimeout(function(){
-        getDataForEdit('wholesaler');
+        var selectedService = $('#type').val();
+        getDataForEdit(selectedService);
     }, 500);
 
     

@@ -3,10 +3,12 @@
 use App\Models\Pages\Pages;
 use Illuminate\Http\Request;
 use App\Models\GeneralSettings;
+use App\Models\OurServices;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+
 
 function getAdminAsset($path)
 {
@@ -161,4 +163,19 @@ function getPageSettings(){
         }
     }
     return $settings;
+}
+
+function getAllServices(){
+    $services = OurServices::where('status',1)->orderBy('title', 'ASC')->get();    
+    return $services;
+}
+
+function getPageDetails($type){
+    $settings = [];
+    $pageSettings = Pages::leftJoin('modules', 'modules.pages_id', '=', 'pages.id')
+                            ->where('pages.page_id_name',$type)
+                            ->select('pages.page_id_name', 'pages.page_name','pages.banner_text', 'pages.banner_content', 'pages.banner_btn_text', 'pages.banner_btn_link', 'pages.banner_image', 'pages.seo_url','modules.*')
+                            ->get()->toArray();
+    
+    return $pageSettings;
 }

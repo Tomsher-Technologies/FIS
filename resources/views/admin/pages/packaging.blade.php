@@ -52,6 +52,54 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Title<span class="text-danger">*</span></label>
+                                <input type="text" name="title" id="title" class="form-control" value="" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description<span class="text-danger">*</span></label>
+                                <textarea name="description" id="description" cols="30" rows="10" class="form-control" > </textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Image 1</label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"
+                                            name="image1" id="image1">
+                                        <label class="custom-file-label" for="image1">Choose file</label>
+                                       
+                                    </div>
+                                </div>
+                                <div id="current_image1"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Image 2</label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"
+                                            name="image2" id="image2">
+                                        <label class="custom-file-label" for="image2">Choose file</label>
+                                       
+                                    </div>
+                                </div>
+                                <div id="current_image2"></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Title 2<span class="text-danger">*</span></label>
+                                <input type="text" name="heading2" id="heading2" class="form-control" value="" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description 2 <span class="text-danger">*</span></label>
+                                <div wire:ignore>
+                                    <textarea name="content2" id="content2" cols="30" rows="10" class="form-control" > </textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Steps</label>
                                 
                                 <table class="table table-bordered table-striped" >
@@ -76,11 +124,21 @@
 @endsection
 
 @push('footer')
-
+<script src="{{ getAdminAsset('tinymce/tinymce.min.js') }}"></script>
 <script>
 
-    if ($("#awards_settings").length > 0) {    
-        $("#awards_settings").validate({
+    tinymce.init({
+        selector: 'textarea#description',
+        height: 300,
+    });
+    
+    tinymce.init({
+        selector: 'textarea#content2',
+        height: 300,
+    });
+
+    if ($("#package_settings").length > 0) {    
+        $("#package_settings").validate({
             rules: {
                 banner_title: {
                     required: true
@@ -114,7 +172,7 @@
                 $('#submit').html('Please Wait...');
                 $("#submit"). attr("disabled", true);
 
-                var data = new FormData($('#awards_settings')[0]);
+                var data = new FormData($('#package_settings')[0]);
                 $.ajax({
                     url: "{{ route('admin.page.store-package-settings')}}",
                     type: "POST",
@@ -132,7 +190,7 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        getDataForEdit('package');
+                        getDataForEdit('packaging');
                     }
                 });
             }
@@ -144,10 +202,10 @@
     });
 
     setTimeout(function(){
-        getDataForEdit('package');
+        getDataForEdit('packaging');
     }, 500);
 
-    
+    let editCount = 1; 
     function getDataForEdit(type){
         $.ajaxSetup({
             headers: {
@@ -164,7 +222,9 @@
                     $('#banner_title').val(returnedData[0].banner_text);
                     $('#seo_url').val(returnedData[0].seo_url);
                     $('#banner_sub_title').val(returnedData[0].banner_content);
-                    
+                    $('#title').val(returnedData[0].heading);
+                    $('#heading2').val(returnedData[0].heading2);
+
                     $('#seotitle').val(returnedData[0].seo_title);
                     $('#ogtitle').val(returnedData[0].og_title);
                     $('#twtitle').val(returnedData[0].twitter_title);
@@ -172,13 +232,25 @@
                     $('#og_description').val(returnedData[0].og_description);
                     $('#twitter_description').val(returnedData[0].twitter_description);
                     $('#seokeywords').val(returnedData[0].keywords);
+
+                    tinymce.get("description").setContent(returnedData[0].content);
+                    tinymce.get("content2").setContent(returnedData[0].content2);
                    
                     if(returnedData[0].banner_image != ''){
                        var html = ' <label for="exampleInputEmail1">Current Image</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].banner_image +' " alt="">';
                        $('#current_image').html(html);
                     }
 
-                    var editCount = 1;
+                    if(returnedData[0].image1 != ''){
+                       var html = ' <label for="exampleInputEmail1">Current Image1</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].image1 +' " alt="">';
+                       $('#current_image1').html(html);
+                    }
+                    if(returnedData[0].image2 != ''){
+                       var html = ' <label for="exampleInputEmail1">Current Image2</label> <img class="w-20 d-block mb-3" src="'+ returnedData[0].image2 +' " alt="">';
+                       $('#current_image2').html(html);
+                    }
+
+                    editCount = 1;
                     $.each(returnedData[0].packages, function(key,value) {
                         dynamic_field(editCount);
                         editCount++;
@@ -194,9 +266,7 @@
     }
 
 
-    var count = 1;
-
-    dynamic_field(count);
+    dynamic_field(editCount);
 
     function dynamic_field(number)
     {
@@ -220,12 +290,12 @@
     }
 
     $(document).on('click', '#add', function(){
-        count++;
-        dynamic_field(count);
+        editCount++;
+        dynamic_field(editCount);
     });
 
     $(document).on('click', '.remove', function(){
-        count--;
+        editCount--;
         $(this).closest("tr").remove();
     });
 

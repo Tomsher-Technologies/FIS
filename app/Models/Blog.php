@@ -19,7 +19,7 @@ class Blog extends Model
         'image_alt',
         'image',
         'status',
-        'slug',
+        'slug','seo_title', 'og_title', 'twitter_title', 'seo_description', 'og_description', 'twitter_description', 'keywords'
     ];
 
     public function getImage()

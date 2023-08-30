@@ -86,6 +86,14 @@
                     </li>
                 @endif
 
+                @if (auth()->user()->can('manage-enquiries'))
+                    <li class="{{ request()->routeIs('admin.enquiries*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.enquiries') }}">
+                            <i class="simple-icon-question"></i>Enquiries 
+                        </a>
+                    </li>
+                @endif
+
             </ul>
         </div>
     </div>

@@ -62,7 +62,7 @@
                                        
                                     </div>
                                 </div>
-                                @if($member['image'] != NULL)
+                                @if(isset($member['image']) && $member['image'] != NULL)
                                 <div id="current_image">
                                     <label for="exampleInputEmail1">Current Image</label> 
                                     <img class="w-20 d-block mb-3" src="{{ $image }}" alt="">

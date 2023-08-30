@@ -1,5 +1,5 @@
-<nav class="navbar fixed-top">
-    <div class="d-flex align-items-center navbar-left">
+<nav class="navbar fixed-top row">
+    <div class="d-flex align-items-center navbar-left col-md-3">
         <a href="#" class="menu-button d-none d-md-block">
             <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
                 <rect x="0.48" y="0.5" width="7" height="1" />
@@ -30,12 +30,12 @@
     </div>
 
 
-    <a class="navbar-logo" href="{{ route('admin.dashboard') }}">
+    <a class="navbar-logo col-md-6" href="{{ route('admin.dashboard') }}">
         <span class="logo d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>
 
-    <div class="navbar-right">
+    <div class="navbar-right col-md-3">
         <div class="header-icons d-inline-block align-middle">
             {{-- <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1" data-container="html"

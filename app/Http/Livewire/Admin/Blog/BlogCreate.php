@@ -63,7 +63,7 @@ class BlogCreate extends Component
         $validatedData = $this->validate();
 
         $iname = time() . cleanFileName($this->photo->getClientOriginalName());
-
+       
         $blog = Blog::create([
             'title' => $this->title,
             'description' => $this->description,
@@ -71,11 +71,18 @@ class BlogCreate extends Component
             'image_alt' => $this->image_alt,
             'slug' => $this->slug,
             'image' => '/storage/blogs/' . $iname,
+            'seo_title' => $this->seotitle ?? '',
+            'og_title' => $this->ogtitle ?? '',
+            'twitter_title' => $this->twtitle ?? '',
+            'seo_description' => $this->seodescription ?? '',
+            'og_description' => $this->og_description ?? '',
+            'twitter_description' => $this->twitter_description ?? '',
+            'keywords' => $this->seokeywords ?? '',
         ]);
 
-        $this->photo->storeAs('public/blogs', $iname);
+        
 
-        saveSEO($blog, $this, get_class(new Blog));
+        $this->photo->storeAs('public/blogs', $iname);
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Blog create',
@@ -101,6 +108,7 @@ class BlogCreate extends Component
         $this->reset('seodescription');
         $this->reset('og_description');
         $this->reset('twitter_description');
+        $this->reset('seokeywords');
     }
 
     public function changeSeoUrl($value)

@@ -34,7 +34,42 @@
                                 <input name="seo_url" id="seo_url" class="form-control" />
                             </div>
                             
-                           
+                            <div class="form-group">
+                                <h4> Service Section</h4>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Service Section Title</label>
+                                <input type="text" name="title" id="title" class="form-control" value="" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Service Section Content</label>
+                                <textarea name="description" id="description" cols="30" rows="10" class="form-control" > </textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <h4> Our Brands Section</h4>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Title</label>
+                                <input type="text" name="heading2" id="heading2" class="form-control" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Year</label>
+                                <input type="text" name="title2" id="title2" class="form-control" value="" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                <textarea name="content2" id="content2" cols="30" rows="10" class="form-control" > </textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Products Count</label>
+                                <input type="text" name="title3" id="title3" class="form-control" value="" />
+                            </div>
+
                             @include('admin.common.seo_form')
 
                             <button type="submit" class="btn btn-primary mb-0" id='submit'>Save</button>
@@ -129,7 +164,14 @@
                 if(returnedData[0]){
                     $('#banner_title').val(returnedData[0].banner_text);
                     $('#seo_url').val(returnedData[0].seo_url);
-                   
+                    $('#title').val(returnedData[0].heading);
+                    $('#description').html(returnedData[0].content);
+
+                    $('#heading2').val(returnedData[0].heading2);
+                    $('#title2').val(returnedData[0].title2);
+                    $('#content2').val(returnedData[0].content2);
+                    $('#title3').val(returnedData[0].title3);
+                    
                     $('#seotitle').val(returnedData[0].seo_title);
                     $('#ogtitle').val(returnedData[0].og_title);
                     $('#twtitle').val(returnedData[0].twitter_title);

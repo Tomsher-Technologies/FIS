@@ -1753,7 +1753,7 @@ hr.light-bg {
 
 .feature-info-style-05:before {
   content: "";
-  border-top: 2px dotted #0d4ea2;
+  /* border-top: 2px dotted #0d4ea2; */
   width: 52px;
   display: inline-block;
   position: absolute;
@@ -6076,4 +6076,12 @@ input.form-control {
   transform: translate(0, -15%);
 }
 
+.blog-image-first{
+  width: 100% !important;
+  height: 455px;
+}
+.blog-image-second{
+  width: 100% !important;
+  height: 255px;
+}
 

@@ -10,7 +10,9 @@ use App\Models\Teams;
 use App\Models\GeneralSettings;
 use App\Models\HistoryDetails;
 use App\Models\AwardDetails;
+use App\Models\OurServices;
 use App\Models\PackageSteps;
+use App\Models\Contacts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -40,6 +42,39 @@ class PageController extends Controller
                     'heading'    => $request->get("title"),
                     'sub_heading'    => $request->get("sub_title"),
                     'content'    => $request->get("description"),
+                    'seo_title'    => $request->get("seotitle"),
+                    'og_title'    => $request->get("ogtitle"),
+                    'twitter_title'    => $request->get("twtitle"),
+                    'seo_description'    => $request->get("seodescription"),
+                    'og_description'    => $request->get("og_description"),
+                    'twitter_description'    => $request->get("twitter_description"),
+                    'keywords'    => $request->get("seokeywords")
+                ]);
+    }
+
+    public function contact()
+    {
+        return view('admin.pages.contact');
+    }
+
+    public function storeContact(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),'contact');
+        $page = Pages::updateOrCreate([
+                    'page_id_name'   => 'contact',
+                ],[
+                    'page_name' => $request->get('title'),
+                    'seo_url'    => $seo_url
+                ]);
+              
+        $module = Modules::updateOrCreate([
+                    'pages_id'   => $page->id,
+                ],[
+                    'name' => $request->get('title'),
+                    'heading'    => $request->get("title"),
+                    'sub_heading'    => $request->get("sub_title"),
+                    'content'    => $request->get("description"),
+                    'heading2'    => $request->get("heading2"),
                     'seo_title'    => $request->get("seotitle"),
                     'og_title'    => $request->get("ogtitle"),
                     'twitter_title'    => $request->get("twtitle"),
@@ -87,6 +122,7 @@ class PageController extends Controller
             }
             $result[0]['history'] = HistoryDetails::get();
             $result[0]['awards'] = AwardDetails::get();
+            $result[0]['packages'] = PackageSteps::get();
         }
         return json_encode( $result);
     }
@@ -204,7 +240,11 @@ class PageController extends Controller
                             'block_content' => isset($data['block_content']) ? $data['block_content'] : NULL,
                             'heading2' => isset($data['heading2']) ? $data['heading2'] : NULL,
                             'content2' => isset($data['content2']) ? $data['content2'] : NULL,
+                            'title2' => isset($data['title2']) ? $data['title2'] : NULL,
+                            'title3' => isset($data['title3']) ? $data['title3'] : NULL,
                             'home_content' => isset($data['home_content']) ? $data['home_content'] : NULL);
+
+       
         if(isset($data['image1']) ){
             $image_array['image1'] = $data['image1'];
         }
@@ -440,7 +480,8 @@ class PageController extends Controller
     }
     public function services()
     {
-        return view('admin.pages.services');
+        $services = OurServices::where('status',1)->orderBy('title', 'ASC')->get();
+        return view('admin.pages.services',compact('services'));
     }
 
     public function storeServices(Request $request)
@@ -552,6 +593,12 @@ class PageController extends Controller
         return view('admin.pages.teams_list')->with('teams', $teams);
     }
 
+    public function enquiries()
+    {
+        $enquiries = Contacts::orderBy('id','desc')->get();
+        return view('admin.pages.enquiries')->with('enquiries', $enquiries);
+    }
+
     public function createTeamMember()
     {
          return view('admin.pages.member_create')->with('member', array());
@@ -604,6 +651,18 @@ class PageController extends Controller
             $file->move(base_path() . '/storage/app/public/pages', $fileName);
             $data['banner_image'] = $fileName;
         }
+        if ($request->has('image1')) {
+            $file1 = $request->file('image1');
+            $fileName1 = strtolower(Str::random(2)).time().'.'. $file1->extension();  
+            $file1->move(base_path() . '/storage/app/public/pages', $fileName1);
+            $data['image1'] = $fileName1;
+        }
+        if ($request->has('image2')) {
+            $file2 = $request->file('image2');
+            $fileName2 = strtolower(Str::random(2)).time().'.'. $file2->extension();  
+            $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
+            $data['image2'] = $fileName2;
+        }
         $data['type'] = 'packaging';
        
         $this->savePageSettings($data);
@@ -612,7 +671,7 @@ class PageController extends Controller
         $package_content = $request->package_content;
         for($count = 0; $count < count($package_title); $count++)
         {
-            if($award_title[$count] != ''){
+            if($package_title[$count] != ''){
                 $dataHis = array(
                     'title' => $package_title[$count],
                     'content'  => $package_content[$count],

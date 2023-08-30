@@ -1810,13 +1810,14 @@ hr.light-bg {
       margin-top: -1px; }
 
 .feature-info-style-05:before {
-  content: "";
-  border-top: 2px dotted #022d62;
+  /* content: ""; */
+  /* border-top: 2px dotted #022d62; */
   width: 52px;
   display: inline-block;
   position: absolute;
   right: -26px;
-  top: 70px; }
+  top: 70px; 
+}
 
 .feature-info-style-05:hover .feature-info-icon i {
   background: #ef3139;

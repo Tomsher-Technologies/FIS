@@ -9,7 +9,7 @@
                           <a class="navbar-brand" href="{{ route('home') }}">
                               <img class="img-fluid" src="{{ asset('images/logo.svg') }}" alt="logo" />
                           </a>
-                          <div class="contact-info ms-auto align-items-center d-none d-lg-flex">
+                          <div class="contact-info ms-auto align-items-center d-none d-lg-flex col-md-8">
                               <ul>
                                   <li>
                                       <i class="flaticon-pin"></i>
@@ -51,6 +51,9 @@
               </div>
           </div>
       </div>
+      @php   
+        $aboutContent = getValueFromSetting($settings, 'about_content');
+      @endphp
       <div class="container-fluid">
           <div class="row">
               <div class="col-sm-12 position-relative">
@@ -77,16 +80,7 @@
                                                       About FAROOK
                                                   </h6>
                                                   <p>
-                                                      Farook International
-                                                      Stationery Was
-                                                      Established In Dubai
-                                                      In 1980. Today FIS
-                                                      Is The Leading
-                                                      Stationers Brand In
-                                                      U.A.E. With Strong 3
-                                                      Manufacturing
-                                                      Factories, Plus 11
-                                                      Showrooms In U.A.E.
+                                                  {{ $aboutContent }}
                                                   </p>
 
                                                   <a class="btn btn-dark btn-round text-white"
@@ -164,21 +158,11 @@
                                                       About FAROOK
                                                   </h6>
                                                   <p>
-                                                      Farook International
-                                                      Stationery Was
-                                                      Established In Dubai
-                                                      In 1980. Today FIS
-                                                      Is The Leading
-                                                      Stationers Brand In
-                                                      U.A.E. With Strong 3
-                                                      Manufacturing
-                                                      Factories, Plus 11
-                                                      Showrooms In U.A.E.
+                                                  {{ $aboutContent }}
                                                   </p>
 
                                                   <a class="btn btn-dark btn-round text-white"
-                                                      href="aboutus.html">Explore About
-                                                      Farook
+                                                      href="{{ getSEOUrl('about_us') }}">Explore About Farook
                                                       <i class="fas fa-arrow-right ps-3"></i>
                                                   </a>
                                               </div>
@@ -187,29 +171,15 @@
                                                       Our Services
                                                   </h6>
                                                   <ul class="list-unstyled mt-lg-3">
+                                                    @php 
+                                                    $services = getAllServices();
+                                                    @endphp
+                                                    @foreach ($services as $service)
                                                       <li>
-                                                          <a href="service-detail.html">Wholesaler
-                                                              and Retailer
+                                                          <a href="{{ getSEOUrl($service->type) }}">{{$service->title}}
                                                           </a>
                                                       </li>
-                                                      <li>
-                                                          <a href="service-detail.html">Manufacturer
-                                                          </a>
-                                                      </li>
-                                                      <li>
-                                                          <a href="service-detail.html">Office
-                                                              Stationery</a>
-                                                      </li>
-                                                      <li>
-                                                          <a href="service-detail.html">Import &
-                                                              Exports
-                                                          </a>
-                                                      </li>
-                                                      <li>
-                                                          <a href="service-detail.html">CSR
-                                                              Activities
-                                                          </a>
-                                                      </li>
+                                                    @endforeach
                                                   </ul>
                                               </div>
                                               <div class="col-sm-6 col-lg-5">
@@ -236,20 +206,11 @@
                                                       About FAROOK
                                                   </h6>
                                                   <p>
-                                                      Farook International
-                                                      Stationery Was
-                                                      Established In Dubai
-                                                      In 1980. Today FIS
-                                                      Is The Leading
-                                                      Stationers Brand In
-                                                      U.A.E. With Strong 3
-                                                      Manufacturing
-                                                      Factories, Plus 11
-                                                      Showrooms In U.A.E.
+                                                  {{ $aboutContent }}
                                                   </p>
 
                                                   <a class="btn btn-dark btn-round text-white"
-                                                      href="https://www.farookonline.com/" target="_blank">Explore
+                                                      href="{{ getSEOUrl('about_us') }}" target="_blank">Explore
                                                       About
                                                       Farook
                                                       <i class="fas fa-arrow-right ps-3"></i>
@@ -261,17 +222,16 @@
                                                   </h6>
                                                   <ul class="list-unstyled mt-lg-3">
                                                       <li>
-                                                          <a href="agencies.html">Agencies
+                                                          <a href="{{ getSEOUrl('agencies') }}">Agencies
                                                           </a>
                                                       </li>
                                                       <li>
-                                                          <a href="products-catalogues.html">Products
+                                                          <a href="{{ getSEOUrl('product_catalogue') }}">Products
                                                               Catalogues
                                                           </a>
                                                       </li>
                                                       <li>
-                                                          <a href="stationery-catalogue.html">Stationery
-                                                              Catalogue
+                                                          <a href="{{ getSEOUrl('agencies_catalogue') }}">Agencies Catalogue
                                                           </a>
                                                       </li>
                                                   </ul>
@@ -281,10 +241,10 @@
                                                   </h6>
                                                   <ul class="list-unstyled mt-lg-3">
                                                       <li>
-                                                          <a href="materials.html">Materials</a>
+                                                          <a href="{{ getSEOUrl('materials') }}">Materials</a>
                                                       </li>
                                                       <li>
-                                                          <a href="packaging.html">Packaging
+                                                          <a href="{{ getSEOUrl('packaging') }}">Packaging
                                                           </a>
                                                       </li>
                                                   </ul>
@@ -295,11 +255,11 @@
                                                   </h6>
                                                   <ul class="list-unstyled mt-lg-3">
                                                       <li>
-                                                          <a href="brands.html">Brands
+                                                          <a href="{{ getSEOUrl('brands') }}">Brands
                                                           </a>
                                                       </li>
                                                       <li>
-                                                          <a href="store-location.html">Store
+                                                          <a href="{{ getSEOUrl('store_location') }}">Store
                                                               Location
                                                           </a>
                                                       </li>
@@ -325,7 +285,7 @@
                                   </ul>
                               </li>
                               <li class="nav-item">
-                                  <a href="{{ getSEOUrl('media-center') }}" class="nav-link">Media center</a>
+                                  <a href="{{ getSEOUrl('media_center') }}" class="nav-link">Media center</a>
                               </li>
                               <li class="nav-item">
                                   <a href="{{ getSEOUrl('contact') }}" class="nav-link">Contact Us</a>

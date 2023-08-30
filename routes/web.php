@@ -18,4 +18,6 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 
 Route::fallback([FrontendController::class, 'catchAll']);
 
+Route::post('/contact-save', [FrontendController::class, 'postContact'])->name('contact-save');
+Route::get('/blog-details/{id}', [FrontendController::class, 'blog_details'])->name('blog-details');
 include 'admin.php';

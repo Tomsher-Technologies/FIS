@@ -66,6 +66,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::post('/logout-everywhere', [ProfileController::class, 'logoutEverywhere'])->name('logout-everywhere');
         });
 
+        Route::get('/enquiries', [PageController::class, 'enquiries'])->name('enquiries');
+
         // Logged-in user profile
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             Route::get('/', Settings::class)->name('index');
@@ -158,6 +160,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::post('/store-data', [PageController::class, 'store'])->name('store-privacy');
             Route::post('/getData', [PageController::class, 'getData'])->name('get-data');
 
+            Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+            Route::post('/store-contact', [PageController::class, 'storeContact'])->name('store-contact');
+
             Route::get('/faq', [PageController::class, 'faq'])->name('faq');
             Route::get('/create-faq', [PageController::class, 'createFaq'])->name('faq-create');
             Route::post('/store-faq', [PageController::class, 'storeFaq'])->name('store-faq');
@@ -201,6 +206,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/packaging', [PageController::class, 'packaging'])->name('packaging');
             Route::post('/store-package-settings', [PageController::class, 'storePackagingSettings'])->name('store-package-settings');
+
+            
         });
     });
 });

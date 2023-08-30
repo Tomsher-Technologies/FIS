@@ -22,6 +22,7 @@ class BlogEdit extends Component
     public $seodescription;
     public $og_description;
     public $twitter_description;
+    public $seokeywords;
 
     protected $rules = [
         'blog.title' => 'required',
@@ -48,16 +49,17 @@ class BlogEdit extends Component
     public function mount($blog)
     {
         $this->blog = Blog::find($blog);
-        $seo = $this->blog->seo;
+        $this->seotitle = $this->blog->seo_title;
+        $this->ogtitle = $this->blog->og_title;
+        $this->twtitle = $this->blog->twitter_title;
+        $this->seodescription = $this->blog->seo_description;
+        $this->og_description = $this->blog->og_description;
+        $this->twitter_description = $this->blog->twitter_description;
+        $this->seokeywords =  $this->blog->keywords;
 
-        if ($seo) {
-            $this->seotitle = $seo->title;
-            $this->ogtitle = $seo->og_title;
-            $this->twtitle = $seo->twitter_title;
-            $this->seodescription = $seo->description;
-            $this->og_description = $seo->og_description;
-            $this->twitter_description = $seo->twitter_description;
-        }
+        // echo '<pre>';
+        // print_r($this);
+        // die;
     }
 
     public function save()
@@ -69,10 +71,15 @@ class BlogEdit extends Component
             $this->photo->storeAs('public/blogs', $iname);
             $this->blog->image  = '/storage/blogs/' . $iname;
         }
+        $this->blog->seo_title = $this->seotitle;
+        $this->blog->og_title = $this->ogtitle;
+        $this->blog->twitter_title = $this->twtitle;
+        $this->blog->seo_description = $this->seodescription;
+        $this->blog->og_description = $this->og_description;
+        $this->blog->twitter_description = $this->twitter_description;
+        $this->blog->keywords = $this->seokeywords;
 
         $this->blog->save();
-
-        saveSEO($this->blog, $this, get_class(new Blog));
 
         // $this->blog->seo()->updateorCreate([
         //     'seo_id' => $this->blog->id,

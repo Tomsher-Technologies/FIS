@@ -147,7 +147,7 @@
         getDataForEdit('awards');
     }, 500);
 
-    
+    let editCount = 1;
     function getDataForEdit(type){
         $.ajaxSetup({
             headers: {
@@ -178,7 +178,7 @@
                        $('#current_image').html(html);
                     }
 
-                    var editCount = 1;
+                    editCount = 1;
                     $.each(returnedData[0].awards, function(key,value) {
                         dynamic_field(editCount);
                         editCount++;
@@ -194,9 +194,7 @@
     }
 
 
-    var count = 1;
-
-    dynamic_field(count);
+    dynamic_field(editCount);
 
     function dynamic_field(number)
     {
@@ -220,12 +218,12 @@
     }
 
     $(document).on('click', '#add', function(){
-        count++;
-        dynamic_field(count);
+        editCount++;
+        dynamic_field(editCount);
     });
 
     $(document).on('click', '.remove', function(){
-        count--;
+        editCount--;
         $(this).closest("tr").remove();
     });
 

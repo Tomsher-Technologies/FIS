@@ -21,7 +21,9 @@ final class BlogListing extends PowerGridComponent
 
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
-
+    public string $sortField = 'id';
+    
+    public string $sortDirection = 'desc';
     protected function getListeners(): array
     {
         return array_merge(

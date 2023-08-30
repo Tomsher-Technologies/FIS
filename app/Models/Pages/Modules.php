@@ -34,7 +34,7 @@ class Modules extends Model
         'heading2',
         'content2',
         'home_icon',
-        'home_content'
+        'home_content','title2','title3'
     ];
 
     public function page()

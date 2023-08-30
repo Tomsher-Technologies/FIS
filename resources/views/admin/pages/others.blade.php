@@ -33,7 +33,7 @@
                                     <option value="materials">Materials </option>
                                     <option value="media_center">Media Center </option>
                                     <option value="product_catalogue">Product Catalogues </option>
-                                    <option value="stationary_catalogue">Stationary Catalogues </option>
+                                    <option value="agencies_catalogue">Agencies Catalogues </option>
                                     <option value="store_location">Store Location </option>
                                 </select>
                             </div>
@@ -176,7 +176,8 @@
                     $('#banner_title').val(returnedData[0].banner_text);
                     $('#seo_url').val(returnedData[0].seo_url);
                     $('#banner_sub_title').val(returnedData[0].banner_content);
-            
+                    $('#title').val(returnedData[0].heading);
+                    $('#sub_title').val(returnedData[0].sub_heading);
                     $('#seotitle').val(returnedData[0].seo_title);
                     $('#ogtitle').val(returnedData[0].og_title);
                     $('#twtitle').val(returnedData[0].twitter_title);
