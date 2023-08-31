@@ -19,7 +19,6 @@
                                           </label>
                                       </span>
                                   </li>
-
                                   <li>
                                       <i class="flaticon-phone"></i>
                                       <span>
@@ -51,8 +50,8 @@
               </div>
           </div>
       </div>
-      @php   
-        $aboutContent = getValueFromSetting($settings, 'about_content');
+      @php
+      $aboutContent = getValueFromSetting($settings, 'about_content');
       @endphp
       <div class="container-fluid">
           <div class="row">
@@ -80,9 +79,8 @@
                                                       About FAROOK
                                                   </h6>
                                                   <p>
-                                                  {{ $aboutContent }}
+                                                      {{ $aboutContent }}
                                                   </p>
-
                                                   <a class="btn btn-dark btn-round text-white"
                                                       href="{{ getSEOUrl('about_us') }}">Explore About
                                                       Farook
@@ -100,7 +98,6 @@
                                                           </a>
                                                       </li>
                                                   </ul>
-
                                                   <h6 class="mb-3 nav-title text-primary">
                                                       Our values
                                                   </h6>
@@ -158,9 +155,8 @@
                                                       About FAROOK
                                                   </h6>
                                                   <p>
-                                                  {{ $aboutContent }}
+                                                      {{ $aboutContent }}
                                                   </p>
-
                                                   <a class="btn btn-dark btn-round text-white"
                                                       href="{{ getSEOUrl('about_us') }}">Explore About Farook
                                                       <i class="fas fa-arrow-right ps-3"></i>
@@ -171,15 +167,15 @@
                                                       Our Services
                                                   </h6>
                                                   <ul class="list-unstyled mt-lg-3">
-                                                    @php 
-                                                    $services = getAllServices();
-                                                    @endphp
-                                                    @foreach ($services as $service)
+                                                      @php
+                                                      $services = getAllServices();
+                                                      @endphp
+                                                      @foreach ($services as $service)
                                                       <li>
                                                           <a href="{{ getSEOUrl($service->type) }}">{{$service->title}}
                                                           </a>
                                                       </li>
-                                                    @endforeach
+                                                      @endforeach
                                                   </ul>
                                               </div>
                                               <div class="col-sm-6 col-lg-5">
@@ -206,9 +202,8 @@
                                                       About FAROOK
                                                   </h6>
                                                   <p>
-                                                  {{ $aboutContent }}
+                                                      {{ $aboutContent }}
                                                   </p>
-
                                                   <a class="btn btn-dark btn-round text-white"
                                                       href="{{ getSEOUrl('about_us') }}" target="_blank">Explore
                                                       About
@@ -231,11 +226,11 @@
                                                           </a>
                                                       </li>
                                                       <li>
-                                                          <a href="{{ getSEOUrl('agencies_catalogue') }}">Agencies Catalogue
+                                                          <a href="{{ getSEOUrl('agencies_catalogue') }}">Agencies
+                                                              Catalogue
                                                           </a>
                                                       </li>
                                                   </ul>
-
                                                   <h6 class="mb-3 nav-title text-primary">
                                                       Production
                                                   </h6>
@@ -291,9 +286,14 @@
                                   <a href="{{ getSEOUrl('contact') }}" class="nav-link">Contact Us</a>
                               </li>
                           </ul>
-                          {{-- <div class="d-none d-lg-flex ms-md-auto">
-                              <a class="btn btn-dark btn-round text-white" href="#">Enquiry</a>
-                          </div> --}}
+                          <div class="d-none d-lg-flex ms-md-auto">
+                              <a class="btn btn-dark btn-round text-white d-flex align-items-center shop-btn" href="#"
+                                  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                  aria-controls="offcanvasRight">
+                                  <img class="menu-dark p-1" width="25" src="{{ asset('images/menu.svg') }}" alt="#">
+                                  Shop Menu
+                              </a>
+                          </div>
                       </div>
                   </nav>
               </div>
@@ -302,3 +302,60 @@
   </header>
   <!--=================================
 header -->
+  <!--=================================
+      Right menu -->
+  <div class="offcanvas offcanvas-end offcanvas-sidebar-menu" tabindex="-1" id="offcanvasRight">
+      <div class="offcanvas-header  p-4">
+          <h3 class="mb-0">All Categories</h3>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><i
+                  class="fa-solid"></i></button>
+      </div>
+
+        @php 
+            $categories = getFarookOnlineCategories();
+        @endphp
+      <div class="offcanvas-body p-0 w-100">
+          <div id="shop-menu" class="sidebar-menu">
+              <nav class="nav d-block" role="navigation">
+                  <ul class="nav__list">
+                    @php $i=0;  @endphp
+                    @foreach($categories as $catg)
+                        @php $i++;  @endphp
+                        @if($catg['hasSubMenu'])
+                        <li>
+                            <input id="group-{{$i}}" type="checkbox" hidden />
+                            <label for="group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $catg['title'] }}</label>
+                            <ul class="group-list">
+                                @foreach($catg['subItems'] as $subitem)
+                                    @php $i++;  @endphp
+                                    
+                                    @if($subitem['hasSubMenu'])
+                                        <li>
+                                            <input id="sub-group-{{$i}}" type="checkbox" hidden />
+                                            <label for="sub-group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $subitem['title'] }}</label>
+                                            <ul class="sub-group-list">
+                                                @foreach($subitem['subItems'] as $item)
+                                                    @php $i++;  @endphp
+                                                    <li><a href="" title="{{ $item['title'] }}">{{ $item['title'] }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li><a href="" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                        @else
+                            <li><a href="" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
+                        @endif
+                       
+                    @endforeach
+
+                  </ul>
+              </nav>
+          </div>
+      </div>
+  </div>
+  <!--=================================
+      Right menu -->

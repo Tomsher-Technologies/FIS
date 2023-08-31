@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Http;
 
 function getAdminAsset($path)
 {
@@ -178,4 +178,23 @@ function getPageDetails($type){
                             ->get()->toArray();
     
     return $pageSettings;
+}
+
+function getFarookOnlineCategories(){
+    $options = [];
+    if (App::environment('local')) {
+        $options = ['verify'=>false];
+    }
+    $response =  Http::withOptions($options)->withHeaders(['accessToken' => env('API_ACCESS_TOKEN')])
+                        ->get(env('API_BASE_URL').'get-category');
+
+    $result = $response->getBody()->getContents();
+    $result = json_decode($result, true);
+    $result = $result['data'];
+    
+    // echo '<pre>';
+    // print_r($result);
+    // die;
+    
+    return $result;
 }
