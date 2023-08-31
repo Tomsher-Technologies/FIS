@@ -1,13 +1,13 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => ' Agencies/Catelogues/Materials'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => ' Agencies/Catalogues/Materials'])
 @section('content')
     <div class="container-fluid">
 
         <div class="row">
             <div class="col-12">
-                <h1> Agencies/Catelogues/Materials</h1>
+                <h1> Agencies/Catalogues/Materials</h1>
                 <div class="text-zero top-right-button-container">
                     <a href="{{ route('admin.businesses.create') }}" class="btn btn-primary btn-lg top-right-button mr-1">CREATE NEW
-                        AGENCY/CATELOGUE/MATERIAL</a>
+                        AGENCY/CATALOGUE/MATERIAL</a>
                 </div>
                 <div class="separator mb-5"></div>
             </div>

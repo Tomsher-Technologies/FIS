@@ -254,11 +254,10 @@
         $slug = slugify($(this).val());
         $('#seo_url').val($slug);
     });
-
     setTimeout(function(){
         getDataForEdit('about_us');
-    }, 500);
-
+    }, 1000);
+    
     
     function getDataForEdit(type){
         $.ajaxSetup({

@@ -17,6 +17,7 @@ class BrandCreate extends Component
     public $status = 1;
 
     public $photo;
+    public $product_photo;
 
     protected $rules = [
         'title' => 'required',
@@ -24,12 +25,14 @@ class BrandCreate extends Component
         'description' => 'required',
         'image_alt' => 'nullable',
         'photo' => 'required|mimes:jpeg,png,jpg,gif,webp|max:1024',
+        'product_photo' => 'required|mimes:jpeg,png,jpg,gif,webp|max:1024',
     ];
 
     protected $messages = [
         'title.required' => "Please enter a title",
         'status.required' => "Please enter a title",
         'photo.required' => "Please select an image",
+        'product_photo.required' => "Please select a product image",
     ];
 
     public function save()
@@ -37,6 +40,7 @@ class BrandCreate extends Component
         $validatedData = $this->validate();
 
         $iname = time() . cleanFileName($this->photo->getClientOriginalName());
+        $piname = time() . cleanFileName($this->product_photo->getClientOriginalName());
 
         $brand = Brand::create([
             'title' => $this->title,
@@ -44,9 +48,11 @@ class BrandCreate extends Component
             'image_alt' => $this->image_alt,
             'status' => $this->status,
             'image' => '/storage/brands/' .  $iname,
+            'product_image' => '/storage/brands/' .  $piname,
         ]);
 
         $this->photo->storeAs('public/brands', $iname);
+        $this->product_photo->storeAs('public/brands', $piname);
 
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Brand create',
@@ -61,6 +67,7 @@ class BrandCreate extends Component
         $this->reset('description');
         $this->reset('image_alt');
         $this->reset('photo');
+        $this->reset('product_photo');
     }
 
     public function render()

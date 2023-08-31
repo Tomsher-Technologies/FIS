@@ -20,6 +20,10 @@ class Businesses extends PowerGridComponent
 {
     use ActionButton;
 
+    public string $sortField = 'id';
+    
+    public string $sortDirection = 'desc';
+
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
 

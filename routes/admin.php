@@ -66,6 +66,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::post('/logout-everywhere', [ProfileController::class, 'logoutEverywhere'])->name('logout-everywhere');
         });
 
+        Route::get('/enquiries', [PageController::class, 'enquiries'])->name('enquiries');
+
         // Logged-in user profile
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             Route::get('/', Settings::class)->name('index');
@@ -158,6 +160,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
             Route::post('/store-data', [PageController::class, 'store'])->name('store-privacy');
             Route::post('/getData', [PageController::class, 'getData'])->name('get-data');
 
+            Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+            Route::post('/store-contact', [PageController::class, 'storeContact'])->name('store-contact');
+
             Route::get('/faq', [PageController::class, 'faq'])->name('faq');
             Route::get('/create-faq', [PageController::class, 'createFaq'])->name('faq-create');
             Route::post('/store-faq', [PageController::class, 'storeFaq'])->name('store-faq');
@@ -186,6 +191,23 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
             Route::get('/directors', [PageController::class, 'directors'])->name('directors');
             Route::post('/store-directors', [PageController::class, 'storeDirectors'])->name('store-directors');
+            
+            Route::get('/other-pages', [PageController::class, 'otherPages'])->name('other-pages');
+            Route::post('/store-others', [PageController::class, 'storeOtherPages'])->name('store-other-settings');
+
+            Route::get('/home', [PageController::class, 'homePage'])->name('home');
+            Route::post('/store-home', [PageController::class, 'storeHomePage'])->name('store-home');
+            
+            Route::get('/teams', [PageController::class, 'teams'])->name('teams');
+            Route::get('/create-team-member', [PageController::class, 'createTeamMember'])->name('team-member-create');
+            Route::post('/store-member', [PageController::class, 'storeMember'])->name('store-member');
+            Route::get('/edit-member/{id}', [PageController::class, 'editMember'])->name('member-edit');
+            Route::post('/delete-member', [PageController::class, 'deleteMember'])->name('delete-member');
+
+            Route::get('/packaging', [PageController::class, 'packaging'])->name('packaging');
+            Route::post('/store-package-settings', [PageController::class, 'storePackagingSettings'])->name('store-package-settings');
+
+            
         });
     });
 });

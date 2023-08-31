@@ -32,7 +32,9 @@ class Modules extends Model
         'image2',
         'image3',
         'heading2',
-        'content2'
+        'content2',
+        'home_icon',
+        'home_content','title2','title3'
     ];
 
     public function page()

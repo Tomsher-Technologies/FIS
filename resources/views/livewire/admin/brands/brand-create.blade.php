@@ -58,6 +58,21 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Product Image <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <div class="custom-file" wire:ignore>
+                                        <input wire:model="product_photo" type="file" accept=".jpg,.png,.jpeg,.gif,.webp"
+                                            class="custom-file-input" name="proimage_file" id="inputGroupFile03">
+                                        <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                                    </div>
+                                </div>
+                                <div wire:loading wire:target="product_photo">Uploading...</div>
+                                @error('product_photo')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Status</label>
                                 <select wire:model="status" name="status" class="form-control select2-single mb-3">
                                     <option value="1">

@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Pages\Pages;
 use App\Models\Pages\Modules;
 use App\Models\Pages\Faq;
+use App\Models\Teams;
 use App\Models\GeneralSettings;
 use App\Models\HistoryDetails;
 use App\Models\AwardDetails;
+use App\Models\OurServices;
+use App\Models\PackageSteps;
+use App\Models\Contacts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -48,6 +52,39 @@ class PageController extends Controller
                 ]);
     }
 
+    public function contact()
+    {
+        return view('admin.pages.contact');
+    }
+
+    public function storeContact(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),'contact');
+        $page = Pages::updateOrCreate([
+                    'page_id_name'   => 'contact',
+                ],[
+                    'page_name' => $request->get('title'),
+                    'seo_url'    => $seo_url
+                ]);
+              
+        $module = Modules::updateOrCreate([
+                    'pages_id'   => $page->id,
+                ],[
+                    'name' => $request->get('title'),
+                    'heading'    => $request->get("title"),
+                    'sub_heading'    => $request->get("sub_title"),
+                    'content'    => $request->get("description"),
+                    'heading2'    => $request->get("heading2"),
+                    'seo_title'    => $request->get("seotitle"),
+                    'og_title'    => $request->get("ogtitle"),
+                    'twitter_title'    => $request->get("twtitle"),
+                    'seo_description'    => $request->get("seodescription"),
+                    'og_description'    => $request->get("og_description"),
+                    'twitter_description'    => $request->get("twitter_description"),
+                    'keywords'    => $request->get("seokeywords")
+                ]);
+    }
+
     public function getData(Request $request){
         $type = $request->type;
         $result = Pages::leftJoin('modules', 'modules.pages_id', '=', 'pages.id')
@@ -69,6 +106,9 @@ class PageController extends Controller
             if($result[0]['image'] != NULL){
                 $result[0]['image'] = Storage::url('pages/'. $result[0]['image']);
             }
+            if($result[0]['home_icon'] != NULL){
+                $result[0]['home_icon'] = Storage::url('pages/'. $result[0]['home_icon']);
+            }
 
             $settings = GeneralSettings::get();
             if($settings){
@@ -82,6 +122,7 @@ class PageController extends Controller
             }
             $result[0]['history'] = HistoryDetails::get();
             $result[0]['awards'] = AwardDetails::get();
+            $result[0]['packages'] = PackageSteps::get();
         }
         return json_encode( $result);
     }
@@ -193,13 +234,17 @@ class PageController extends Controller
                             'twitter_description'    => isset($data["twitter_description"]) ? $data["twitter_description"] : NULL,
                             'keywords'    => isset($data["seokeywords"]) ? $data["seokeywords"] : NULL,
                             'has_image' => isset($data['has_image']) ? $data['has_image'] : 0,
-                            'image' => isset($data['mid_image']) ? $data['mid_image'] : NULL,
                             'has_btn' => isset($data['has_btn']) ? $data['has_btn'] : 0,
                             'btn_text' => isset($data['btn_text']) ? $data['btn_text'] : NULL,
                             'btn_link' => isset($data['btn_link']) ? $data['btn_link'] : NULL,
                             'block_content' => isset($data['block_content']) ? $data['block_content'] : NULL,
                             'heading2' => isset($data['heading2']) ? $data['heading2'] : NULL,
-                            'content2' => isset($data['content2']) ? $data['content2'] : NULL);
+                            'content2' => isset($data['content2']) ? $data['content2'] : NULL,
+                            'title2' => isset($data['title2']) ? $data['title2'] : NULL,
+                            'title3' => isset($data['title3']) ? $data['title3'] : NULL,
+                            'home_content' => isset($data['home_content']) ? $data['home_content'] : NULL);
+
+       
         if(isset($data['image1']) ){
             $image_array['image1'] = $data['image1'];
         }
@@ -208,6 +253,12 @@ class PageController extends Controller
         }
         if(isset($data['image3']) ){
             $image_array['image3'] = $data['image3'];
+        }
+        if(isset($data['mid_image']) ){
+            $image_array['image'] = $data['mid_image'];
+        }
+        if(isset($data['home_icon']) ){
+            $image_array['home_icon'] = $data['home_icon'];
         }
         $result_array = array_merge( $normal_array,$image_array);
 
@@ -369,23 +420,37 @@ class PageController extends Controller
             $data['banner_image'] = $fileName;
         }
 
+        $settings = GeneralSettings::get();
+        $gSettings = array();
+        if($settings){
+            foreach($settings as$value){
+                $gSettings[$value['type']] = $value['image'];
+            }
+        }
+
         if ($request->has('image1')) {
             $file1 = $request->file('image1');
             $fileName1 = strtolower(Str::random(2)).time().'.'. $file1->extension();  
             $file1->move(base_path() . '/storage/app/public/pages', $fileName1);
             $data['image1'] = $fileName1;
+        }else{
+            $data['image1'] = $gSettings['mission_vision'];
         }
         if ($request->has('image2')) {
             $file2 = $request->file('image2');
             $fileName2 = strtolower(Str::random(2)).time().'.'. $file2->extension();  
             $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
             $data['image2'] = $fileName2;
+        }else{
+            $data['image2'] = $gSettings['challenges'];
         }
         if ($request->has('image3')) {
             $file3 = $request->file('image3');
             $fileName3 = strtolower(Str::random(2)).time().'.'. $file3->extension();  
             $file3->move(base_path() . '/storage/app/public/pages', $fileName3);
             $data['image3'] = $fileName3;
+        }else{
+            $data['image3'] = $gSettings['our_team'];
         }
         if ($request->has('mid_image')) {
             $mid_file = $request->file('mid_image');
@@ -396,6 +461,7 @@ class PageController extends Controller
         $data['type'] = 'mission_vision';
         $this->savePageSettings($data);
 
+        
         $general['mission_vision'] = array('value' => $data['title1'],'content' => $data['content1'],'image' => $data['image1']  );
         $general['challenges'] = array('value' => $data['title2'],'content' => $data['content2'],'image' => $data['image2']  );
         $general['our_team'] = array('value' => $data['title3'],'content' => $data['content3'],'image' => $data['image3']  );
@@ -414,7 +480,8 @@ class PageController extends Controller
     }
     public function services()
     {
-        return view('admin.pages.services');
+        $services = OurServices::where('status',1)->orderBy('title', 'ASC')->get();
+        return view('admin.pages.services',compact('services'));
     }
 
     public function storeServices(Request $request)
@@ -440,6 +507,13 @@ class PageController extends Controller
             $fileName2 = strtolower(Str::random(2)).time().'.'. $file2->extension();  
             $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
             $data['image3'] = $fileName2;
+        }
+
+        if ($request->has('image4')) {
+            $file4 = $request->file('image4');
+            $fileName4 = strtolower(Str::random(2)).time().'.'. $file4->extension();  
+            $file4->move(base_path() . '/storage/app/public/pages', $fileName4);
+            $data['home_icon'] = $fileName4;
         }
         $this->savePageSettings($data);
         return json_encode(array('type' => $request->get("type")));
@@ -477,5 +551,137 @@ class PageController extends Controller
         }
 
         return json_encode(array('type' => $request->get("type")));
+    }
+
+    public function otherPages()
+    {
+        return view('admin.pages.others');
+    }
+
+    public function storeOtherPages(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),$request->get("type"));
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/pages', $fileName);
+            $data['banner_image'] = $fileName;
+        }
+        $this->savePageSettings($data);
+        return json_encode(array('type' => $request->get("type")));
+    }
+
+    public function homePage()
+    {
+        return view('admin.pages.home');
+    }
+
+    public function storeHomePage(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),'home');
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        $data['type'] = 'home';
+        $this->savePageSettings($data);
+    }
+
+    public function teams()
+    {
+        $teams = Teams::orderBy('id','desc')->get();
+        return view('admin.pages.teams_list')->with('teams', $teams);
+    }
+
+    public function enquiries()
+    {
+        $enquiries = Contacts::orderBy('id','desc')->get();
+        return view('admin.pages.enquiries')->with('enquiries', $enquiries);
+    }
+
+    public function createTeamMember()
+    {
+         return view('admin.pages.member_create')->with('member', array());
+    }
+
+    public function storeMember(Request $request)
+    {
+        $fileName = '';
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/teams', $fileName);
+        }
+        $page = Teams::updateOrCreate([
+            'id'   => $request->get('member_id'),
+        ],[
+            'type' => $request->get('type'),
+            'name' => $request->get('name'),
+            'designation'    => $request->designation,
+            'image' => $fileName,
+            'status'    => $request->status,
+        ]);
+
+        $result['image'] = Storage::url('teams/'. $fileName);
+        return json_encode($result);
+    }
+    public function editMember($id)
+    {
+        $member = Teams::find($id);
+         return view('admin.pages.member_create')->with('member', $member);
+    }
+    public function deleteMember(Request $request){
+        $member = Teams::find($request->id);
+        $member->delete();
+    }
+
+    public function packaging()
+    {
+         return view('admin.pages.packaging')->with('package', array());
+    }
+
+    public function storePackagingSettings(Request $request)
+    {
+        $seo_url = $this->checkSEOUrlExist($request->get("seo_url"),'packaging');
+        $data = $request->all();
+        $data['seo_url'] = $seo_url;
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
+            $file->move(base_path() . '/storage/app/public/pages', $fileName);
+            $data['banner_image'] = $fileName;
+        }
+        if ($request->has('image1')) {
+            $file1 = $request->file('image1');
+            $fileName1 = strtolower(Str::random(2)).time().'.'. $file1->extension();  
+            $file1->move(base_path() . '/storage/app/public/pages', $fileName1);
+            $data['image1'] = $fileName1;
+        }
+        if ($request->has('image2')) {
+            $file2 = $request->file('image2');
+            $fileName2 = strtolower(Str::random(2)).time().'.'. $file2->extension();  
+            $file2->move(base_path() . '/storage/app/public/pages', $fileName2);
+            $data['image2'] = $fileName2;
+        }
+        $data['type'] = 'packaging';
+       
+        $this->savePageSettings($data);
+
+        $package_title = $request->package_title;
+        $package_content = $request->package_content;
+        for($count = 0; $count < count($package_title); $count++)
+        {
+            if($package_title[$count] != ''){
+                $dataHis = array(
+                    'title' => $package_title[$count],
+                    'content'  => $package_content[$count],
+                    'created_at' => now()
+                );
+                $insert_data[] = $dataHis; 
+            }
+        }
+      
+        PackageSteps::truncate();
+        PackageSteps::insert($insert_data);
     }
 }

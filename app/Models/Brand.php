@@ -17,10 +17,15 @@ class Brand extends Model
         'image_alt',
         'image',
         'status',
+        'product_image'
     ];
 
     public function getImage()
     {
         return Storage::url(Str::replace('/storage/', '', $this->image));
+    }
+    public function getProductImage()
+    {
+        return Storage::url(Str::replace('/storage/', '', $this->product_image));
     }
 }

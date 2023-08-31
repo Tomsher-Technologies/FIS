@@ -4,10 +4,14 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Common\Settings as CommonSettings;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Settings extends Component
 {
+    use WithFileUploads;
+
     public $address;
     public $email;
     public $phone;
@@ -21,6 +25,8 @@ class Settings extends Component
         'phone.value' => 'required',
         'working_time.value' => 'required',
         'socialLinks.*.value' => 'required',
+        'about_content.value' => 'required',
+        
     ];
 
     protected $messages = [
@@ -32,6 +38,7 @@ class Settings extends Component
         'email.value.required' => 'Email is required',
         'email.value.email' => 'Email format is not valid',
         'socialLinks.*.value.required' => 'required',
+        'about_content.value.required' => 'About content is required',
     ];
 
     public function mount()
@@ -43,6 +50,8 @@ class Settings extends Component
         $this->phone = $setting->where('name', 'phone')->first();
         $this->working_time = $setting->where('name', 'working_time')->first();
 
+        $this->about_content = $setting->where('name', 'about_content')->first();
+     
         $this->socialLinks = $setting->where('group', 'social');
     }
 
@@ -55,8 +64,15 @@ class Settings extends Component
         $this->phone->save();
         $this->working_time->save();
 
+        $this->about_content->save();
+
         $this->socialLinks->each(function ($link) {
             $link->save();
+        });
+
+        Cache::forget('settings');
+        Cache::rememberForever('settings', function () {
+            return CommonSettings::all();
         });
 
         $this->dispatchBrowserEvent('swal', [

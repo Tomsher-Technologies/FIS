@@ -43,6 +43,15 @@
                             @enderror
                         </div>
 
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Header About Content</label>
+                            <input class="form-control" type="text" wire:model='about_content.value'>
+                            @error('about_content.value')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    
+
                         <button type="submit" class="btn btn-primary mb-0">Submit</button>
                     </form>
                 </div>

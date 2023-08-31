@@ -11,6 +11,7 @@ class BrandEdit extends Component
     use WithFileUploads;
 
     public $photo;
+    public $product_photo;
 
     public $brand;
 
@@ -20,12 +21,14 @@ class BrandEdit extends Component
         'brand.description' => 'required',
         'brand.image_alt' => 'nullable',
         'photo' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:1024',
+        'product_photo' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:1024',
     ];
 
     protected $messages = [
         'brand.title.required' => "Please enter a title",
         'brand.status.required' => "Please enter a title",
         'photo.required' => "Please select an image",
+        'product_photo.required' => "Please select a product image",
     ];
 
     public function mount($brand)
@@ -42,6 +45,13 @@ class BrandEdit extends Component
             $iname = time() . cleanFileName($this->photo->getClientOriginalName());
             $this->photo->storeAs('public/brands', $iname);
             $this->brand->image = '/storage/brands/' . $iname;
+        }
+
+        if ($this->product_photo) {
+            deleteImage($this->brand->product_image);
+            $piname = time() . cleanFileName($this->product_photo->getClientOriginalName());
+            $this->product_photo->storeAs('public/brands', $piname);
+            $this->brand->product_image = '/storage/brands/' . $piname;
         }
 
         $this->brand->save();

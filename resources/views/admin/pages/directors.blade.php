@@ -235,6 +235,6 @@
             }
         });
     }
-
+    
 </script>
 @endpush

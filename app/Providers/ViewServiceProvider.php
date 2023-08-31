@@ -25,6 +25,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Facades\View::composer('frontend.*', function (View $view) {
+            
             $settings = Cache::rememberForever('settings', function () {
                 return Settings::all();
             });

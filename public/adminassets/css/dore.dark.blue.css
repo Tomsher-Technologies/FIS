@@ -1533,7 +1533,7 @@ button {
           padding: 0 10px;
           line-height: 14px; }
         .menu .main-menu ul li a {
-          height: 110px;
+          height: 70px;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -1559,8 +1559,8 @@ button {
           border-radius: 10px;
           position: absolute;
           width: 6px;
-          height: 90px;
-          top: 50%;
+          height: 80px;
+          top: 42%;
           transform: translateY(-50%);
           left: 0; }
         .menu .main-menu ul li:last-of-type a {

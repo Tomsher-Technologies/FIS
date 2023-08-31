@@ -50,6 +50,13 @@
                         </a>
                     </li>
                 @endif
+                @if (auth()->user()->can('manage-brand'))
+                    <li class="{{ request()->routeIs('admin.brands*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.brands.index') }}">
+                            <i class="simple-icon-badge"></i> Brands
+                        </a>
+                    </li>
+                @endif
                 @if (auth()->user()->can('manage-gallery'))
                     <li class="{{ request()->routeIs('admin.gallery*') ? 'active' : '' }}">
                         <a href="{{ route('admin.gallery') }}">
@@ -75,6 +82,14 @@
                     <li class="{{ request()->routeIs('admin.page*') ? 'active' : '' }}">
                         <a href="#pages">
                             <i class="simple-icon-notebook"></i> Page Settings
+                        </a>
+                    </li>
+                @endif
+
+                @if (auth()->user()->can('manage-enquiries'))
+                    <li class="{{ request()->routeIs('admin.enquiries*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.enquiries') }}">
+                            <i class="simple-icon-question"></i>Enquiries 
                         </a>
                     </li>
                 @endif
@@ -137,6 +152,30 @@
                 <li class="{{ (request()->routeIs('admin.page.directors')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.directors') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Board Of Directors & Management</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.home')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.home') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Home</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.other-pages')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.other-pages') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Other Pages</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.packaging')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.packaging') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Packaging</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.teams') ||  request()->routeIs('admin.page.team-create') ) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.teams') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Teams</span>
                     </a>
                 </li>
                
