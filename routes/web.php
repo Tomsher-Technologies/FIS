@@ -20,9 +20,12 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::fallback([FrontendController::class, 'catchAll']);
 
 Route::post('/contact-save', [FrontendController::class, 'postContact'])->name('contact-save');
+Route::post('/enquiry-save', [FrontendController::class, 'postEnquiry'])->name('enquiry-save');
 Route::get('/blog-details/{id}', [FrontendController::class, 'blog_details'])->name('blog-details');
 
-Route::get('/products', [ProductsController::class, 'getProductsList'])->name('products');
+Route::get('/products/{category?}', [ProductsController::class, 'getProductsList'])->name('products');
 Route::get('/product/{sku}/{slug}', [ProductsController::class, 'getProductDetails'])->name('product-details');
 Route::get('posts', [ProductsController::class, 'index']);
+
+Route::post('/loadmore-products', [ProductsController::class, 'loadMoreProducts'])->name('loadmore-products');
 include 'admin.php';

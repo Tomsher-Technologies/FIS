@@ -67,6 +67,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         });
 
         Route::get('/enquiries', [PageController::class, 'enquiries'])->name('enquiries');
+        Route::get('/product-enquiries', [PageController::class, 'productEnquiries'])->name('product-enquiries');
 
         // Logged-in user profile
         Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {

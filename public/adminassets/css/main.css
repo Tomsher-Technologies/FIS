@@ -141,3 +141,9 @@ display: none;
 .dynamic-sub-heading{
     margin-top: 72px !important;
 }
+.filterDiv{
+    text-align: left;
+    margin: auto;
+    padding: 27px;
+    margin-left: 0 !important;
+  }

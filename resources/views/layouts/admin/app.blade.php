@@ -75,6 +75,7 @@
     <script src="{{ getAdminAsset('js/dore.script.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/jquery.validate/jquery.validate.min.js') }}"></script>
     <script src="{{ getAdminAsset('js/vendor/jquery.validate/additional-methods.min.js') }}"></script>
+ 
     @stack('footer')
     <script src="{{ getAdminAsset('js/scripts.single.theme.js') }}"></script>
 </body>

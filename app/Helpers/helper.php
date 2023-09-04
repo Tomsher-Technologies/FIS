@@ -198,3 +198,85 @@ function getFarookOnlineCategories(){
     
     return $result;
 }
+
+function star_rating($rating)
+{
+    $rating_round = $rating;
+    if ($rating_round == 0) {
+        return '<i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 0.5 && $rating_round >= 0) {
+        return '<i class="fas fa-star-half-alt text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 1 && $rating_round > 0.5) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 1.5 && $rating_round > 1) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star-half-alt text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 2 && $rating_round > 1.5) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 2.5 && $rating_round > 2) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star-half-alt text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 3 && $rating_round > 2.5) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 3.5 && $rating_round > 3) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star-half-alt text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round <= 4 && $rating_round > 3.5) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="far fa-star text-warning"></i>';
+    }
+    if ($rating_round < 5 && $rating_round > 4) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star-half-alt text-warning"></i>';
+    }
+    if ($rating_round == 5) {
+        return '<i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>
+        <i class="fas fa-star text-warning"></i>';
+    } 
+}

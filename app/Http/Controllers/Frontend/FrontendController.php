@@ -17,6 +17,7 @@ use App\Models\Faqs;
 use App\Models\Career;
 use App\Models\BusinessSettings;
 use App\Models\Contacts;
+use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -562,5 +563,16 @@ class FrontendController extends Controller
         TwitterCard::setTitle($model->twitter_title);
         TwitterCard::setSite("@DmuDubai");
         TwitterCard::setDescription($model->twitter_description);
+    }
+
+    public function postEnquiry(Request $request){
+        $con = new Enquiries;
+        $con->name = $request->name;
+        $con->product_sku = $request->sku;
+        $con->email = $request->email;
+        $con->phone = $request->phone;
+        $con->company = $request->company;
+        $con->content = $request->message;
+        $con->save();
     }
 }

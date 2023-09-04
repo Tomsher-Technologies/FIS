@@ -10,9 +10,11 @@ class Enquiries extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_sku',
         'name',
         'email',
         'phone',
+        'company',
         'content',
         'status',
     ];

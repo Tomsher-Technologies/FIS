@@ -8292,7 +8292,7 @@ input.form-control {
 
 .discount {
   background-color: #D73845;
-  color: #fff;
+  color: #fff !important;
   padding: 5px;
   font-size: 10px;
   border-radius: 5px;
@@ -9427,3 +9427,52 @@ label>span {
 .shop-btn {
   padding: 15px 25px !important;
 }
+
+.main-category{
+    color: #0d81c9 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+.sortBy{
+  border-radius: 1.5rem;
+  padding: 11px 40px 11px;
+}
+
+.ml-5px{
+  margin-left: 5px !important;
+}
+
+.prodAttr{
+  font-weight: 700 !important;
+    font-size: 16px;
+}
+
+.org-price{
+    font-size: 20px !important;
+    text-decoration: line-through !important;
+}
+
+.fs-14{
+  font-size: 14px !important;
+}
+
+.off-percentage{
+  margin: -4px 6px !important;
+}
+.required{
+  color: red;
+}
+.error{
+  color: red;
+}
+.ml-20{
+  margin-left: 20px !important;
+}
+
+.h-75{
+  max-height: 75% !important;
+}
+.h-100{
+  max-height: 100% !important;
+}
+

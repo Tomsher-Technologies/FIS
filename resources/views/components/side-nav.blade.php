@@ -88,7 +88,7 @@
 
                 @if (auth()->user()->can('manage-enquiries'))
                     <li class="{{ request()->routeIs('admin.enquiries*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.enquiries') }}">
+                        <a href="#enquiries">
                             <i class="simple-icon-question"></i>Enquiries 
                         </a>
                     </li>
@@ -180,6 +180,23 @@
                 </li>
                
             </ul>
+
+            @if (auth()->user()->can('manage-enquiries'))
+                <ul class="list-unstyled" data-link="enquiries" id="enquiries">
+                    <li>
+                        <a href="{{ route('admin.enquiries') }}">
+                            <i class="simple-icon-eye"></i>
+                            <span class="d-inline-block">Contact Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.product-enquiries') }}">
+                            <i class="simple-icon-eye"></i>
+                            <span class="d-inline-block">Product Enquiries</span>
+                        </a>
+                    </li>
+                </ul>
+            @endif
             
         </div>
     </div>
