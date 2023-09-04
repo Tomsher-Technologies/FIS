@@ -67,7 +67,7 @@
                                     <a href="{{ getSEOUrl('store_location') }}">Store Location</a>
                                 </li>
                                 <li>
-                                    <a href="https://www.farookonline.com/" target="_blank">Shop Online</a>
+                                    <a href="{{ env('SITE_LINK') }}" target="_blank">Shop Online</a>
                                 </li>
                             </ul>
                         </div>

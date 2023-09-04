@@ -11,10 +11,13 @@
 :: Counter
 :: Owl Carousel
 :: Magnific Popup
+:: Datetimepicker
+:: Select2
 :: Countdown
 :: SwiperAnimation
 :: Typer
 :: Search
+Slickslider
 :: Shuffle
 :: Pricing Tabs
 :: Back to top
@@ -22,11 +25,11 @@
 ======================================
 [ End table content ]
 ======================================*/
-//POTENZA var
+//FAROOK var
 
 (function ($) {
   "use strict";
-  var POTENZA = {};
+  var FAROOK = {};
 
 /*************************
   Predefined Variables
@@ -45,7 +48,7 @@
 /*************************
          Sticky
 *************************/
-POTENZA.isSticky = function () {
+FAROOK.isSticky = function () {
   $(window).on('scroll',function(event) {
         var scroll = $(window).scrollTop();
         if (scroll < 300) {
@@ -59,7 +62,7 @@ POTENZA.isSticky = function () {
 /*************************
     Secondary Sticky
 *************************/
-POTENZA.secondarySticky = function () {
+FAROOK.secondarySticky = function () {
   $(window).on('scroll',function(event) {
         var scroll = $(window).scrollTop();
         if (scroll < 500) {
@@ -91,7 +94,7 @@ POTENZA.secondarySticky = function () {
 /*************************
     Menu
 *************************/
-POTENZA.dropdownmenu = function () {
+FAROOK.dropdownmenu = function () {
   if ($('.navbar').exists()) {
     $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
       if (!$(this).next().hasClass('show')) {
@@ -110,7 +113,7 @@ POTENZA.dropdownmenu = function () {
   /*************************
        Tooltip
   *************************/
-  POTENZA.Tooltip = function() {
+  FAROOK.Tooltip = function() {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
       var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -120,7 +123,7 @@ POTENZA.dropdownmenu = function () {
   /*************************
         Popover
   *************************/
-  POTENZA.Popover = function() {
+  FAROOK.Popover = function() {
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
       var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)
@@ -131,7 +134,7 @@ POTENZA.dropdownmenu = function () {
 /*************************
        Counter
 *************************/
-  POTENZA.counters = function () {
+  FAROOK.counters = function () {
     var counter = jQuery(".counter");
     if (counter.length > 0) {
       $counter.each(function () {
@@ -146,7 +149,7 @@ POTENZA.dropdownmenu = function () {
 /*************************
        Owl Carousel
 *************************/
-  POTENZA.carousel = function () {
+  FAROOK.carousel = function () {
     var owlslider = jQuery("div.owl-carousel");
     if (owlslider.length > 0) {
       owlslider.each(function () {
@@ -199,7 +202,7 @@ POTENZA.dropdownmenu = function () {
   /*************************
       Magnific Popup
   *************************/
-  POTENZA.mediaPopups = function () {
+  FAROOK.mediaPopups = function () {
     if ($(".popup-single").exists() || $(".popup-gallery").exists() || $('.modal-onload').exists() || $(".popup-youtube, .popup-vimeo, .popup-gmaps").exists()) {
       if ($(".popup-single").exists()) {
         $('.popup-single').magnificPopup({
@@ -255,10 +258,36 @@ POTENZA.dropdownmenu = function () {
     }
   }
 
+  /*************************
+      Datetimepicker
+  *************************/
+      FAROOK.datetimepickers = function () {
+        if ($('.datetimepickers').exists()) {
+          $('#datetimepicker-01, #datetimepicker-02').datetimepicker({
+            format: 'L'
+          });
+          $('#datetimepicker-03, #datetimepicker-04').datetimepicker({
+            format: 'LT'
+          });
+        }
+      };
+
+  /*************************
+      select2
+  *************************/
+      FAROOK.select2 = function () {
+        if ($('.basic-select').exists()) {
+          var select = jQuery(".basic-select");
+          if (select.length > 0) {
+            $('.basic-select').select2({dropdownCssClass : 'bigdrop'});
+          }
+        }
+      };
+
 /*************************
        Countdown
 *************************/
-  POTENZA.countdownTimer = function () {
+  FAROOK.countdownTimer = function () {
     if ($countdownTimer.exists()) {
       $countdownTimer.downCount({
         date: '12/25/2021 12:00:00', // Month/Date/Year HH:MM:SS
@@ -270,7 +299,7 @@ POTENZA.dropdownmenu = function () {
 /*************************
    SwiperAnimation
 *************************/
-POTENZA.swiperAnimation = function () {
+FAROOK.swiperAnimation = function () {
   var siperslider = jQuery(".swiper-container");
   if (siperslider.length > 0) {
     var swiperAnimation = new SwiperAnimation();
@@ -305,7 +334,7 @@ POTENZA.swiperAnimation = function () {
 /*************************
        Typer
 *************************/
-POTENZA.typer = function () {
+FAROOK.typer = function () {
   if ($('.typer').exists()) {
     }
 };
@@ -313,7 +342,7 @@ POTENZA.typer = function () {
 /*************************
        Search
 *************************/
-POTENZA.searchbox = function () {
+FAROOK.searchbox = function () {
    if (jQuery('.search').exists()) {
       jQuery('.search-btn').on('click', function () {
          jQuery('.search').toggleClass("search-open");
@@ -327,11 +356,32 @@ POTENZA.searchbox = function () {
      });
     }
 }
+/*************************
+        Slickslider
+*************************/
+FAROOK.slickslider = function () {
+  if ($('.slider-for').exists()) {
+    $('.slider-for').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      asNavFor: '.slider-for',
+      dots: false,
+      centerMode: false,
+      focusOnSelect: true
+    });
+  }
+};
 
 /*************************
     Shuffle
 *************************/
-   POTENZA.shuffle = function () {
+   FAROOK.shuffle = function () {
     if (jQuery('.my-shuffle-container').exists()) {
     var Shuffle = window.Shuffle;
       var element = document.querySelector('.my-shuffle-container');
@@ -359,7 +409,7 @@ POTENZA.searchbox = function () {
 /*************************
     Pricing Tabs
 *************************/
-POTENZA.pricingtabs = function () {
+FAROOK.pricingtabs = function () {
     jQuery('.pricing-tab-switcher').on('click', function() {
       jQuery(this).toggleClass('active');
       jQuery('.pricing-price').toggleClass('change-pricing-price');
@@ -369,7 +419,7 @@ POTENZA.pricingtabs = function () {
 /*************************
      Back to top
 *************************/
-  POTENZA.goToTop = function () {
+  FAROOK.goToTop = function () {
     var $goToTop = $('#back-to-top');
     $goToTop.hide();
     $window.scroll(function () {
@@ -385,34 +435,39 @@ POTENZA.pricingtabs = function () {
   }
 
 
+
+  
+
+
 /****************************************************
-     POTENZA Window load and functions
+     FAROOK Window load and functions
 ****************************************************/
 
   //Window load functions
   $window.on("load", function () {
-    POTENZA.shuffle();
+    FAROOK.shuffle();
   });
 
   //Document ready functions
   $document.ready(function () {
-    POTENZA.isSticky(),
-    POTENZA.secondarySticky(),
-    POTENZA.counters(),
-    POTENZA.dropdownmenu(),
-    POTENZA.goToTop(),
-    POTENZA.countdownTimer(),
-    POTENZA.mediaPopups(),
-    POTENZA.pricingtabs(),
-    POTENZA.Tooltip(),
-    POTENZA.Popover(),
-    POTENZA.carousel(),
-    POTENZA.swiperAnimation(),
-    POTENZA.searchbox(),
-    POTENZA.typer();
+    FAROOK.isSticky(),
+    FAROOK.secondarySticky(),
+    FAROOK.counters(),
+    FAROOK.dropdownmenu(),
+    FAROOK.goToTop(),
+    FAROOK.countdownTimer(),
+    FAROOK.mediaPopups(),
+    FAROOK.select2(),
+    FAROOK.slickslider(),
+    FAROOK.pricingtabs(),
+    FAROOK.Tooltip(),
+    FAROOK.Popover(),
+    FAROOK.carousel(),
+    FAROOK.swiperAnimation(),
+    FAROOK.searchbox(),
+    FAROOK.typer();
   });
 
 })(jQuery);
-
 
 

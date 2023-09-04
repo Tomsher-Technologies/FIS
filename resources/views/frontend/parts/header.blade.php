@@ -132,10 +132,10 @@
                                               </div>
                                               <div class="col-sm-6 col-lg-3">
                                                   <div class="shop_now_img position-relative">
-                                                      <img src="images/shop_img.webp"
+                                                      <img src="{{ asset('images/shop_img.webp') }}"
                                                           class="img-fluid position-relative" alt="" />
                                                       <a class="btn btn-dark btn-round text-white px-4 font-sm"
-                                                          href="https://www.farookonline.com/" target="_blank">
+                                                          href="{{ env('SITE_LINK') }}" target="_blank">
                                                           SHOP NOW ONLINE
                                                       </a>
                                                   </div>
@@ -180,10 +180,10 @@
                                               </div>
                                               <div class="col-sm-6 col-lg-5">
                                                   <div class="shop_now_img position-relative">
-                                                      <img src="images/shop_img1.webp"
+                                                      <img src="{{ asset('images/shop_img1.webp') }}"
                                                           class="img-fluid position-relative" alt="" />
                                                       <a class="btn btn-dark btn-round text-white px-4 font-sm"
-                                                          href="https://www.farookonline.com/" target="_blank">
+                                                          href="{{ env('SITE_LINK') }}" target="_blank">
                                                           SHOP NOW ONLINE
                                                       </a>
                                                   </div>
@@ -259,7 +259,7 @@
                                                           </a>
                                                       </li>
                                                       <li>
-                                                          <a href="https://www.farookonline.com/" target="_blank">Shop
+                                                          <a href="{{ env('SITE_LINK') }}" target="_blank">Shop
                                                               Online
                                                           </a>
                                                       </li>
@@ -267,10 +267,10 @@
                                               </div>
                                               <div class="col-sm-6 col-lg-3">
                                                   <div class="shop_now_img position-relative">
-                                                      <img src="images/shop_img2.webp"
+                                                      <img src="{{ asset('images/shop_img2.webp') }}"
                                                           class="img-fluid position-relative" alt="" />
                                                       <a class="btn btn-dark btn-round text-white px-4 font-sm"
-                                                          href="https://www.farookonline.com/" target="_blank">
+                                                          href="{{ env('SITE_LINK') }}" target="_blank">
                                                           SHOP NOW ONLINE
                                                       </a>
                                                   </div>
@@ -326,6 +326,7 @@ header -->
                             <input id="group-{{$i}}" type="checkbox" hidden />
                             <label for="group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $catg['title'] }}</label>
                             <ul class="group-list">
+                                <li><a href="{{ route('products',['category' => $catg['slug']]) }}" class="main-category" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
                                 @foreach($catg['subItems'] as $subitem)
                                     @php $i++;  @endphp
                                     
@@ -334,20 +335,21 @@ header -->
                                             <input id="sub-group-{{$i}}" type="checkbox" hidden />
                                             <label for="sub-group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $subitem['title'] }}</label>
                                             <ul class="sub-group-list">
+                                                <li><a href="{{ route('products',['category' => $subitem['slug']]) }}" class="main-category" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
                                                 @foreach($subitem['subItems'] as $item)
                                                     @php $i++;  @endphp
-                                                    <li><a href="" title="{{ $item['title'] }}">{{ $item['title'] }}</a></li>
+                                                    <li><a href="{{ route('products',['category' => $item['slug']]) }}" title="{{ $item['title'] }}">{{ $item['title'] }}</a></li>
                                                 @endforeach
                                             </ul>
                                         </li>
                                     @else
-                                        <li><a href="" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
+                                        <li><a href="{{ route('products',['category' => $subitem['slug']]) }}" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
                                     @endif
                                 @endforeach
                             </ul>
                         </li>
                         @else
-                            <li><a href="" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
+                            <li><a href="{{ route('products',['category' => $catg['slug']]) }}" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
                         @endif
                        
                     @endforeach

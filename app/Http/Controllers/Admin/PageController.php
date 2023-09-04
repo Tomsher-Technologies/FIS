@@ -13,6 +13,7 @@ use App\Models\AwardDetails;
 use App\Models\OurServices;
 use App\Models\PackageSteps;
 use App\Models\Contacts;
+use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -593,10 +594,68 @@ class PageController extends Controller
         return view('admin.pages.teams_list')->with('teams', $teams);
     }
 
-    public function enquiries()
+    public function enquiries(Request $request)
     {
-        $enquiries = Contacts::orderBy('id','desc')->get();
-        return view('admin.pages.enquiries')->with('enquiries', $enquiries);
+        $date_search = $title_search = '';
+
+        if($request->has('title_search')){
+            $title_search = $request->title_search;
+        }
+
+        if($request->has('date_search')){
+            $date_search = $request->date_search;
+        }
+
+        $query = Contacts::orderBy('id','desc');
+        if($title_search){
+            $query->Where(function ($query) use ($title_search) {
+                $query->orWhere('name', 'LIKE', "%$title_search%")
+                ->orWhere('email', 'LIKE', "%$title_search%")
+                ->orWhere('subject', 'LIKE', "%$title_search%")
+                ->orWhere('phone', 'LIKE', "%$title_search%");   
+            }); 
+        }
+        if($date_search){
+            $query->whereDate('created_at', $date_search);
+        }
+        $enquiries = $query->paginate(10);
+
+        return view('admin.pages.enquiries', compact('enquiries','date_search','title_search'));
+    }
+
+    public function productEnquiries(Request $request){
+        $sku_search = $date_search = $title_search = '';
+
+        if($request->has('sku')){
+            $sku_search = $request->sku;
+        }
+
+        if($request->has('title_search')){
+            $title_search = $request->title_search;
+        }
+
+        if($request->has('date_search')){
+            $date_search = $request->date_search;
+        }
+
+        $query = Enquiries::orderBy('id','desc');
+        if($sku_search){
+            $query->where('product_sku','LIKE', "%$sku_search%");
+        }
+
+        if($title_search){
+            $query->Where(function ($query) use ($title_search) {
+                $query->orWhere('name', 'LIKE', "%$title_search%")
+                ->orWhere('email', 'LIKE', "%$title_search%")
+                ->orWhere('company', 'LIKE', "%$title_search%")
+                ->orWhere('phone', 'LIKE', "%$title_search%");   
+            }); 
+        }
+        if($date_search){
+            $query->whereDate('created_at', $date_search);
+        }
+        $enquiries = $query->paginate(10);
+        return view('admin.pages.product-enquiries', compact('enquiries','sku_search','date_search','title_search'));
     }
 
     public function createTeamMember()

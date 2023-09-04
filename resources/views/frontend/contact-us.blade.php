@@ -26,7 +26,7 @@
                 <div class="col-lg-7 col-md-7 pe-lg-5">
                     <div class="p-4 p-md-5 bg-white shadow">
                         <h3>Need assistance? please fill the form</h3>
-                        <form class="mt-4" id="contact-form-new" action="#" method="POST">
+                        <form class="mt-4" id="contact-form-new" action="#" method="POST"  autocomplete="off">
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Name">
                             </div>
@@ -89,52 +89,52 @@
 <script src="{{ getAdminAsset('js/vendor/jquery.validate/additional-methods.min.js') }}"></script>
 <script>
 
-$("#contact-form-new").validate({
-            rules: {
-                contact_name: {
-                    required: true
-                },
-                contact_email: {
-                    required: true,
-                    email:true
-                },  
-                contact_phone: {
-                    required: true
-                },
-                contact_subject: {
-                    required: true
-                },  
-                contact_message: {
-                    required: true
-                },     
+    $("#contact-form-new").validate({
+        rules: {
+            contact_name: {
+                required: true
             },
-            
-            submitHandler: function(e) {
-                $.ajaxSetup({
-                    headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $('#submit').html('Please Wait...');
-                $("#submit"). attr("disabled", true);
-                $.ajax({
-                    url: "{{ route('contact-save')}}",
-                    type: "POST",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "name": $('#contact_name').val(),
-                        "email": $('#contact_email').val(),
-                        "phone": $('#contact_phone').val(),
-                        "subject": $('#contact_subject').val(),
-                        "message": $('#contact_message').val()
-                    },
-                    success: function(response) {
-                        $("#contact-form-new")[0].reset();
-                        $(".ajax-response").html("<div class='alert alert-success'>THANK YOU FOR GETTING IN TOUCH. OUR TEAM WILL CONTACT YOU SHORTLY.</div>");
-                    }
-                });
-            }
-        })
+            contact_email: {
+                required: true,
+                email:true
+            },  
+            contact_phone: {
+                required: true
+            },
+            contact_subject: {
+                required: true
+            },  
+            contact_message: {
+                required: true
+            },     
+        },
+        
+        submitHandler: function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#submit').html('Please Wait...');
+            $("#submit"). attr("disabled", true);
+            $.ajax({
+                url: "{{ route('contact-save')}}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "name": $('#contact_name').val(),
+                    "email": $('#contact_email').val(),
+                    "phone": $('#contact_phone').val(),
+                    "subject": $('#contact_subject').val(),
+                    "message": $('#contact_message').val()
+                },
+                success: function(response) {
+                    $("#contact-form-new")[0].reset();
+                    $(".ajax-response").html("<div class='alert alert-success'>THANK YOU FOR GETTING IN TOUCH. OUR TEAM WILL CONTACT YOU SHORTLY.</div>");
+                }
+            });
+        }
+    })
     // hideErrors();
     // function hideErrors(){
     //     $('#name-error').css('display','none');

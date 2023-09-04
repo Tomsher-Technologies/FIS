@@ -251,7 +251,7 @@
                                     <!-- Quality and value assured, <br>
                                     superb prices -->
                                 </p>
-                                <a class="btn btn-dark btn-round text-white" href="https://www.farookonline.com/"
+                                <a class="btn btn-dark btn-round text-white" href="{{ env('SITE_LINK') }}"
                                     target="_blank"> Shop Our Products <i class="fas fa-arrow-right ps-3"></i></a>
 
                                 <!-- <ul class="list-unstyled list-number mb-0 text-start ps-5 mt-4">
@@ -287,7 +287,7 @@
                     <h2 class="mb-3 mb-lg-0">Our Latest <br> Products</h2>
                 </div>
                 <div class="col-lg-6 text-lg-end">
-                    <a href="https://www.farookonline.com/" target="_blank"
+                    <a href="{{ env('SITE_LINK') }}" target="_blank"
                         class="btn btn-dark text-white btn-round w-space">Shop Online<i
                             class="fas fa-arrow-right ps-3"></i></a>
                 </div>
