@@ -343,7 +343,7 @@
                     <div class="col-md-7 col-lg-8 mb-4">
                         <div class="blog-post blog-post-sticky">
                             <div class="blog-post-image shadow-sm">
-                                <img class="img-fluid blog-image-first" src="{{ $blog_first->getImage() }}"
+                                <img class="img-fluid blog-image-first" src="{{ asset($blog_first->getImage()) }}"
                                     alt="{{ $blog_first->image_alt }}">
                             </div>
                             <div class="blog-post-content">
@@ -375,7 +375,7 @@
                         @foreach ($blog_second as $item)
                             <div class="blog-post mb-4">
                                 <div class="blog-post-image shadow-sm">
-                                    <img class="img-fluid blog-image-second" src="{{ $item->getImage() }}" alt="{{ $item->image_alt }}">
+                                    <img class="img-fluid blog-image-second" src="{{ asset($item->getImage()) }}" alt="{{ $item->image_alt }}">
                                 </div>
                                 <div class="blog-post-content">
                                     <div class="blog-post-info justify-content-between">

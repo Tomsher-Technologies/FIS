@@ -32,7 +32,7 @@
 
                             @if ($client->url)
                                 <label for="exampleInputEmail1">Current Image</label>
-                                <img class="w-50 d-block mb-3" src="{{ $client->getImage() }}" alt="">
+                                <img class="w-50 d-block mb-3" src="{{ asset($client->getImage()) }}" alt="">
                             @endif
 
                             <div class="form-group">

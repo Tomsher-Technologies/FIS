@@ -52,7 +52,7 @@
                             @endif
                             @if ($business_settings->image)
                                 <label for="exampleInputEmail1">Current Image</label>
-                                <img class="w-20 d-block mb-3" src="{{ $business_settings->getImage() }}" alt="">
+                                <img class="w-20 d-block mb-3" src="{{ asset($business_settings->getImage()) }}" alt="">
                             @endif
 
                             <div class="form-group">
