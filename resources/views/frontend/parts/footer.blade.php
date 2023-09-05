@@ -83,7 +83,7 @@
                                     <a href="{{ getSEOUrl('terms') }}">Terms & Conditions</a>
                                 </li>
                                 <li><a href="{{ getSEOUrl('faq') }}">Help & FAQ</a></li>
-                                <li><a href="{{ getSEOUrl('contact_us') }}">Contact Us</a></li>
+                                <li><a href="{{ getSEOUrl('contact') }}">Contact Us</a></li>
                                 <li><a href="{{ getSEOUrl('careers') }}">Careers</a></li>
                             </ul>
                         </div>
