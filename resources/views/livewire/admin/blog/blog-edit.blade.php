@@ -44,7 +44,7 @@
                                 <div class="form-group mb-0">
                                     <label for="exampleInputEmail1">Current Image</label>
                                 </div>
-                                <img class="w-50 mb-3" src="{{ $blog->getImage() }}" alt="">
+                                <img class="w-50 mb-3" src="{{ asset($blog->getImage()) }}" alt="">
                             @endif
 
                             <div class="form-group">

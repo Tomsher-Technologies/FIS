@@ -46,7 +46,7 @@
                             </div>
 
                             @if ($banner->image)
-                                <img src="{{ $banner->getImage() }}" alt="" class="w-100">
+                                <img src="{{ asset($banner->getImage()) }}" alt="" class="w-100">
                             @endif
 
                             <label for="exampleInputEmail1">Image</label>
