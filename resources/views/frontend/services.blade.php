@@ -7,7 +7,7 @@
 <!--=================================
     inner banner -->
     @php $banner = Storage::url('pages/'. $pageSettings['banner_image']) ; @endphp
-<section class="header-inner bg-overlay-black-50" style="background-image: url({{ $banner }});">
+<section class="header-inner bg-overlay-black-50" style="background-image: url({{ asset($banner) }});">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8">

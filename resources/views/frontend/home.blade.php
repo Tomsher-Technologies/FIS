@@ -12,7 +12,7 @@
                     @foreach ($banners as $banner)
                         <div class="swiper-slide align-items-center d-flex responsive-overlap-md bg-overlay-black-30"
                             style="
-                    background-image: url('{{ $banner->getImage() }}');
+                    background-image: url('{{  asset($banner->getImage()) }}');
                     background-size: cover;
                     background-position: center center;
                 ">
@@ -302,7 +302,7 @@
                             <div class="items">
                                 <div class="case-study case-study-style-02">
                                     <div class="case-study-img case-study-lg"
-                                        style="background-image: url('{{ $product->getImage() }}');">
+                                        style="background-image: url('{{  asset($product->getImage()) }}');">
                                     </div>
                                     <div class="case-study-info">
                                         <p class="mt-2">
