@@ -16,9 +16,9 @@ class BusinessEdit extends Component
 
     protected $rules = [
         'business_settings.type' => 'required',
-        'business_settings.title' => 'required_unless:btype,agency',
+        'business_settings.title' => 'required_unless:business_settings.type,agency',
         'business_settings.image_alt' => 'nullable',
-        'business_settings.link' => 'required_unless:btype,agency|nullable|url',
+        'business_settings.link' => 'required_unless:business_settings.type,agency|nullable|url',
         'photo' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:1024',
         'business_settings.status' => 'required',
     ];
@@ -37,6 +37,7 @@ class BusinessEdit extends Component
     public function save()
     {
         $validatedData = $this->validate();
+        
         if($this->business_settings->type == "agency"){
             $this->business_settings->title = NULL;
             $this->business_settings->link = NULL;
@@ -50,16 +51,19 @@ class BusinessEdit extends Component
 
         $this->business_settings->save();
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Successfully Updated',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Successfully Updated',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
         $this->reset('photo');
+        session()->flash('message', 'Successfully Updated.');
+ 
+        return redirect()->route('admin.businesses.index');
     }
 
     public function render()

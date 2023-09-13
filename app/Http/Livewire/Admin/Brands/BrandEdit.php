@@ -56,16 +56,17 @@ class BrandEdit extends Component
 
         $this->brand->save();
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Brand updated',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Brand updated',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
         $this->reset('photo');
+        return redirect()->route('admin.brands.index')->with('status', 'Brand updated successfully');
     }
 
     public function render()

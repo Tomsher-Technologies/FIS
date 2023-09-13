@@ -18,11 +18,16 @@ use PowerComponents\LivewirePowerGrid\Rules\Rule;
 final class BannerListing extends PowerGridComponent
 {
     use ActionButton;
+    protected $index = 0;
+    public string $sortField = 'id';
+    
+    public string $sortDirection = 'desc';
 
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
 
     public int $perPage = 2;
+    
 
     protected function getListeners(): array
     {
@@ -98,7 +103,13 @@ final class BannerListing extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
+            ->addColumn('id_inc', function () {
+                return ++$this->index +  ($this->page - 1) * $this->perPage;
+            })
             ->addColumn('heading')
+            ->addColumn('status', function (Banner $model) {
+                return ($model->status == 1) ? '<span class="badge badge-success">Enabled </span>' : '<span  class="badge badge-danger">Disabled</span>';
+            })
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', function (Banner $model) {
                 return Carbon::parse($model->created_at)->format('d/m/Y');
@@ -124,19 +135,21 @@ final class BannerListing extends PowerGridComponent
         return [
             Column::add()
                 ->title('ID')
-                ->field('id')
+                ->field('id_inc', 'id')
+                ->searchable()
                 ->sortable(),
 
             Column::add()
                 ->title('Heading')
                 ->field('heading')
+                ->makeInputText('heading')
                 ->searchable()
                 ->sortable(),
 
             Column::add()
                 ->title('Status')
                 ->field('status')
-                ->toggleable(true, 1, 0)
+                ->makeBooleanFilter('status', 'Enabled', 'Disabled')
                 ->sortable(),
 
             Column::add()
@@ -147,6 +160,7 @@ final class BannerListing extends PowerGridComponent
             Column::add()
                 ->title('Created at')
                 ->field('created_at_formatted', 'created_at')
+                ->makeInputDatePicker('created_at')
                 ->sortable()
         ];
     }

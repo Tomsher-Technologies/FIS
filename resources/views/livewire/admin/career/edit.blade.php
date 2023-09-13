@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1">Status</label>
-            <select wire:model="status" name="status" class="form-control select2-single mb-3">
+            <select wire:model="status" name="status" class="form-control mb-3">
                 <option value="1">
                     Enabled
                 </option>

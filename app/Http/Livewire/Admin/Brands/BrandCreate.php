@@ -54,12 +54,12 @@ class BrandCreate extends Component
         $this->photo->storeAs('public/brands', $iname);
         $this->product_photo->storeAs('public/brands', $piname);
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Brand create',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Brand create',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
@@ -68,6 +68,7 @@ class BrandCreate extends Component
         $this->reset('image_alt');
         $this->reset('photo');
         $this->reset('product_photo');
+        return redirect()->route('admin.brands.index')->with('status', 'Brand created successfully');
     }
 
     public function render()

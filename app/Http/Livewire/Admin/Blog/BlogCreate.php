@@ -84,12 +84,12 @@ class BlogCreate extends Component
 
         $this->photo->storeAs('public/blogs', $iname);
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Blog create',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Blog create',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
@@ -109,6 +109,10 @@ class BlogCreate extends Component
         $this->reset('og_description');
         $this->reset('twitter_description');
         $this->reset('seokeywords');
+
+        session()->flash('message', 'Blog successfully created.');
+ 
+        return redirect()->route('admin.blog.index');
     }
 
     public function changeSeoUrl($value)

@@ -17,7 +17,10 @@ use PowerComponents\LivewirePowerGrid\Rules\Rule;
 final class ProductListing extends PowerGridComponent
 {
     use ActionButton;
-
+    protected $index = 0;
+    public string $sortField = 'id';
+    
+    public string $sortDirection = 'desc';
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
 
@@ -96,8 +99,14 @@ final class ProductListing extends PowerGridComponent
     public function addColumns(): ?PowerGridEloquent
     {
         return PowerGrid::eloquent()
+            ->addColumn('sl_no', function (Product $model) {
+                return ++$this->index +  ($this->page - 1) * $this->perPage;
+            })
             ->addColumn('id')
             ->addColumn('title')
+            ->addColumn('status', function (Product $model) {
+                return ($model->status == 1) ? '<span class="badge badge-success">Enabled </span>' : '<span  class="badge badge-danger">Disabled</span>';
+            })
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', function (Product $model) {
                 return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
@@ -120,13 +129,17 @@ final class ProductListing extends PowerGridComponent
      */
     public function columns(): array
     {
+        $this->index = $this->page > 1 ? ($this->page - 1) * $this->perPage : 0;
         return [
+            Column::add()
+                ->title('Sl No')
+                ->field('sl_no'),
+
             Column::add()
                 ->title('ID')
                 ->field('id')
-                ->searchable()
-                ->sortable(),
-
+                ->hidden(),
+           
             Column::add()
                 ->title('Title')
                 ->field('title')
@@ -137,7 +150,8 @@ final class ProductListing extends PowerGridComponent
             Column::add()
                 ->title('Status')
                 ->field('status')
-                ->toggleable(true, 1, 0)
+                ->makeBooleanFilter('status', 'Enabled', 'Disabled')
+                // ->toggleable(true, 1, 0)
                 ->sortable(),
 
             Column::add()

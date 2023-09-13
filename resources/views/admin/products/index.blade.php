@@ -16,6 +16,14 @@
         <div class="rpw">
             <div class="col-12">
                 <x-status />
+
+                <div>
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
 

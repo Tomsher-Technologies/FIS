@@ -49,16 +49,20 @@ class ProductEdit extends Component
 
         $this->product->save();
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Product updated',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Product updated',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
         $this->reset('photo');
+
+        session()->flash('message', 'Product successfully updated.');
+ 
+        return redirect()->route('admin.products.index');
     }
 
     public function render()

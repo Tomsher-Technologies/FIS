@@ -43,13 +43,15 @@ class Edit extends Component
         $this->career->status = $this->status;
         $this->career->save();
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Career updated',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
-
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Career updated',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
+        session()->flash('message', 'Career successfully updated.');
+ 
+        return redirect()->route('admin.career.index');
     }
 
     public function render()

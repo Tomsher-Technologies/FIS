@@ -65,7 +65,7 @@
                                 <label for="exampleInputEmail1">Image <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="custom-file" wire:ignore>
-                                        <input wire:model="photo" type="file" accept=".jpg,.png,.jpeg,.gif,.webp"
+                                        <input wire:model="photo" type="file" accept="image/*"
                                             class="custom-file-input" name="image_file" id="inputGroupFile02">
                                         <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                     </div>
@@ -114,6 +114,11 @@
                 $('.custom-file-label').html('Choose file');
             });
         </script>
+        <style>
+            .invalid-tooltip, .valid-tooltip, div.error{
+                margin-top: 5rem !important;
+            }
+            </style>
     @endpush
 
 </div>
