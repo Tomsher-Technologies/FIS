@@ -60,7 +60,7 @@
                                     placeholder="Password">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Comfirm Password</label>
+                                <label for="exampleInputPassword1">Confirm Password</label>
                                 <input type="password" name="password_confirmation" class="form-control"
                                     id="exampleInputPassword1" placeholder="Password">
                             </div>

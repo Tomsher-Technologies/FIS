@@ -30,24 +30,27 @@
                                         <th scope="col">No:</th>
                                         <th scope="col">User Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">User Role</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
-                                        <tr>
+                                        <tr id="row_{{$user->id}}">
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->roles->first() ? $user->roles->first()->title : '' }}</td>
-                                            <td>{{ $user->status ? "Enabled":"Disabled" }}</td>
+                                            
+                                            <td>{!! $user->status ? "<span class='badge badge-success'>Enabled</span>":"<span class='badge badge-danger'>Disabled</span>" !!}</td>
                                             <td>
-                                                <a href="{{ route('admin.users.show', $user) }}"
-                                                    class="btn btn-primary mb-1">Show</a>
+                                                
                                                 <a href="{{ route('admin.users.edit', $user) }}"
                                                     class="btn btn-secondary mb-1">Edit</a>
+                                                @if($user->id != 1)
+                                                    <a class="btn btn-danger delete_faq" href="#" id="" data-id="{{ $user->id }}" onClick="deleteUser({{ $user->id }})">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -61,5 +64,40 @@
     </div>
 @endsection
 
-@push('header')
+@push('footer')
+<script >
+function deleteUser(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "It will permanently deleted !",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('admin.delete-user')}}",
+                    type: "POST",
+                    data: 'id='+ id,
+                    success: function( response ) {
+                        $('#row_'+id).css('display','none');
+                        Swal.fire(
+                            'Deleted!',
+                            'User has been deleted.',
+                            'success'
+                        );
+                    }
+                });
+            } 
+            
+        })
+    }
+</script>
 @endpush

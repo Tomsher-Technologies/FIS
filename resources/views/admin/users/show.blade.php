@@ -28,24 +28,6 @@
                                 aria-describedby="emailHelp" value="{{ $user->status ? "Enabled":"Disabled" }}">
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">User Role</label>
-                            <input type="text" name="email" disabled class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" value="{{ $user->roles->first()->title }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">User Abilities</label>
-                            <input type="text" name="email" disabled class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp"
-                                value="{{ implode(', ',$user->getAbilities()->pluck('title')->toArray()) }}">
-                        </div>
-
-                        @if ($user->can('manage-users'))
-                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-secondary mb-1">Edit</a>
-                        @endif
-
-
                     </div>
                 </div>
 

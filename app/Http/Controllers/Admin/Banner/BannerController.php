@@ -107,7 +107,7 @@ class BannerController extends Controller
 
         Cache::forget('banners');
 
-        return redirect()->route('admin.banner.index')->with('status', 'Banner created successfully');
+        return redirect()->route('admin.banner.index')->with('status', 'Banner updated successfully');
     }
 
     /**

@@ -44,7 +44,7 @@
                                 <label for="exampleInputEmail1">Image <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="custom-file" wire:ignore>
-                                        <input wire:model="photo" type="file" accept=".jpg,.png,.jpeg,.gif,.webp"
+                                        <input wire:model="photo" type="file" 
                                             class="custom-file-input" name="image_file" id="inputGroupFile02">
                                         <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                     </div>
@@ -72,7 +72,7 @@
                                 <label for="exampleInputEmail1">Product Image <span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="custom-file" wire:ignore>
-                                        <input wire:model="product_photo" type="file" accept=".jpg,.png,.jpeg,.gif,.webp"
+                                        <input wire:model="product_photo" type="file" 
                                             class="custom-file-input" name="proimage_file" id="inputGroupFile03">
                                         <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
                                     </div>

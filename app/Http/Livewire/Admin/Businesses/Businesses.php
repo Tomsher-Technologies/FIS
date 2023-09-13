@@ -100,6 +100,10 @@ class Businesses extends PowerGridComponent
             ->addColumn('image', function (BusinessSettings $model) {
                 return '<img class="img_width" src="'. $model->getImage().'" alt="'.$model->image_alt.'"/>';
               })
+            ->addColumn('status', function (BusinessSettings $model) {
+                return ($model->status == 1) ? '<span class="badge badge-success">Enabled </span>' : '<span  class="badge badge-danger">Disabled</span>';
+            })
+
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', function (BusinessSettings $model) {
                 return $model->created_at ? Carbon::parse($model->created_at)->format('d/m/Y H:i') : '' ;
@@ -125,7 +129,7 @@ class Businesses extends PowerGridComponent
         return [
            
             Column::add()
-                ->title('ID')
+                ->title('Sl No')
                 ->field('id_inc', 'id')
                 ->searchable()
                 ->sortable(),
@@ -155,7 +159,7 @@ class Businesses extends PowerGridComponent
                 ->title('Status')
                 ->field('status')
                 ->makeBooleanFilter('status', 'Enabled', 'Disabled')
-                ->toggleable(true, 1, 0)
+                // ->toggleable(true, 1, 0)
                 ->sortable(),
 
             Column::add()

@@ -45,9 +45,9 @@
                                         <td> {{ $faq->title }}</td>
                                         <td> 
                                             @if($faq->status == 1)
-                                               <span class="success"> Enabled </span>
+                                               <span class="badge badge-success"> Enabled </span>
                                             @else
-                                                <span class="error"> Disabled </span>
+                                                <span class="badge badge-danger"> Disabled </span>
                                             @endif
                                             <!-- <input type="checkbox" id="switch" onChange="changeStatus({{ $faq->status }}, {{ $faq->id }})" name="some-switch" @if($faq->status == '1') checked  @else ''  @endif>
                                             <label class="switch-label" for="switch"></label> -->
@@ -119,8 +119,7 @@
     }
 
     function changeStatus(status,faqid){
-        alert(status);
-        alert(faqid);
+        
         Swal.fire({
             title: 'Are you sure?',
             text: "Do you want to change the status?",

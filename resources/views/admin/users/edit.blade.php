@@ -15,7 +15,7 @@
 
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.users.update', $user) }}">
+                        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
                             @csrf
                             @method('PATCH')
 
@@ -33,37 +33,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">User Role</label>
-                                <select name="role" class="form-control select2-single mb-3">
-                                    @foreach ($roles as $role)
-                                        <option {{ in_array($role->name, $userRoles) ? 'selected' : '' }}
-                                            value="{{ $role->name }}">{{ $role->title }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">User Abilities</label>
-                                <select name="ability[]" class="form-control select2-multiple mb-3" multiple required>
-                                    @foreach ($abilities as $ability)
-                                        <option {{ in_array($ability->id, $userAbilities) ? 'selected' : '' }}
-                                            value="{{ $ability->name }}">{{ $ability->title }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Status</label>
-                                <select name="status" class="form-control select2-single mb-3">
-                                    <option {{ old('status', $user->status) == '1' ? 'selected' : '' }} value="1">
-                                        Enabled
-                                    </option>
-                                    <option {{ old('status', $user->status) == '0' ? 'selected' : '' }} value="0">
-                                        Disabled
-                                    </option>
-                                </select>
+                                <label for="status">Status</label>
+                                <div class="form-group">
+                                    <input type="radio" name="status" id="status" class="radio" value="1" {{ old('status', $user->status) == '1' ? 'checked' : '' }}> <span class="ml-1 float-left">Enabled</span>
+                                    <input type="radio" name="status" id="status0" class="radio ml-2" value="0" {{ old('status', $user->status) == '0' ? 'checked' : '' }}> <span class="ml-1">Disabled</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -72,7 +46,7 @@
                                     placeholder="Password">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Comfirm Password</label>
+                                <label for="exampleInputPassword1">Confirm Password</label>
                                 <input type="password" name="password_confirmation" class="form-control"
                                     id="exampleInputPassword1" placeholder="Password">
                             </div>
@@ -98,6 +72,14 @@
 @push('header')
     <link rel="stylesheet" href="{{ getAdminAsset('css/vendor/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ getAdminAsset('css/vendor/select2-bootstrap.min.css') }}" />
+    <style>
+    .radio{
+        width: 1.2rem;
+        /* font-size: 39px; */
+        height: 1.2rem;
+        float: left;
+    }
+    </style>
 @endpush
 @push('footer')
     <script src="{{ getAdminAsset('js/vendor/select2.full.js') }}"></script>

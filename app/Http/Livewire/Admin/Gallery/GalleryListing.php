@@ -48,7 +48,7 @@ class GalleryListing extends Component
             $image->save();
         }
         $this->dispatchBrowserEvent('swal', [
-            'title' => 'Gallery Updated create',
+            'title' => 'Gallery Updated',
             'timer' => 3000,
             'icon' => 'success',
             'timerProgressBar' => true,

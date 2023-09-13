@@ -145,7 +145,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         // All Users 
         Route::resource('users', UserController::class);
-
+        Route::post('/delete-user', [UserController::class, 'destroy'])->name('delete-user');
         // Businesses
         Route::group(['prefix' => 'businesses', 'as' => 'businesses.'], function () {
             Route::get('/', function () {

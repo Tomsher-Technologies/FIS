@@ -39,14 +39,17 @@ class ClientEdit extends Component
 
         $this->client->save();
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Client updated',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Client updated',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
         $this->dispatchBrowserEvent('clear');
         $this->reset('photo');
+        session()->flash('message', 'Client successfully updated.');
+ 
+        return redirect()->route('admin.clients.index');
     }
 
     public function mount($client)

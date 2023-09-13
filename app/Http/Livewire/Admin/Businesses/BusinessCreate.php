@@ -51,12 +51,12 @@ class BusinessCreate extends Component
 
         $this->photo->storeAs('public/business', $iname);
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Successfully Created',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Successfully Created',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
@@ -66,6 +66,11 @@ class BusinessCreate extends Component
         $this->reset('image_alt');
         $this->reset('photo');
         $this->reset('status');
+
+        session()->flash('message', 'Successfully created.');
+ 
+        return redirect()->route('admin.businesses.index');
+
     }
 
     public function render()

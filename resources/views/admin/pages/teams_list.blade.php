@@ -55,9 +55,9 @@
                                         </td>
                                         <td> 
                                             @if($team->status == 1)
-                                               <span class="success"> Enabled </span>
+                                               <span class="badge badge-success"> Enabled </span>
                                             @else
-                                                <span class="error"> Disabled </span>
+                                                <span class="badge badge-danger"> Disabled </span>
                                             @endif
                                            
                                         </td>

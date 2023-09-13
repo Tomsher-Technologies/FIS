@@ -95,14 +95,17 @@ class BlogEdit extends Component
 
         Cache::forget('blogs');
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Blog updated',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Blog updated',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
         $this->dispatchBrowserEvent('clear');
         $this->reset('photo');
+        session()->flash('message', 'Blog successfully updated.');
+ 
+        return redirect()->route('admin.blog.index');
     }
 
     public function render()

@@ -34,12 +34,12 @@ class Create extends Component
             'status' => $this->status,
         ]);
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Career create',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Career create',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
         $this->dispatchBrowserEvent('clear', [
             'title' => 'Career create',
             'timer' => 3000,
@@ -50,6 +50,11 @@ class Create extends Component
         $this->reset('title');
         $this->reset('description');
         $this->reset('status');
+
+        session()->flash('message', 'Career successfully created.');
+ 
+        return redirect()->route('admin.career.index');
+
     }
 
     public function render()

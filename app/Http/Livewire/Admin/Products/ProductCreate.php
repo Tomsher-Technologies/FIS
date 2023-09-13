@@ -48,12 +48,12 @@ class ProductCreate extends Component
 
         $this->photo->storeAs('public/products', $iname);
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Product create',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Product create',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
@@ -61,6 +61,10 @@ class ProductCreate extends Component
         $this->reset('link');
         $this->reset('image_alt');
         $this->reset('photo');
+
+        session()->flash('message', 'Product successfully created.');
+ 
+        return redirect()->route('admin.products.index');
     }
 
     public function render()

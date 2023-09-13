@@ -18,12 +18,14 @@ use PowerComponents\LivewirePowerGrid\Rules\Rule;
 final class BlogListing extends PowerGridComponent
 {
     use ActionButton;
+    protected $index = 0;
 
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
     public string $sortField = 'id';
     
     public string $sortDirection = 'desc';
+    public array $perPageValues = [15, 30, 100, 0];
     protected function getListeners(): array
     {
         return array_merge(
@@ -43,7 +45,7 @@ final class BlogListing extends PowerGridComponent
     */
     public function setUp(): void
     {
-        $this->showPerPage()
+        $this->showPerPage(15)
             ->showSearchInput();
     }
 
@@ -94,12 +96,19 @@ final class BlogListing extends PowerGridComponent
     public function addColumns(): ?PowerGridEloquent
     {
         return PowerGrid::eloquent()
-            ->addColumn('id')
-            ->addColumn('title')
-            ->addColumn('created_at')
-            ->addColumn('created_at_formatted', function (Blog $model) {
-                return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
-            });
+                ->addColumn('id')
+                ->addColumn('id_inc', function () {
+                    return ++$this->index +  ($this->page - 1) * $this->perPage;
+                })
+                ->addColumn('title')
+                ->addColumn('status', function (Blog $model) {
+                    return ($model->status == 1) ? '<span class="badge badge-success">Enabled </span>' : '<span  class="badge badge-danger">Disabled</span>';
+                })
+    
+                ->addColumn('created_at')
+                ->addColumn('created_at_formatted', function (Blog $model) {
+                    return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
+                });
     }
 
     /*
@@ -121,20 +130,21 @@ final class BlogListing extends PowerGridComponent
         return [
             Column::add()
                 ->title('ID')
-                ->field('id')
+                ->field('id_inc', 'id')
                 ->searchable()
                 ->sortable(),
 
             Column::add()
                 ->title('Title')
                 ->field('title')
+                ->makeInputText('title')
                 ->searchable()
                 ->sortable(),
 
             Column::add()
                 ->title('Status')
                 ->field('status')
-                ->toggleable(true, 1, 0)
+                ->makeBooleanFilter('status', 'Enabled', 'Disabled')
                 ->sortable(),
 
             Column::add()

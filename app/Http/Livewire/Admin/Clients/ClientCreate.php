@@ -45,18 +45,22 @@ class ClientCreate extends Component
 
         $this->photo->storeAs('public/clients', $iname);
 
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Blog create',
-            'timer' => 3000,
-            'icon' => 'success',
-            'timerProgressBar' => true,
-        ]);
+        // $this->dispatchBrowserEvent('swal', [
+        //     'title' => 'Blog create',
+        //     'timer' => 3000,
+        //     'icon' => 'success',
+        //     'timerProgressBar' => true,
+        // ]);
 
         $this->dispatchBrowserEvent('clear');
 
         $this->reset('title');
         $this->reset('status');
         $this->reset('photo');
+        session()->flash('message', 'Client successfully created.');
+ 
+        return redirect()->route('admin.clients.index');
+
     }
 
 
