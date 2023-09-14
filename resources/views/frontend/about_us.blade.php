@@ -114,7 +114,7 @@
                     </div>
                     <div class="counter-content align-self-center">
                         <span class="timer" data-to="{{ $general[0]['happy_clients'] }}" data-speed="10000">{{ $general[0]['happy_clients'] }}</span>
-                        <label>Happy Clients</label>
+                        <label>Products</label>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="counter-content">
                         <span class="timer" data-to="{{ $general[0]['skilled_experts'] }}" data-speed="10000">{{ $general[0]['skilled_experts'] }}</span>
-                        <label>Skilled Experts</label>
+                        <label>Years of experience</label>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="counter-content">
                         <span class="timer" data-to="{{ $general[0]['finished_projects'] }}" data-speed="10000">{{ $general[0]['finished_projects'] }}</span>
-                        <label>Finished Projects</label>
+                        <label>Showrooms</label>
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="counter-content">
                         <span class="timer" data-to="{{ $general[0]['media_posts'] }}" data-speed="10000">{{ $general[0]['media_posts'] }}</span>
-                        <label>Media Posts</label>
+                        <label>Factories</label>
                     </div>
                 </div>
             </div>
