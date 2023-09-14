@@ -52,7 +52,7 @@
                         <p>
                         Call Us: {!! $callUs !!}<br>
                         Fax: {!! $fax !!} <br>
-                        Email: {{ $pageSettings['content2'] ?? '' }}
+                        Email: <a href="mailto:{{ $pageSettings['content2'] }}" class='phn-color'>{{ $pageSettings['content2'] ?? '' }}</a>
                         </p>
                     </div>
                 </div>
