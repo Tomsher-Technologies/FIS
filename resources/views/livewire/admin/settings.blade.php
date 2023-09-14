@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Phone Number</label>
+                            <label for="exampleInputEmail1">Phone Number <span class="text-info">(To add multiple numbers, enter the number with '/' symbol)</span></label>
                             <input class="form-control" type="text" wire:model='phone.value'>
                             @error('phone.value')
                                 <span class="error">{{ $message }}</span>
