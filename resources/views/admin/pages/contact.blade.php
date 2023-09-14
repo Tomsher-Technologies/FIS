@@ -44,10 +44,29 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Description<span class="text-danger">*</span></label>
+                                <label for="exampleInputEmail1">Address<span class="text-danger">*</span></label>
                                 <div wire:ignore>
-                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" ></textarea>
+                                    <textarea name="description" id="description" cols="30" rows="8" class="form-control" ></textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Contact Email<span class="text-danger">*</span></label>
+                                <input name="content2" id="content2" class="form-control" placeholder="Enter contact email"/>
+                            </div>
+
+                            <div class="form-group">
+                                <h5>Phone Numbers</h5>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Call Us<span class="text-danger">*</span> <span class="text-info">(To add multiple numbers, enter the number with '/' symbol)</span></label>
+                                <input name="title2" id="title2" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Fax<span class="text-danger">*</span> <span class="text-info">(To add multiple numbers, enter the number with '/' symbol)</span></label>
+                                <input name="title3" id="title3" class="form-control" />
                             </div>
 
                             @include('admin.common.seo_form')
@@ -67,12 +86,18 @@
    
     tinymce.init({
         selector: 'textarea#description',
-        height: 400,
+        height: 300,
+        setup: function (editor) {
+            editor.on('change', function () {
+                tinymce.triggerSave();
+            });
+        }
     });
    
 
     if ($("#contact_us").length > 0) {
         $("#contact_us").validate({
+            ignore: '',
             rules: {
                 title: {
                     required: true
@@ -85,7 +110,16 @@
                 },
                 description: {
                     required: true
-                },      
+                },  
+                title2: {
+                    required: true
+                },     
+                title3: {
+                    required: true
+                }, 
+                content2: {
+                    required: true
+                },
             },
             messages: {
                 title: {
@@ -98,7 +132,16 @@
                     required: "Please enter a Sub Title"
                 },   
                 description: {
-                    required: "Please enter Description"
+                    required: "Please enter Address"
+                },
+                title2: {
+                    required: "This field is required"
+                },
+                title3: {
+                    required: "This field is required"
+                },
+                content2: {
+                    required: "This field is required"
                 },
             },
             submitHandler: function(e) {
@@ -157,6 +200,7 @@
                     $('#title').val(returnedData[0].heading);
                     $('#seo_url').val(returnedData[0].seo_url);
                     $('#sub_title').val(returnedData[0].sub_heading);
+                    $('#description').html(returnedData[0].content);
                     tinymce.get("description").setContent(returnedData[0].content);
                     $('#heading2').val(returnedData[0].heading2);
                     $('#seotitle').val(returnedData[0].seo_title);
@@ -166,6 +210,9 @@
                     $('#og_description').val(returnedData[0].og_description);
                     $('#twitter_description').val(returnedData[0].twitter_description);
                     $('#seokeywords').val(returnedData[0].keywords);
+                    $('#title2').val(returnedData[0].title2);
+                    $('#title3').val(returnedData[0].title3);
+                    $('#content2').val(returnedData[0].content2);
                 }else{
                     $('#title,#seo_url,#sub_title,#seotitle,#ogtitle,#twtitle,#seodescription,#og_description,#twitter_description,#seokeywords').val('');
                    

@@ -101,51 +101,52 @@
         <div class="scroll ps">
 
             <ul class="list-unstyled" data-link="pages">
-                <li class="{{ (request()->routeIs('admin.page.services')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.services') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Services</span>
-                    </a>
-                </li>
-                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.privacy') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Privacy Policy & Terms</span>
-                    </a>
-                </li>
-                <li class="{{ (request()->routeIs('admin.page.faq') ||  request()->routeIs('admin.page.faq-create') ||  request()->routeIs('admin.page.faq-settings')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.faq') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Help & FAQ</span>
-                    </a>
-                </li>
+
                 <li class="{{ (request()->routeIs('admin.page.about-us') ) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.about-us') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">About Us</span>
                     </a>
                 </li>
-                <li class="{{ (request()->routeIs('admin.page.history')) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.history') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">History And Evolution</span>
-                    </a>
-                </li>
 
-                <li class="{{ (request()->routeIs('admin.page.mission-vision') ) ? 'active' : '' }}">
-                    <a href="{{ route('admin.page.mission-vision') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Mission & Vision</span>
-                    </a>
-                </li>
                 <li class="{{ (request()->routeIs('admin.page.awards')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.awards') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Awards & Accolades</span>
                     </a>
                 </li>
+
+                <li class="{{ (request()->routeIs('admin.page.contact')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.contact') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Contact Us</span>
+                    </a>
+                </li>
+
                 <li class="{{ (request()->routeIs('admin.page.directors')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.directors') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Directors & Management</span>
                     </a>
                 </li>
 
+                <li class="{{ (request()->routeIs('admin.page.faq') ||  request()->routeIs('admin.page.faq-create') ||  request()->routeIs('admin.page.faq-settings')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.faq') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Help & FAQ</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.history')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.history') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">History And Evolution</span>
+                    </a>
+                </li>
+
                 <li class="{{ (request()->routeIs('admin.page.home')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.home') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Home</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.mission-vision') ) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.mission-vision') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Mission & Vision</span>
                     </a>
                 </li>
 
@@ -158,6 +159,18 @@
                 <li class="{{ (request()->routeIs('admin.page.packaging')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.packaging') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Packaging</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.privacy') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Privacy Policy & Terms</span>
+                    </a>
+                </li>
+
+                <li class="{{ (request()->routeIs('admin.page.services')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.page.services') }}">
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Services</span>
                     </a>
                 </li>
 
