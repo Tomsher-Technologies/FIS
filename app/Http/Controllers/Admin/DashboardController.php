@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contacts;
+use App\Models\Enquiries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -12,9 +14,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $contactEnquiries = Contacts::count();
+        $productEnquiries = Enquiries::count();
         return view('admin.dashboard')->with([
-            'countNews' => 1,
-            'countEnquiry' => 1,
+            'productEnquiries' => $productEnquiries,
+            'contactEnquiries' => $contactEnquiries,
         ]);
     }
 
