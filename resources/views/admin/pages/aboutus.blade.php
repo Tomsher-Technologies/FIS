@@ -125,20 +125,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Happy Clients</label>
+                                <label for="exampleInputEmail1">Products</label>
                                 <input type="number" name="happy_clients" id="happy_clients" class="form-control" value="" />
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Skilled Experts</label>
+                                <label for="exampleInputEmail1">Years of experience</label>
                                 <input type="number" name="skilled_experts" id="skilled_experts" class="form-control" value="" />
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Finished Projects</label>
+                                <label for="exampleInputEmail1">Showrooms</label>
                                 <input type="number" name="finished_projects" id="finished_projects" class="form-control" value="" />
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Media Posts</label>
+                                <label for="exampleInputEmail1">Factories</label>
                                 <input type="number" name="media_posts" id="media_posts" class="form-control" value="" />
                             </div>
                             
