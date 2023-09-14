@@ -15,12 +15,45 @@
                     </div>
                 </div>
             </div>
+
+            @php  
+                $phns1 = [];
+                $callUs = $fax = '';
+                $phones1 = trim($pageSettings['title2']);
+                if($phones1 != ''){
+                    $phns1 = explode('/', $phones1);
+                    if(!empty($phns1)){
+                        $count1 = count($phns1)-1;
+                        foreach($phns1 as $k1 => $ph1){
+                            $slash1 = ($k1 != $count1) ? '/' : '';
+                            $callUs .=  "<a href='tel:".$ph1."' class='phn-color'>".$ph1."</a> ".$slash1;
+                        }
+                    }
+                }
+
+                $phones2 = trim($pageSettings['title3']);
+                if($phones2 != ''){
+                    $phns2 = explode('/', $phones2);
+                    if(!empty($phns2)){
+                        $count2 = count($phns2)-1;
+                        foreach($phns2 as $k2 => $ph2){
+                            $slash2 = ($k2 != $count2) ? '/' : '';
+                            $fax .=  "<a href='tel:".$ph2."' class='phn-color'>".$ph2."</a> ".$slash2;
+                        }
+                    }
+                }
+            @endphp
             <div class="row justify-content-lg-around position-relative pt-5">
                 <div class="col-lg-4 col-md-5 mb-4">
                     <div class="is-sticky">
                         <h4 class="mb-4">{{ $pageSettings['heading2'] ?? '' }}</h4>
                         
                         {!! $pageSettings['content'] ?? '' !!}
+                        <p>
+                        Call Us: {!! $callUs !!}<br>
+                        Fax: {!! $fax !!} <br>
+                        Email: {{ $pageSettings['content2'] ?? '' }}
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 pe-lg-5">
@@ -78,9 +111,12 @@
     <!--=================================
           contact Form info-->
 <style>
-.error{
-    color:red ;
-}
+    .error{
+        color:red ;
+    }
+    .phn-color{
+        color: #676c71 ;
+    }
 </style>
 @endsection
 

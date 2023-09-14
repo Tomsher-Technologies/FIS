@@ -82,7 +82,10 @@ class PageController extends Controller
                     'seo_description'    => $request->get("seodescription"),
                     'og_description'    => $request->get("og_description"),
                     'twitter_description'    => $request->get("twitter_description"),
-                    'keywords'    => $request->get("seokeywords")
+                    'keywords'    => $request->get("seokeywords"),
+                    'title2' => $request->get("title2"),
+                    'title3' => $request->get("title3"),
+                    'content2' => $request->get("content2"),
                 ]);
     }
 
