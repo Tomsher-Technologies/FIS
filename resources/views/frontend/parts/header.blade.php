@@ -23,8 +23,11 @@
                                       <i class="flaticon-phone"></i>
                                       <span>
                                           <label class="d-block">
-                                              <a
-                                                  href="tel:{{ str_replace(' ', '', getValueFromSetting($settings, 'phone')) }}">
+                                            @php  
+                                                $phones = getValueFromSetting($settings, 'phone');
+
+                                            @endphp
+                                              <a href="tel:{{ str_replace(' ', '', getValueFromSetting($settings, 'phone')) }}">
                                                   {{ getValueFromSetting($settings, 'phone') }}
                                               </a>
                                           </label>
@@ -280,7 +283,7 @@
                                   </ul>
                               </li>
                               <li class="nav-item">
-                                  <a href="{{ getSEOUrl('media_center') }}" class="nav-link">Media center</a>
+                                  <a href="{{ getSEOUrl('media_center') }}" class="nav-link me-0">Media center</a>
                               </li>
                               <li class="nav-item">
                                   <a href="{{ getSEOUrl('contact') }}" class="nav-link">Contact Us</a>
