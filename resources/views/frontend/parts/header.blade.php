@@ -104,8 +104,7 @@
                                                     </h6>
                                                     <ul class="list-unstyled mt-lg-3">
                                                         <li>
-                                                            <a href="{{ getSEOUrl('history') }}">History and
-                                                                Evolution
+                                                            <a href="{{ getSEOUrl('history') }}">Our History
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -118,25 +117,25 @@
                                                                 Mission
                                                             </a>
                                                         </li>
-                                                        <li>
+                                                        <!-- <li>
                                                             <a href="{{ getSEOUrl('awards') }}">Awards &
                                                                 Accolades
                                                             </a>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                                 <div class="col-sm-6 col-lg-2">
                                                     <h6 class="mb-3 nav-title text-primary">
-                                                        Leadership
+                                                        Our Team
                                                     </h6>
                                                     <ul class="list-unstyled mt-lg-3">
-                                                        <li>
+                                                        <!-- <li>
                                                             <a href="{{ getSEOUrl('directors') }}">Board of
                                                                 Directors
                                                             </a>
-                                                        </li>
+                                                        </li> -->
                                                         <li>
-                                                            <a href="{{ getSEOUrl('management') }}">Management
+                                                            <a href="{{ getSEOUrl('management') }}">Leadership
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -242,7 +241,7 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                    <h6 class="mb-3 nav-title text-primary">
+                                                    <!-- <h6 class="mb-3 nav-title text-primary">
                                                         Production
                                                     </h6>
                                                     <ul class="list-unstyled mt-lg-3">
@@ -253,7 +252,7 @@
                                                             <a href="{{ getSEOUrl('packaging') }}">Packaging
                                                             </a>
                                                         </li>
-                                                    </ul>
+                                                    </ul> -->
                                                 </div>
                                                 <div class="col-sm-6 col-lg-2">
                                                     <h6 class="mb-3 nav-title text-primary">

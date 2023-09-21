@@ -1,10 +1,10 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Board Of Directors & Management'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Leadership'])
 @section('content')
     <div class="container-fluid">
 
         <div class="row">
             <div class="col-12">
-                <h1>Board Of Directors & Management</h1>
+                <h1> Leadership</h1>
                 <div class="separator mb-5"></div>
             </div>
         </div>
@@ -26,8 +26,8 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Type<span class="text-danger">*</span></label>
                                 <select name="type" class="form-control  mb-3" onChange="getDataForEdit(this.value)">
-                                    <option value="directors">Board Of Directors</option>
-                                    <option value="management">Management </option>
+                                    <!-- <option value="directors">Board Of Directors</option> -->
+                                    <option value="management">Leadership </option>
                                 </select>
                             </div>
 
@@ -186,7 +186,7 @@
     });
 
     setTimeout(function(){
-        getDataForEdit('directors');
+        getDataForEdit('management');
     }, 500);
 
     

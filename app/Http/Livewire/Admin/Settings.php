@@ -26,7 +26,7 @@ class Settings extends Component
         'working_time.value' => 'required',
         'socialLinks.*.value' => 'required',
         'about_content.value' => 'required',
-        
+        'footer_content.value' => 'required',
     ];
 
     protected $messages = [
@@ -39,6 +39,7 @@ class Settings extends Component
         'email.value.email' => 'Email format is not valid',
         'socialLinks.*.value.required' => 'required',
         'about_content.value.required' => 'About content is required',
+        'footer_content.value.required' => 'Footer content is required',
     ];
 
     public function mount()
@@ -51,7 +52,7 @@ class Settings extends Component
         $this->working_time = $setting->where('name', 'working_time')->first();
 
         $this->about_content = $setting->where('name', 'about_content')->first();
-     
+        $this->footer_content = $setting->where('name', 'footer_content')->first();
         $this->socialLinks = $setting->where('group', 'social');
     }
 
@@ -65,7 +66,7 @@ class Settings extends Component
         $this->working_time->save();
 
         $this->about_content->save();
-
+        $this->footer_content->save();
         $this->socialLinks->each(function ($link) {
             $link->save();
         });

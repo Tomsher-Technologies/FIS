@@ -7,10 +7,7 @@
                         <div class="footer-contact-info">
                             <a href="{{ route('home') }}"><img class="img-fluid mb-4" src="{{ asset('images/logo_f.png') }}" alt="logo" /></a>
                             <p class="mb-2 mb-sm-4">
-                                We Are Experienced Professionals Who Understand
-                                That It Services Is Changing, And Are True
-                                Partners Who Care About Your Future Business
-                                Success.
+                               {{ getValueFromSetting($settings, 'footer_content'); }} 
                             </p>
 
                             <ul class="list-unstyled mb-0 social-icon">
@@ -39,15 +36,15 @@
                                 <li>
                                     <a href="{{ getSEOUrl('about_us') }}">About Company </a>
                                 </li>
-                                <li><a href="{{ getSEOUrl('history') }}">History</a></li>
+                                <li><a href="{{ getSEOUrl('history') }}">Our History</a></li>
                                 <li>
-                                    <a href="{{ getSEOUrl('mission_vision') }}">Vision & Mission</a>
+                                    <a href="{{ getSEOUrl('mission_vision') }}">Our Mission & Vision</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="{{ getSEOUrl('directors') }}">Board of Directors</a>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a href="{{ getSEOUrl('management') }}">Management</a>
+                                    <a href="{{ getSEOUrl('management') }}">Leadership</a>
                                 </li>
                             </ul>
                         </div>

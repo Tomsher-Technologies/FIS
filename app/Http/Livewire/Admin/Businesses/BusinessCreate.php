@@ -77,7 +77,7 @@ class BusinessCreate extends Component
     {
         return view('livewire.admin.businesses.business-create')->extends('layouts.admin.app', [
             'body_class' => '',
-            'title' => 'Create Agency/Catalogue/Material'
+            'title' => 'Create Agency/Catalogue'
         ]);
     }
 

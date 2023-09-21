@@ -108,11 +108,11 @@
                     </a>
                 </li>
 
-                <li class="{{ (request()->routeIs('admin.page.awards')) ? 'active' : '' }}">
+                <!-- <li class="{{ (request()->routeIs('admin.page.awards')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.awards') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Awards & Accolades</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="{{ (request()->routeIs('admin.page.contact')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.contact') }}">
@@ -122,7 +122,7 @@
 
                 <li class="{{ (request()->routeIs('admin.page.directors')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.directors') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Directors & Management</span>
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Leadership</span>
                     </a>
                 </li>
 
@@ -134,7 +134,7 @@
 
                 <li class="{{ (request()->routeIs('admin.page.history')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.history') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">History And Evolution</span>
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Our History</span>
                     </a>
                 </li>
 
@@ -156,11 +156,11 @@
                     </a>
                 </li>
 
-                <li class="{{ (request()->routeIs('admin.page.packaging')) ? 'active' : '' }}">
+                <!-- <li class="{{ (request()->routeIs('admin.page.packaging')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.packaging') }}">
                         <i class="simple-icon-doc"></i> <span class="d-inline-block">Packaging</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="{{ (request()->routeIs('admin.page.privacy') ||  request()->routeIs('admin.page.privacy')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.privacy') }}">
