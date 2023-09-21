@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Artisan;
+use Cache;
 
 class DashboardController extends Controller
 {
@@ -55,5 +57,11 @@ class DashboardController extends Controller
                 'location' => url($name)
             ]
         );
+    }
+
+    function clearCache(Request $request)
+    {
+        Artisan::call('cache:clear');
+        return back();
     }
 }
