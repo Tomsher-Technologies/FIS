@@ -49,7 +49,7 @@
                                             @if($team->type == 'director')
                                                <span class=""> Board Of Director </span>
                                             @else
-                                                <span class=""> Management </span>
+                                                <span class=""> Leadership </span>
                                             @endif
                                            
                                         </td>

@@ -22,13 +22,13 @@
                     <div class="col-12 d-flex justify-content-center">
                         <ul class="nav">
                             <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('about_us') }}">About Us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('history') }}">History and Evolution</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('mission_vision') }}">Vision & Mission</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('awards') }}">Awards & Accolades</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('history') }}">Our History</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('mission_vision') }}">Our Mission & Vision</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('awards') }}">Awards & Accolades</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('directors') }}">Board of Directors</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('management') }}">Management</a></li>
+                            </li> -->
+                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('management') }}">Leadership</a></li>
                         </ul>
                     </div>
                 </div>

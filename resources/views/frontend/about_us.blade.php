@@ -22,13 +22,13 @@
                 <div class="col-12 d-flex justify-content-center">
                     <ul class="nav">
                         <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('about_us') }}">About Us</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('history') }}">History and Evolution</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('mission_vision') }}">Vision & Mission</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('awards') }}">Awards & Accolades</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('directors') }}">Board of Directors</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('management') }}">Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('history') }}">Our History</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('mission_vision') }}">Our Mission & Visionn</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('awards') }}">Awards & Accolades</a>
+                        </li> -->
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('directors') }}">Board of Directors</a>
+                        </li> -->
+                        <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('management') }}">Leadership</a></li>
                     </ul>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                         <i class="flaticon-emoji"></i>
                     </div>
                     <div class="counter-content align-self-center">
-                        <span class="timer" data-to="{{ $general[0]['happy_clients'] }}" data-speed="10000">{{ $general[0]['happy_clients'] }}</span>
+                        <span class="timer float-left" data-to="{{ $general[0]['happy_clients'] }}" data-speed="10000">{{ $general[0]['happy_clients'] }} </span><span class="symbol">+</span>
                         <label>Products</label>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <i class="flaticon-trophy"></i>
                     </div>
                     <div class="counter-content">
-                        <span class="timer" data-to="{{ $general[0]['skilled_experts'] }}" data-speed="10000">{{ $general[0]['skilled_experts'] }}</span>
+                        <span class="timer float-left"  data-to="{{ $general[0]['skilled_experts'] }}" data-speed="10000">{{ $general[0]['skilled_experts'] }} </span><span class="symbol">+</span>
                         <label>Years of experience</label>
                     </div>
                 </div>
@@ -186,6 +186,24 @@
 <!--=================================
     Client Logo -->
 @endsection
+
+@push('header')
+<style>
+.symbol{
+    color: #0d4ea2;
+    font-size: 25px;
+    line-height: 36px;
+    font-weight: 700;
+    /* font-family: "Archivo", sans-serif; */
+    /* color: #ffffff; */
+    margin-bottom: 10px;
+    display: block;
+}
+.float-left{
+    float : left !important;
+}
+</style>
+@endpush
 
 @push('footer')
 <script src="{{ asset('js/horizontal-timeline/horizontal-timeline.js') }}"></script>

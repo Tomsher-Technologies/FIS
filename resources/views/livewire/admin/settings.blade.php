@@ -50,6 +50,14 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Footer Content</label>
+                            <input class="form-control" type="text" wire:model='footer_content.value'>
+                            @error('footer_content.value')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
                     
 
                         <button type="submit" class="btn btn-primary mb-0">Submit</button>

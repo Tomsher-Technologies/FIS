@@ -70,7 +70,7 @@ class BusinessEdit extends Component
     {
         return view('livewire.admin.businesses.business-edit')->extends('layouts.admin.app', [
             'body_class' => '',
-            'title' => 'Edit Agency/Catalogue/Material'
+            'title' => 'Edit Agency/Catalogue'
         ]);
     }
 

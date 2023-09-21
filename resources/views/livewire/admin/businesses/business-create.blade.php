@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1>Create Agency/Catalogue/Material</h1>
+                <h1>Create Agency/Catalogue</h1>
                 <div class="text-zero top-right-button-container">
                     <a href="{{ route('admin.businesses.index') }}" class="btn btn-primary btn-lg top-right-button mr-1">Go Back To List</a>
                 </div>
@@ -34,9 +34,9 @@
                                     <option {{ old('btype') == "agencies_catalogue" ? 'selected' : '' }} value="agencies_catalogue">
                                         Agencies Catalogue
                                     </option>
-                                    <option {{ old('btype') == "material" ? 'selected' : '' }} value="material">
+                                    <!-- <option {{ old('btype') == "material" ? 'selected' : '' }} value="material">
                                         Material
-                                    </option>
+                                    </option> -->
                                 </select>
                                 @error('type')
                                     <div class="alert alert-danger">{{ $message }}</div>

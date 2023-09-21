@@ -22,13 +22,13 @@
                     <div class="col-12 d-flex justify-content-center">
                         <ul class="nav">
                             <li class="nav-item"><a class="nav-link " href="{{ getSEOUrl('about_us') }}">About Us</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('history') }}">History and Evolution</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('mission_vision') }}">Vision & Mission</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('awards') }}">Awards & Accolades</a>
+                            <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('history') }}">Our History</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('mission_vision') }}">Our Mission & Vision</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('awards') }}">Awards & Accolades</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('directors') }}">Board of Directors</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('management') }}">Management</a></li>
+                            </li> -->
+                            <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('management') }}">Leadership</a></li>
                         </ul>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center">
                 <div class="col-md-10">
                     <div class="cd-horizontal-timeline">
                         <div class="timeline">
@@ -67,16 +67,16 @@
                                     </ul>
                                     <span class="filling-line" aria-hidden="true"></span>
                                 </div>
-                                <!-- .events -->
+                               
                             </div>
-                            <!-- .events-wrapper -->
+                           
                             <ul class="cd-timeline-navigation">
                                 <li><a href="#0" class="prev inactive"></a></li>
                                 <li><a href="#0" class="next"></a></li>
                             </ul>
-                            <!-- .cd-timeline-navigation -->
+                           
                         </div>
-                        <!-- .timeline -->
+                        
                         <div class="events-content">
                             <ul>
                                 @foreach($history as $key=>$hisYear)
@@ -101,10 +101,10 @@
                                
                             </ul>
                         </div>
-                        <!-- .events-content -->
+                       
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <!--=================================

@@ -348,26 +348,26 @@ class PageController extends Controller
        
         $this->savePageSettings($data);
 
-        $year = $request->year;
-        $year_heading = $request->year_heading;
-        $year_sub_heading = $request->year_sub_heading;
-        $year_content = $request->year_content;
-        for($count = 0; $count < count($year); $count++)
-        {
-            if($year[$count] != ''){
-                $dataHis = array(
-                    'year' => $year[$count],
-                    'heading'  => $year_heading[$count],
-                    'sub_heading'  => $year_sub_heading[$count],
-                    'content'  => $year_content[$count],
-                    'created_at' => now()
-                );
-                $insert_data[] = $dataHis; 
-            }
-        }
+        // $year = $request->year;
+        // $year_heading = $request->year_heading;
+        // $year_sub_heading = $request->year_sub_heading;
+        // $year_content = $request->year_content;
+        // for($count = 0; $count < count($year); $count++)
+        // {
+        //     if($year[$count] != ''){
+        //         $dataHis = array(
+        //             'year' => $year[$count],
+        //             'heading'  => $year_heading[$count],
+        //             'sub_heading'  => $year_sub_heading[$count],
+        //             'content'  => $year_content[$count],
+        //             'created_at' => now()
+        //         );
+        //         $insert_data[] = $dataHis; 
+        //     }
+        // }
       
-        HistoryDetails::truncate();
-        HistoryDetails::insert($insert_data);
+        // HistoryDetails::truncate();
+        // HistoryDetails::insert($insert_data);
     }
 
     public function awards()

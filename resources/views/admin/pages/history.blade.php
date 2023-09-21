@@ -1,10 +1,10 @@
-@extends('layouts.admin.app', ['body_class' => '', 'title' => 'History And Evolution'])
+@extends('layouts.admin.app', ['body_class' => '', 'title' => 'Our History'])
 @section('content')
     <div class="container-fluid">
 
         <div class="row">
             <div class="col-12">
-                <h1>History And Evolution</h1>
+                <h1>Our History</h1>
                 <div class="separator mb-5"></div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                                 <textarea name="description" id="description" cols="30" rows="10" class="form-control" > </textarea>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="exampleInputEmail1">History Details<span class="text-danger">*</span></label>
                                 
                                 <table class="table table-bordered table-striped" id="user_table">
@@ -91,7 +91,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> -->
 
                             @include('admin.common.seo_form')
 

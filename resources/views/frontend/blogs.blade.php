@@ -25,13 +25,13 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="blog-post">
                             <div class="blog-post-image">
-                                <img class="img-fluid blog-img" src="{{asset($blg->image)}}" alt="">
+                                <a href="{{ route('blog-details',['id' => $blg->slug]) }}"><img class="img-fluid blog-img" src="{{asset($blg->image)}}" alt=""></a>
                             </div>
                             <div class="blog-post-content">
                                 <div class="blog-post-info">
                                 <!-- blog-post-date -->
                                     <div class="">
-                                        <a href="#">{{ date('M d, Y', strtotime($blg->created_at)) }}</a>
+                                        <a href="{{ route('blog-details',['id' => $blg->slug]) }}">{{ date('M d, Y', strtotime($blg->created_at)) }}</a>
                                     </div>
                                 </div>
                                 <div class="blog-post-details">
