@@ -54,6 +54,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         // Search in dashboard
         Route::get('/search', [DashboardController::class, 'search'])->name('search');
+        Route::get('/cache-cache', [DashboardController::class, 'clearCache'])->name('cache.clear');
 
         // Logged-in user profile
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

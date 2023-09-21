@@ -45,10 +45,9 @@
                 </div>
             </div> --}}
 
-            <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
-                <i class="simple-icon-size-fullscreen"></i>
-                <i class="simple-icon-size-actual"></i>
-            </button>
+            <a href="{{ route('admin.cache.clear')}}" class="btn btn-info d-none d-sm-inline-block" id="">
+                Clear Cache
+            </a>
 
         </div>
 
