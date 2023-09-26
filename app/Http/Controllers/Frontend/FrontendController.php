@@ -305,7 +305,7 @@ class FrontendController extends Controller
         TwitterCard::setTitle($model->page_name);
 
         if (isset($model->moudels[0])) {
-            SEOMeta::setTitle($model->moudels[0]->seo_title);
+            SEOMeta::setTitle($model->moudels[0]->seo_title ?? $model->page_name);
             SEOMeta::setDescription($model->moudels[0]->seo_description);
             SEOMeta::addKeyword($model->moudels[0]->keywords);
 
