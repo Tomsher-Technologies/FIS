@@ -7,7 +7,7 @@
                         <div class="footer-contact-info">
                             <a href="{{ route('home') }}"><img class="img-fluid mb-4" src="{{ asset('images/logo_f.png') }}" alt="logo" /></a>
                             <p class="mb-2 mb-sm-4">
-                               {{ getValueFromSetting($settings, 'footer_content'); }} 
+                               {{ getValueFromSetting($settings, 'footer_content') }} 
                             </p>
 
                             <ul class="list-unstyled mb-0 social-icon">
