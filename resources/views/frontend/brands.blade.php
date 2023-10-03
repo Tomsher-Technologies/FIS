@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="case-study-info">
                                         <a class="case-study-title fw-bold" href="#">{{ $bd->title }}</a>
-                                        <p class="mt-2">{!! $bd->description !!}</p>
+                                        
                                     </div>
                                 </div>
                             </div>

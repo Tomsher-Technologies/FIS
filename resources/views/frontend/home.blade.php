@@ -223,7 +223,7 @@
                                         <div class="case-study-info">
                                             <span class="case-study-title fw-bold" >{{ $brd->title }}</span>
                                             <!-- <a class="case-study-services" href="#">Sports</a> -->
-                                            <p class="mt-2">{!! $brd->description !!}</p>
+                                            
                                             <!-- <a href="#" class="icon-btn"><i class="fas fa-long-arrow-alt-right"></i></a> -->
                                         </div>
                                     </div>
