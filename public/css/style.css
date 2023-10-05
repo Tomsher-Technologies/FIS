@@ -9433,6 +9433,9 @@ label>span {
     font-size: 16px !important;
     font-weight: 700 !important;
 }
+.main-category:hover{
+  color: #ffffff !important;
+}
 .sortBy{
   border-radius: 1.5rem;
   padding: 11px 40px 11px;

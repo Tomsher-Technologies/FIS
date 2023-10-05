@@ -8,9 +8,7 @@
                         <a href="{{ route('product-details',['sku' => $prod['sku'], 'slug' => $prod['slug']]) }}"> <img class="img-fluid" src="{{ env('API_IMAGE_URL').$prod['image'] }}"
                                 alt="image"></a>
                         <div class="custom-icon">
-                            <ul class="list-unstyled">
-                                <li class="discount">@if($prod['offerPercentage'] != '' || $prod['offerPercentage'] != 0) {{ $prod['offerPercentage'] }}% OFF @endif</li>
-                            </ul>
+                           
                         </div>
                     </div>
                     <div class="product-content">
@@ -20,8 +18,19 @@
                                     </a></h4>
                             </div>
                         </div>
-                        <div class="product-prize">
-                            <p><span class="me-2">{{ $prod['originalPrice'] }}</span>{{ $prod['offerPrice'] }}</p>
+                        <div class="product-prize pt-4">
+                            <div class="widget block block-static-block">
+                                <a class="btn btn-info custom-btn getEnquiryModal"
+                                    style="background-color: #084B85; color: #FFFFFF;border: 1px solid #084B85;"
+                                    alt="Make an Enquiry" title="Make an Enquiry" data-toggle="modal"
+                                    id="" data-proname="{{ $prod['name'] }}"  data-img="{{ asset(env('API_IMAGE_URL').$prod['image']) }}" data-sku="{{ $prod['sku'] }}">
+                                    Make an Enquiry
+                                </a>
+
+                                <a class="btn btn-primary custom-btn"
+                                    href="{{ env('SITE_LINK').'product/'.$prod['sku'].'/'.$prod['slug'] }}"
+                                    target="_blank"> <span> Buy Online </span> </a>
+                            </div>
                         </div>
                     </div>
                 </div>
