@@ -294,10 +294,6 @@
         var proname = $(this).attr('data-proname');
         var sku = $(this).attr('data-sku');
 
-        console.log(image);
-        console.log(proname);
-        console.log(sku);
-
         $('#product_image').attr('src',image);
         $('#product_name').html(proname);
         $('#sku').val(sku);
