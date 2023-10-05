@@ -48,32 +48,15 @@
                     </div>
                     <div class="col-lg-7">
                         <div class="product-detail">
-                            <div class="product-rating d-flex mb-3 align-items-center">
-                                {!! star_rating($result['rating']) !!}
-
-                                <a href="#" class="text-dark ms-3" rel="nofollow"><span
-                                        class="count">{{ $result['totalReviews']}}</span>
-                                    reviews</a>
-                            </div>
+                          
                             <h2 class="mb-4">{{ $result['name'] }}
                             </h2>
                             <div class="no-stock row">
                                 <p class="pd-no col-sm-4">SKU.<span>{{ $result['sku'] }}</span></p>
-                                <p class="stock-qty col-sm-4"><span>{{ $result['stockStatus'] }}</span></p>
-                                <!-- <p class=" col-sm-4"><span class="no-rating">No ratings</span></p> -->
+                                
                             </div>
                             <div class="product-price-rating">
-                                <div class="product-prize d-flex">
-                                    <p>
-                                        <span class="me-2 org-price">{{ $result['originalPrice'] }}</span>
-                                        {{ $result['offerPrice'] }}
-                                    </p>
-                                    <p class="off-percentage">
-                                        @if($result['offerPercentage'] != '' || $result['offerPercentage'] != 0)
-                                        <span class="discount fs-14">{{ $result['offerPercentage'] }}% OFF</span>
-                                        @endif
-                                    </p>
-                                </div>
+                               
                             </div>
 
                             @if($result['productAttributes'])

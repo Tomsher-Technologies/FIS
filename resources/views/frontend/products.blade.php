@@ -106,143 +106,7 @@
                                     @endif
                                 @endforeach
                             @endif
-                            <!-- <div class="widget">
-                                <div class="widget-title">
-                                    <h5>Discount</h5>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label form-label" for="customCheck2">10%-20%</label>
-                                    <span>(52)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                    <label class="custom-control-label form-label" for="customCheck7">15%-25%</label>
-                                    <span>(23)</span>
-                                </div>
-                            </div> -->
-                            <!-- <div class="widget">
-                                <div class="widget-title">
-                                    <h5>Filter by color</h5>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label form-label" for="customCheck2">Black,
-                                        brown</label>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label form-label" for="customCheck3">Blue</label>
-                                    <span>(1)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label form-label" for="customCheck4">Dark
-                                        grey</label>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                    <label class="custom-control-label form-label" for="customCheck5">Pink</label>
-                                    <span>(3)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                    <label class="custom-control-label form-label" for="customCheck6">Green</label>
-                                    <span>(1)</span>
-                                </div>
-                            </div>
-                            <div class="widget">
-                                <div class="widget-title">
-                                    <h5>Filter by Type
-                                    </h5>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label form-label" for="customCheck2">Desk
-                                        Sets</label>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label form-label" for="customCheck3">11 Pieces
-                                        Executive Desk Set</label>
-                                    <span>(1)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label form-label" for="customCheck4">11-Piece FIS
-                                        Executive Desk Set</label>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                    <label class="custom-control-label form-label" for="customCheck5">Desk
-                                        Set</label>
-                                    <span>(3)</span>
-                                </div>
-                            </div>
-                            <div class="widget">
-                                <div class="widget-title">
-                                    <h5>Filter by Items Included
-                                    </h5>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label form-label" for="customCheck2">Desk
-                                        Blotter</label>
-                                    <span>(2)</span>
-                                </div>
-                            </div>
-                            <div class="widget">
-                                <div class="widget-title">
-                                    <h5>Filter by Material
-                                    </h5>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label form-label" for="customCheck2">Bonded Leather
-                                    </label>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label form-label" for="customCheck3">Aluminium &
-                                        Wood</label>
-                                    <span>(1)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label form-label" for="customCheck4">Italian
-                                        PU</label>
-                                    <span>(2)</span>
-                                </div>
-                            </div>
-                            <div class="widget">
-                                <div class="widget-title">
-                                    <h5>Filter by Number of items
-                                    </h5>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label form-label" for="customCheck2">9 PIECES SET
-                                    </label>
-                                    <span>(2)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label form-label" for="customCheck3">8 PIECES SET
-                                    </label>
-                                    <span>(1)</span>
-                                </div>
-                                <div class="custom-control form-check custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label form-label" for="customCheck4">2 PIECES
-                                        SET</label>
-                                    <span>(2)</span>
-                                </div>
-                            </div> -->
+                          
                         </div>
                     </div>
                 </div>
@@ -274,11 +138,7 @@
                                 <a href="{{ route('product-details',['sku' => $prod['sku'], 'slug' => $prod['slug']]) }}"> <img class="img-fluid" src="{{ env('API_IMAGE_URL').$prod['image'] }}"
                                         alt="image"></a>
                                 <div class="custom-icon">
-                                    <ul class="list-unstyled">
-                                    @if($prod['offerPercentage'] != '' || $prod['offerPercentage'] != 0) 
-                                    <li class="discount">{{ $prod['offerPercentage'] }}% OFF </li>
-                                    @endif
-                                    </ul>
+                                    
                                 </div>
                             </div>
                             <div class="product-content">
@@ -288,8 +148,19 @@
                                             </a></h4>
                                     </div>
                                 </div>
-                                <div class="product-prize">
-                                    <p><span class="me-2">{{ $prod['originalPrice'] }}</span>{{ $prod['offerPrice'] }}</p>
+                                <div class="product-prize pt-4">
+                                    <div class="widget block block-static-block">
+                                        <a class="btn btn-info custom-btn getEnquiryModal"
+                                            style="background-color: #084B85; color: #FFFFFF;border: 1px solid #084B85;"
+                                            alt="Make an Enquiry" title="Make an Enquiry" data-toggle="modal"
+                                            id="" data-proname="{{ $prod['name'] }}"  data-img="{{ asset(env('API_IMAGE_URL').$prod['image']) }}" data-sku="{{ $prod['sku'] }}">
+                                            Make an Enquiry
+                                        </a>
+
+                                        <a class="btn btn-primary custom-btn"
+                                            href="{{ env('SITE_LINK').'product/'.$prod['sku'].'/'.$prod['slug'] }}"
+                                            target="_blank"> <span> Buy Online </span> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -297,6 +168,9 @@
                 @endforeach  
         </div>
         <div class="row">
+            <div class="col-12 text-center mt-4" id="nodata">
+
+            </div>
             @if($result['totalCount'] >= $result['limit'])
                 <div class="col-12 text-center mt-4" id="loadButton">
                     <div class="text-center" id="loadMoreDiv">
@@ -318,9 +192,77 @@
             @endif
         </div>
         @else
-       
+            <div class="row">
+                <div class="col-12 text-center mt-4">
+                    <img src="{{ asset('images/no-product.png')}}" alt=''><h4>No products Found</h4>
+                </div>
+            </div>
         @endif
     </div>
+
+    <div class="modal fade" id="enquiryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" data-role="title"> Make an Enquiry </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 d-flex" style="height: 125px;">
+                        <div class="col-sm-2 text-center">
+                            <img class="img-fluid h-100 " id="product_image" src=""
+                                        alt="">
+                        </div>
+                        <div class="col-sm-10 product-name ml-20" id="product_name">
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <span class="ajax-response"></span>
+                        <form class="" id="contact-form-new" action="#" method="POST" autocomplete="off">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Name<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label mt-1">Email<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="email" name="email" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label mt-1">Phone Number<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="company" class="form-label mt-1">Company Name</label>
+                                <input type="text" class="form-control" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label mt-1">Message <span class="required">*</span></label>
+                                <textarea class="form-control" rows="5" id="message" name="message"></textarea>
+                                
+                            </div>
+                            <div class="form-group mt-3 text-center">
+                                <button type="submit" class="btn btn-primary"  id="contact-button">Send Massage</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            </div>   
+                            
+                        </form>
+                        <input type="hidden" name="sku" id="sku" value="">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+               
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
 </section>
 <!--=================================
       product -->
@@ -328,10 +270,89 @@
 
 @push('header')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<style>
+    .custom-btn{
+        padding:10px 10px !important;
+    }
+    .product-name{
+        font-size: 14px;
+        color: #0d5dab;
+        font-weight: 700;
+        margin: auto;
+    }
+</style>
 @endpush
 
 @push('footer')
+<script src="{{ getAdminAsset('js/vendor/jquery.validate/jquery.validate.min.js') }}"></script>
 <script>
+
+    $(document).on('click', '.getEnquiryModal', function() {
+        $("#contact-form-new")[0].reset();
+
+        var image = $(this).attr('data-img');
+        var proname = $(this).attr('data-proname');
+        var sku = $(this).attr('data-sku');
+
+        console.log(image);
+        console.log(proname);
+        console.log(sku);
+
+        $('#product_image').attr('src',image);
+        $('#product_name').html(proname);
+        $('#sku').val(sku);
+
+        $('label.error').remove();
+        $(".ajax-response").html("");
+        $('#enquiryModal').modal('show');
+    });
+
+    $("#contact-form-new").validate({
+        rules: {
+            name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email:true
+            },  
+            phone: {
+                required: true
+            },  
+            message: {
+                required: true
+            },     
+        },
+        
+        submitHandler: function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#submit').html('Please Wait...');
+            $("#submit"). attr("disabled", true);
+            $.ajax({
+                url: "{{ route('enquiry-save')}}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "name": $('#name').val(),
+                    "sku": $('#sku').val(),
+                    "email": $('#email').val(),
+                    "phone": $('#phone').val(),
+                    "company": $('#company').val(),
+                    "message": $('#message').val()
+                },
+                success: function(response) {
+                    $("#contact-form-new")[0].reset();
+                    $(".ajax-response").html("<div class='alert alert-success'>THANK YOU FOR GETTING IN TOUCH. OUR TEAM WILL CONTACT YOU SHORTLY.</div>");
+                }
+            });
+        }
+    })
+
+
     let page = 1;
   
     $(document).on('click','.load-more-data',function(){
@@ -406,8 +427,9 @@
                     }
                 }else{
                     $("#productsList").html(resData.html);
+                    $('#nodata').html("");
                     if (resData.html == '') {
-                        $('#loadMoreDiv').html("<img src='{{ asset('images/no-product.png')}}' alt=''><h4>No products Found</h4>");
+                        $('#nodata').html("<img src='{{ asset('images/no-product.png')}}' alt=''><h4>No products Found</h4>");
                     }
                 }
                 
