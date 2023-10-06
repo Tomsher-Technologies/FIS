@@ -9490,7 +9490,8 @@ span.free_delivery {
   -webkit-animation: animateBg 2s linear infinite;
   animation: animateBg 2s linear infinite;
   background-image: linear-gradient(90deg,#ff5722,#f10,#db5779,#ff5722,red);
-  background-size: 400% 100%
+  background-size: 400% 100%;
+  color: white !important;
 }
 
 @-webkit-keyframes animateBg {
