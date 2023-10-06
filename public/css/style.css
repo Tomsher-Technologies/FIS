@@ -9512,3 +9512,9 @@ span.free_delivery {
       background-position: 100% 0
   }
 }
+
+.custom-btn {
+  padding: 10px 17px !important;
+  font-size: 12px;
+  margin-right: 4px;
+}
