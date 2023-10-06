@@ -65,7 +65,7 @@
 
                             @if ($brand->product_image)
                                 <label for="exampleInputEmail1">Current Product Image</label>
-                                <img class="w-50 d-block mb-3" src="{{ $brand->getProductImage() }}" alt="">
+                                <img class="w-50 d-block mb-3" src="{{ asset($brand->getProductImage()) }}" alt="">
                             @endif
 
                             <div class="form-group">
