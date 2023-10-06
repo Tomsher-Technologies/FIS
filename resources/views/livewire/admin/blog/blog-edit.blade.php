@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="col-12">
-                <h1>Edit Blog</h1>
+                <h1>Edit News</h1>
                 <div class="separator mb-5"></div>
             </div>
         </div>
