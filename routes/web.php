@@ -21,7 +21,7 @@ Route::fallback([FrontendController::class, 'catchAll']);
 
 Route::post('/contact-save', [FrontendController::class, 'postContact'])->name('contact-save');
 Route::post('/enquiry-save', [FrontendController::class, 'postEnquiry'])->name('enquiry-save');
-Route::get('/blog-details/{id}', [FrontendController::class, 'blog_details'])->name('blog-details');
+Route::get('/news-details/{id}', [FrontendController::class, 'blog_details'])->name('blog-details');
 
 Route::get('/products/{category?}', [ProductsController::class, 'getProductsList'])->name('products');
 Route::get('/product/{sku}/{slug}', [ProductsController::class, 'getProductDetails'])->name('product-details');

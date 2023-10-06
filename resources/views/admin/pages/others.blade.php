@@ -27,7 +27,7 @@
                                 <label for="exampleInputEmail1">Page Type<span class="text-danger">*</span></label>
                                 <select name="type" class="form-control  mb-3" onChange="getDataForEdit(this.value)">
                                     <option value="agencies">Agencies</option>
-                                    <option value="blogs">Blogs </option>
+                                    <option value="news">News </option>
                                     <option value="brands">Brands </option>
                                     <option value="careers">Careers </option>
                                     <!-- <option value="materials">Materials </option> -->

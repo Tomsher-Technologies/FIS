@@ -102,7 +102,7 @@
                         <div class="feature-info-content">
                             <h4 class="mb-3 fw-normal feature-info-title">Latest News</h4>
                             <p>{{ $general[0]['latest_news']['content'] }}</p>
-                            <a href="{{ getSEOUrl('blogs') }}" class="btn btn-primary-round btn-round text-white">Read Articles<i
+                            <a href="{{ getSEOUrl('news') }}" class="btn btn-primary-round btn-round text-white">Read Articles<i
                                     class="fas fa-arrow-right ps-3"></i></a>
                         </div>
                     </div>
