@@ -296,8 +296,9 @@
                                     <a href="{{ getSEOUrl('contact') }}" class="nav-link">Contact Us</a>
                                 </li>
                             </ul>
-                            <span class="free_delivery">FREE DELIVERY ABOVE AED 100</span>
-                            <div class="d-none d-lg-flex ms-md-auto">
+                            <span class="free_delivery me-5 ms-md-auto">FREE DELIVERY ABOVE AED 100</span>
+
+                            <div class="d-none d-lg-flex ">
                                 <a class="btn btn-dark btn-round text-white d-flex align-items-center shop-btn" href="#"
                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                     aria-controls="offcanvasRight">

@@ -100,7 +100,7 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-primary mb-0">Update</button>
+                            <button wire:loading.attr="disabled" type="submit" class="btn btn-primary mb-0">Update</button>
                         </form>
                     </div>
                 </div>
