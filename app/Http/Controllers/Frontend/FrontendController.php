@@ -486,10 +486,10 @@ class FrontendController extends Controller
                     ]);
     }
 
-    public function blogs($page){
+    public function news($page){
         // $page->load(['seo']);
         $this->loadSEO($page);
-        $pageSettings = getPageDetails('blogs');
+        $pageSettings = getPageDetails('news');
         $pageSettings = $pageSettings[0] ?? [];
         $blogs = Blog::where('status',1)->orderBy('id','desc')->paginate(15);
         return view('frontend.blogs')
@@ -530,7 +530,7 @@ class FrontendController extends Controller
             $this->loadBlogSEO($blog[0]);
         }
         
-        $pageSettings = getPageDetails('blogs');
+        $pageSettings = getPageDetails('news');
         $pageSettings = $pageSettings[0] ?? [];
         
         return view('frontend.blog_details')

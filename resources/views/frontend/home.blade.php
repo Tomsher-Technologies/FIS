@@ -375,7 +375,7 @@
                         @foreach ($blog_second as $item)
                             <div class="blog-post mb-4">
                                 <div class="blog-post-image shadow-sm">
-                                    <a href="{{ route('blog-details',['id' => $blog_first->slug]) }}"><img class="img-fluid blog-image-second" src="{{ asset($item->getImage()) }}" alt="{{ $item->image_alt }}"></a>
+                                    <a href="{{ route('blog-details',['id' => $item->slug]) }}"><img class="img-fluid blog-image-second" src="{{ asset($item->getImage()) }}" alt="{{ $item->image_alt }}"></a>
                                 </div>
                                 <div class="blog-post-content">
                                     <div class="blog-post-info justify-content-between">
@@ -406,7 +406,7 @@
             <div class="row mt-4 mt-md-5">
                 <div class="col-12 d-md-flex justify-content-center align-items-center text-center">
                     <p class="mb-3 mb-md-0 mx-0 mx-md-3 text-light">We have articles on a range of topics</p>
-                    <a class="btn btn-dark btn-round text-white" href="{{ getSEOUrl('blogs') }}"> View all news <i
+                    <a class="btn btn-dark btn-round text-white" href="{{ getSEOUrl('news') }}"> View all news <i
                             class="fas fa-arrow-right ps-3"></i></a>
                 </div>
             </div>

@@ -32,7 +32,7 @@
                 @if (auth()->user()->can('manage-blog'))
                     <li class="{{ request()->routeIs('admin.blog*') ? 'active' : '' }}">
                         <a href="{{ route('admin.blog.index') }}">
-                            <i class="simple-icon-paper-plane"></i> Blogs
+                            <i class="simple-icon-paper-plane"></i> News
                         </a>
                     </li>
                 @endif
