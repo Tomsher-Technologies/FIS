@@ -67,7 +67,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 position-relative">
-                    <nav class="navbar navbar-static-top navbar-expand-lg">
+                    <nav class="navbar navbar-static-top navbar-expand-lg p-0">
                         <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
                             data-bs-target=".navbar-collapse">
                             <i class="fas fa-align-left"></i>
@@ -299,7 +299,7 @@
                             <span class="free_delivery me-5 ms-md-auto">FREE DELIVERY ABOVE AED 100</span>
 
                             <div class="d-none d-lg-flex ">
-                                <a class="btn btn-dark btn-round text-white d-flex align-items-center shop-btn" href="#"
+                                <a class="btn btn-dark btn-round text-white d-flex align-items-center shop-btn my-2" href="#"
                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                     aria-controls="offcanvasRight">
                                     <img class="menu-dark p-1" width="25" src="{{ asset('images/menu.svg') }}" alt="#">
