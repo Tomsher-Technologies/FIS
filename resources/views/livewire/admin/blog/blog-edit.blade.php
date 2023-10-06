@@ -23,8 +23,16 @@
                         <form wire:submit.prevent="save()" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Title<span class="text-danger">*</span></label>
-                                <input name="" class="form-control" wire:model="blog.title" />
+                                <input name="" class="form-control" wire:model="blog.title" wire:change="changeSeoUrl($event.target.value)"/>
                                 @error('blog.title')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">SEO URL<span class="text-danger">*</span></label>
+                                <input name="" class="form-control" wire:model="blog.slug" />
+                                @error('blog.slug')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

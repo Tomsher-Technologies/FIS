@@ -12,7 +12,7 @@ class BlogEdit extends Component
     use WithFileUploads;
 
     public $blog;
-
+    public $slug;
     public $photo;
 
     // SEO
@@ -28,6 +28,7 @@ class BlogEdit extends Component
         'blog.title' => 'required',
         'blog.description' => 'required',
         'blog.status' => 'required',
+        'blog.slug' => 'required',
         'blog.image_alt' => 'nullable',
         'photo' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:1024',
 
@@ -41,6 +42,7 @@ class BlogEdit extends Component
 
     protected $messages = [
         'blog.title.required' => "Please enter a title",
+        'blog.slug.required' => "Please enter a seo url",
         'blog.description.required' => "Please enter a description",
         'blog.status.required' => "Please enter a title",
         'photo.required' => "Please select an image",
@@ -52,6 +54,7 @@ class BlogEdit extends Component
         $this->seotitle = $this->blog->seo_title;
         $this->ogtitle = $this->blog->og_title;
         $this->twtitle = $this->blog->twitter_title;
+        $this->slug = $this->blog->slug;
         $this->seodescription = $this->blog->seo_description;
         $this->og_description = $this->blog->og_description;
         $this->twitter_description = $this->blog->twitter_description;
@@ -71,6 +74,7 @@ class BlogEdit extends Component
             $this->photo->storeAs('public/blogs', $iname);
             $this->blog->image  = '/storage/blogs/' . $iname;
         }
+        $this->blog->slug = $this->blog->slug;
         $this->blog->seo_title = $this->seotitle;
         $this->blog->og_title = $this->ogtitle;
         $this->blog->twitter_title = $this->twtitle;
@@ -106,6 +110,11 @@ class BlogEdit extends Component
         session()->flash('message', 'Blog successfully updated.');
  
         return redirect()->route('admin.blog.index');
+    }
+
+    public function changeSeoUrl($value)
+    {
+        $this->blog->slug = createSlug($value);
     }
 
     public function render()
