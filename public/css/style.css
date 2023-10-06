@@ -9479,3 +9479,36 @@ label>span {
   max-height: 100% !important;
 }
 
+a.btn.btn-dark.btn-round.text-white.d-flex.align-items-center.shop-btn {
+  padding: 10px 20px!important;
+}
+
+span.free_delivery {
+  padding: 13px 24px;
+  font-weight: 900;
+  font-size: 18px;
+  -webkit-animation: animateBg 2s linear infinite;
+  animation: animateBg 2s linear infinite;
+  background-image: linear-gradient(90deg,#ff5722,#f10,#db5779,#ff5722,red);
+  background-size: 400% 100%
+}
+
+@-webkit-keyframes animateBg {
+  0% {
+      background-position: 0 0
+  }
+
+  to {
+      background-position: 100% 0
+  }
+}
+
+@keyframes animateBg {
+  0% {
+      background-position: 0 0
+  }
+
+  to {
+      background-position: 100% 0
+  }
+}
