@@ -331,41 +331,42 @@ header -->
               <nav class="nav d-block" role="navigation">
                   <ul class="nav__list">
                     @php $i=0;  @endphp
-                    @foreach($categories as $catg)
-                        @php $i++;  @endphp
-                        @if($catg['hasSubMenu'])
-                        <li>
-                            <input id="group-{{$i}}" type="checkbox" hidden />
-                            <label for="group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $catg['title'] }}</label>
-                            <ul class="group-list">
-                                <li><a href="{{ route('products',['category' => $catg['slug']]) }}" class="main-category" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
-                                @foreach($catg['subItems'] as $subitem)
-                                    @php $i++;  @endphp
-                                    
-                                    @if($subitem['hasSubMenu'])
-                                        <li>
-                                            <input id="sub-group-{{$i}}" type="checkbox" hidden />
-                                            <label for="sub-group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $subitem['title'] }}</label>
-                                            <ul class="sub-group-list">
-                                                <li><a href="{{ route('products',['category' => $subitem['slug']]) }}" class="main-category" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
-                                                @foreach($subitem['subItems'] as $item)
-                                                    @php $i++;  @endphp
-                                                    <li><a href="{{ route('products',['category' => $item['slug']]) }}" title="{{ $item['title'] }}">{{ $item['title'] }}</a></li>
-                                                @endforeach
-                                            </ul>
-                                        </li>
-                                    @else
-                                        <li><a href="{{ route('products',['category' => $subitem['slug']]) }}" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </li>
-                        @else
-                            <li><a href="{{ route('products',['category' => $catg['slug']]) }}" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
-                        @endif
-                       
-                    @endforeach
-
+                    @if(!empty($categories))
+                        @foreach($categories as $catg)
+                            @php $i++;  @endphp
+                            @if($catg['hasSubMenu'])
+                            <li>
+                                <input id="group-{{$i}}" type="checkbox" hidden />
+                                <label for="group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $catg['title'] }}</label>
+                                <ul class="group-list">
+                                    <li><a href="{{ route('products',['category' => $catg['slug']]) }}" class="main-category" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
+                                    @foreach($catg['subItems'] as $subitem)
+                                        @php $i++;  @endphp
+                                        
+                                        @if($subitem['hasSubMenu'])
+                                            <li>
+                                                <input id="sub-group-{{$i}}" type="checkbox" hidden />
+                                                <label for="sub-group-{{$i}}"><span class="fa fa-angle-right"></span>{{ $subitem['title'] }}</label>
+                                                <ul class="sub-group-list">
+                                                    <li><a href="{{ route('products',['category' => $subitem['slug']]) }}" class="main-category" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
+                                                    @foreach($subitem['subItems'] as $item)
+                                                        @php $i++;  @endphp
+                                                        <li><a href="{{ route('products',['category' => $item['slug']]) }}" title="{{ $item['title'] }}">{{ $item['title'] }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        @else
+                                            <li><a href="{{ route('products',['category' => $subitem['slug']]) }}" title="{{ $subitem['title'] }}">{{ $subitem['title'] }}</a></li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @else
+                                <li><a href="{{ route('products',['category' => $catg['slug']]) }}" title="{{ $catg['title'] }}">{{ $catg['title'] }}</a></li>
+                            @endif
+                        
+                        @endforeach
+                    @endif
                   </ul>
               </nav>
           </div>

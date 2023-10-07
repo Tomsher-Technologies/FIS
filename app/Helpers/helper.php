@@ -190,12 +190,8 @@ function getFarookOnlineCategories(){
 
     $result = $response->getBody()->getContents();
     $result = json_decode($result, true);
-    $result = $result['data'];
-    
-    // echo '<pre>';
-    // print_r($result);
-    // die;
-    
+    $result = $result['data'] ?? [];
+  
     return $result;
 }
 

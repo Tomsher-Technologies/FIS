@@ -47,10 +47,7 @@ class ProductsController extends Controller
 
         $result = $response->getBody()->getContents();
         $result = json_decode($result, true);
-          
-        echo '<pre>';
-        print_r($result);
-        die;
+       
     }
 
     public function getProductsList(Request $request){
@@ -76,7 +73,6 @@ class ProductsController extends Controller
 
     public function getCategoryProducts($data)
     {
-        //  echo '<pre>'; print_r($data); die;
         $response =  Http::withOptions($this->options)->withHeaders(['accessToken' => env('API_ACCESS_TOKEN')])
                             ->post(env('API_BASE_URL').'search?limit='.$data['limit'].'&offset='.$data['offset'],[
                                 'category' => $data['category'],
@@ -99,8 +95,7 @@ class ProductsController extends Controller
 
     public function loadMoreProducts(Request $request){
         $pageSettings = '';
-        // echo '<pre>'; print_r($request->all()); 
-       
+        
         $data['category'] = $request->category ?? "";
         $data['attributes'] = $request->attrbts ?? [];
         $data['brands'] = $request->brands ?? [];
@@ -111,18 +106,10 @@ class ProductsController extends Controller
         $data['searchKey'] = '';
         $data['sortBy'] = $request->sortBy;
 
-        // echo '<pre>';
-        // print_r($data['attributes']);
-
         $result = $this->getCategoryProducts($data);
-        // print_r($result);
-        //  die;
+       
         $details['result'] = $result;
         $details['html'] = view('frontend.ajax-products', compact('result'))->render();
-        // return view('frontend.products')
-        //             ->with([
-        //                 'result' => $result
-        //             ]);
 
         return json_encode($details);
     }
@@ -139,11 +126,8 @@ class ProductsController extends Controller
 
         $result = $response->getBody()->getContents();
         $result = json_decode($result, true);
-//         echo '<pre>';
-//         print_r($result);
-// die;
 
-        $result = $result['data'];
+        $result = $result['data'] ?? [];
         $this->loadProductSEO($result['seo']);
         
         return view('frontend.product_details')
