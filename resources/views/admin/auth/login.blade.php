@@ -24,12 +24,12 @@
                         <form action="{{ route('login') }}" method="POST" id="login-form">
                             @csrf
                             <label class="form-group has-float-label mb-4">
-                                <input type="email" name="email" class="form-control" value="admin@fis.com" required="" autofocus />
+                                <input type="email" name="email" class="form-control" value="" required="" autofocus />
                                 <span>E-mail</span>
                             </label>
 
                             <label class="form-group has-float-label mb-4">
-                                <input class="form-control" name="password" type="password" value="password" placeholder="" required="" />
+                                <input class="form-control" name="password" type="password" value="" placeholder="" required="" />
                                 <span>Password</span>
                             </label>
 
