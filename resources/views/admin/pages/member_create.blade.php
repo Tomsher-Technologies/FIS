@@ -37,7 +37,7 @@
                                 <label for="exampleInputEmail1">Member Type<span class="text-danger">*</span></label>
                                 <select name="type" class="form-control  mb-3">
                                     <!-- <option value="director">Board Of Director</option> -->
-                                    <option value="management">Leadership </option>
+                                    <option value="management">Management </option>
                                 </select>
                             </div>
 

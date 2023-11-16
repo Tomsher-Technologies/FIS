@@ -283,7 +283,7 @@ class FrontendController extends Controller
         $this->loadSEO($page);
         $pageSettings = getPageDetails('management');
         $pageSettings = $pageSettings[0] ?? [];
-        $teams = Teams::where('type','management')->orderBy('id','ASC')->get();
+        $teams = Teams::where('type','management')->where('status',1)->orderBy('id','ASC')->get();
         $general = getGeneralSettings();
         return view('frontend.management')
             ->with([

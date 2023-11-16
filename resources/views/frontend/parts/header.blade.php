@@ -135,7 +135,7 @@
                                                             </a>
                                                         </li> -->
                                                         <li>
-                                                            <a href="{{ getSEOUrl('management') }}">Leadership
+                                                            <a href="{{ getSEOUrl('management') }}">Management
                                                             </a>
                                                         </li>
                                                     </ul>
