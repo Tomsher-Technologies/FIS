@@ -122,7 +122,7 @@
 
                 <li class="{{ (request()->routeIs('admin.page.directors')) ? 'active' : '' }}">
                     <a href="{{ route('admin.page.directors') }}">
-                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Leadership</span>
+                        <i class="simple-icon-doc"></i> <span class="d-inline-block">Management</span>
                     </a>
                 </li>
 

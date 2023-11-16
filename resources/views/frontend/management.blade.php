@@ -28,7 +28,7 @@
                             </li>
                             <li class="nav-item"><a class="nav-link" href="{{ getSEOUrl('directors') }}">Board of Directors</a>
                             </li> -->
-                            <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('management') }}">Leadership</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="{{ getSEOUrl('management') }}">Management</a></li>
                         </ul>
                     </div>
                 </div>

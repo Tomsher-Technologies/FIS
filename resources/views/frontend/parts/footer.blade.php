@@ -44,7 +44,7 @@
                                     <a href="{{ getSEOUrl('directors') }}">Board of Directors</a>
                                 </li> -->
                                 <li>
-                                    <a href="{{ getSEOUrl('management') }}">Leadership</a>
+                                    <a href="{{ getSEOUrl('management') }}">Management</a>
                                 </li>
                             </ul>
                         </div>
