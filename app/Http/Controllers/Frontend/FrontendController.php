@@ -43,21 +43,21 @@ class FrontendController extends Controller
         $pages = Pages::with(['moudels'])->get();
 
 
-        // try {
-        $page = $pages->where('seo_url', $uriSegments[0])->firstOrFail();
+        try {
+            $page = $pages->where('seo_url', $uriSegments[0])->firstOrFail();
 
-        $functionName = $page->getFunctionName();
-        // dd($functionName);
+            $functionName = $page->getFunctionName();
+            // dd($functionName);
 
-        if (!method_exists(FrontendController::class, $functionName)) {
+            if (!method_exists(FrontendController::class, $functionName)) {
+                abort(404);
+            }
+
+            $view = $this->$functionName($page, $uriSegments[1] ?? null);
+            return $view;
+        } catch (\Exception $exception) {
             abort(404);
         }
-
-        $view = $this->$functionName($page, $uriSegments[1] ?? null);
-        return $view;
-        // } catch (\Exception $exception) {
-        //     abort(404);
-        // }
         abort(404);
     }
 
