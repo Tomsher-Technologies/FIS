@@ -70,7 +70,7 @@ FAROOK.secondarySticky = function () {
         }else{
             $(".header-inner-nav").addClass("page-menu-top");
         }
-        console.log($('div').hasClass('header-inner-nav'));
+       
         if( $('div').hasClass('header-inner-nav') ) {
           var div_height = 90 + $('.header-inner-nav').height();
           $('.is-sticky').css('top',div_height);
