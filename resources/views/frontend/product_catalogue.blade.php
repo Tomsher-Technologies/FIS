@@ -32,7 +32,7 @@
         <div class="row justify-content-center">
             @if($catalogues)
                 @foreach($catalogues as $cat)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
                         <a href="{{ $cat->link }}" target="_blank" class="bg-light p-4 text-center border-radius mb-4 d-block">
                             <img class="img-fluid " src="{{ asset($cat->image) }}" alt="{{ $cat->image_alt }}">
                             <h5 class="mt-4">{{ $cat->title }}</h5>
