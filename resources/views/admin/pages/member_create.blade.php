@@ -22,12 +22,13 @@
             <div class="col-8 offset-2">
                 <div class="card">
                     <div class="card-body">
-                    @php $name = $designation =  $id = $image = '';  @endphp
+                    @php $name = $designation =  $id = $image = $oldimage = '' ;  @endphp
                     @if($member)
                         @php 
                             $name = $member['name'];
                             $designation = $member['designation'];
                             $id = $member['id'];
+                            $oldimage = $member['image'];
                             $image = Storage::url('teams/'. $member['image']);
                         @endphp
                     @endif
@@ -45,6 +46,7 @@
                                 <label for="exampleInputEmail1">Name<span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" class="form-control" value="{{ $name }}" />
                                 <input type="hidden" name="member_id" id="member_id" class="form-control" value="{{ $id }}" />
+                                <input type="hidden" name="oldimage" id="oldimage" class="form-control" value="{{ $oldimage }}" />
                             </div>
                             
                             <div class="form-group">

@@ -673,7 +673,11 @@ class PageController extends Controller
             $file = $request->file('image');
             $fileName = strtolower(Str::random(2)).time().'.'. $file->extension();  
             $file->move(base_path() . '/storage/app/public/teams', $fileName);
+        }else{
+            $fileName = $request->get('oldimage');
         }
+
+
         $page = Teams::updateOrCreate([
             'id'   => $request->get('member_id'),
         ],[
