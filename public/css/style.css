@@ -5294,8 +5294,9 @@ input.form-control {
 }
 
 .portfolio-item:hover .portfolio-overlay {
-  background: #ffffff;
+  background: rgb(0 0 0 / 38%);
   opacity: 1;
+
 }
 
 .portfolio-item:hover .portfolio-info {
