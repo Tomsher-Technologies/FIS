@@ -491,7 +491,7 @@ class FrontendController extends Controller
         $this->loadSEO($page);
         $pageSettings = getPageDetails('news');
         $pageSettings = $pageSettings[0] ?? [];
-        $blogs = Blog::where('status',1)->orderBy('id','desc')->paginate(15);
+        $blogs = Blog::where('status',1)->orderBy('created_at','desc')->paginate(15);
         return view('frontend.blogs')
                     ->with([
                         'page' => $page,
